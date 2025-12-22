@@ -1,0 +1,5 @@
+# Data files
+*.csv
+
+# Joblib files
+*.joblib

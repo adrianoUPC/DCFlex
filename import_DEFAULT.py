@@ -1,0 +1,80 @@
+"""
+Import and load LAD-FLEX simulation results.
+
+This module loads pre-computed simulation results from joblib files containing:
+- df_summary: Summary statistics and KPIs for all parameter combinations
+- res_dfs: Detailed DataFrames for each simulation run
+"""
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import joblib
+import matplotlib.dates as mdates
+import seaborn as sns
+
+SIMULATION = "DEFAULT"
+SCENARIO = "BASELINE"
+
+# Load summary DataFrame
+df_summary = joblib.load("df_summary_DEFAULT_BASELINE.joblib")
+"""
+df_summary: pd.DataFrame
+    Summary statistics for LAD-FLEX simulations across all parameter combinations.
+
+    Structure:
+        MultiIndex with levels:
+            - timestamp: pd.Timestamp - Date/time of the simulation window
+            - latency: int - Task latency in seconds
+            - flex_window: pd.Timedelta - Duration of flexibility window
+            - delta_notification: pd.Timedelta - Notification time before flexibility window
+            - beta: float - Sensitivity parameter for deferral decision
+            - gamma_buffer: pd.Timedelta - Buffer time after flexibility window
+
+        Columns:
+            - deferrable_energy_kWh: float - Energy from deferrable tasks in the flex window
+            - total_energy_kWh: float - Total energy consumption in the flex window
+            - percentage_flexible_energy: float - Percentage of flexible energy (0-100)
+            - deferrable_task_count: int - Number of tasks that were deferred
+            - rebound_energy_kWh: float - Energy consumption in rebound periods (t0-t1, t2-tend)
+"""
+
+# Load detailed results dictionary
+res_dfs = joblib.load("res_dfs_DEFAULT_BASELINE.joblib")
+"""
+res_dfs: dict
+    Detailed simulation results for each parameter combination.
+
+    Structure:
+        Dictionary with keys: (date, latency, flex_window, delta_notification, beta, gamma_buffer)
+
+        Each value is a dictionary containing:
+
+            Metadata:
+                - t1: pd.Timestamp - Start of flexibility window
+                - t2: pd.Timestamp - End of flexibility window
+                - t0: pd.Timestamp - Start of notification period (t1 - delta_notification)
+                - tend: pd.Timestamp - End of buffer period (t2 + gamma_buffer)
+                - latency: int - Task latency in seconds
+                - beta: float - Sensitivity parameter
+                - delta_notification: pd.Timedelta - Notification time
+                - gamma_buffer: pd.Timedelta - Buffer time
+
+            DataFrames:
+                - df_deferrable: pd.DataFrame - Tasks identified as deferrable
+                - df_not_deferrable: pd.DataFrame - Tasks that are not deferrable
+                - df_deferrable_power_energy: pd.DataFrame - Power/energy time series for deferrable tasks
+                - deferrable_energy_window: pd.DataFrame - Deferrable energy within [t1, t2)
+                - df_total_power_energy: pd.DataFrame - Total power/energy within [t1, t2)
+                - df_t0_to_tend_def: pd.DataFrame - Deferrable power/energy for extended period [t0, tend)
+                - df_t0_to_tend_total: pd.DataFrame - Total power/energy for extended period [t0, tend)
+                - df_rebound_energy: pd.DataFrame - Energy in rebound periods [t0, t1) and [t2, tend)
+"""
+
+params = return_params(SIMULATION, SCENARIO)
+latencies = params['latencies']
+flex_windows = params['flex_windows']
+delta_notifications = params['delta_notifications']
+betas = params['betas']
+gamma_buffers = params['gamma_buffers']
+
+
