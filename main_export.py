@@ -31,7 +31,8 @@ timeline = get_timeline(df_tasks)
 df_power_energy = fast_power_energy_series(df_tasks, timeline)
 
 SIMULATION = "DEFAULT"
-SCENARIO = "BASELINE"
+# SCENARIO = "BASELINE"
+SCENARIO = "DAM"
 
 if SIMULATION == "DEFAULT":
     #consider the dates for the full time period (only for the default simulation)
