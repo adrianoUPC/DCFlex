@@ -22,8 +22,12 @@ df_tasks = pd.read_csv("df_aa_full_sorted_power.csv",
                        usecols=cols_to_keep,   
                        parse_dates=["start_time", "end_time"])  # Parse dates during read
 
+
 # Compute t_request
-df_tasks["t_request"] = df_tasks["start_time"] - pd.to_timedelta(df_tasks["wait_time"], unit="s")
+df_tasks["t_request"] = df_tasks["start_time"]
+
+df_tasks["strat_time"] = df_tasks["start_time"] + pd.to_timedelta(df_tasks["wait_time"], unit="s")
+
 
 #%% 
 # Compute timeline and power series
@@ -32,7 +36,7 @@ df_power_energy = fast_power_energy_series(df_tasks, timeline)
 
 SIMULATION = "DEFAULT"
 # SCENARIO = "BASELINE"
-SCENARIO = "mFRR"
+SCENARIO = "BASELINE"
 
 if SIMULATION == "DEFAULT":
     #consider the dates for the full time period (only for the default simulation)
@@ -173,3 +177,4 @@ print("Checkpoint time: ", checkpoint_time)
 
 end_time = time.time()
 print("End time: ", end_time)
+

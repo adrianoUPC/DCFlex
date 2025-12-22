@@ -8,7 +8,7 @@ from utils import *
 from get_parameters import *
 
 SIMULATION = "DEFAULT"
-SCENARIO = "mFRR"
+SCENARIO = "BASELINE"
 
 # %% Load Data
 # Load summary DataFrame
