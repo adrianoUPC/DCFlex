@@ -17,7 +17,7 @@ cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i",
 
 
 # OBS: we can use this to get results for the duration uncertainty scenarios too (but only if the columns are the same)
-GAMMA = 0.30
+GAMMA = 0.70
 
 # Format GAMMA suffix for filenames
 if GAMMA == 0:
@@ -39,6 +39,12 @@ elif GAMMA == 0.20:
 elif GAMMA == 0.30:
     filename = "DATA/df_tasks_gamma_030.csv"
     gamma_suffix = "GAMMA_030"
+elif GAMMA == 0.50:
+    filename = "DATA/df_tasks_gamma_050.csv"
+    gamma_suffix = "GAMMA_050"
+elif GAMMA == 0.70:
+    filename = "DATA/df_tasks_gamma_070.csv"
+    gamma_suffix = "GAMMA_070"
     
 df_tasks = pd.read_csv(filename, 
                        index_col=0,

@@ -10,7 +10,7 @@ from utils_plotting import *
 
 SIMULATION = "DEFAULT"
 SCENARIO = "BASELINE"
-GAMMA = 0.20  # Task duration uncertainty level: 0, 0.10, 0.20, or 0.30
+GAMMA = 0  # Task duration uncertainty level: 0, 0.10, 0.20, 0.30, 0.50, or 0.70
 
 # Format GAMMA suffix for filenames
 if GAMMA == 0:
@@ -21,6 +21,10 @@ elif GAMMA == 0.20:
     gamma_suffix = "GAMMA_020"
 elif GAMMA == 0.30:
     gamma_suffix = "GAMMA_030"
+elif GAMMA == 0.50:
+    gamma_suffix = "GAMMA_050"
+elif GAMMA == 0.70:
+    gamma_suffix = "GAMMA_070"
 
 # %% Load Data
 # Load summary DataFrame
@@ -291,86 +295,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 # plt.savefig("PLOTS/LAD_flex_default_plot.png", dpi=300)
 plt.show()
-
-# %%3x3 plot - Publication Quality
-# Set publication-quality parameters
-plt.rcParams.update({
-    'font.size': 10,
-    'axes.labelsize': 11,
-    'axes.titlesize': 11,
-    'xtick.labelsize': 9,
-    'ytick.labelsize': 9,
-    'legend.fontsize': 14,
-    'figure.dpi': 150,
-    'savefig.dpi': 300,
-    'axes.linewidth': 1.0,
-    'grid.linewidth': 0.5,
-    'lines.linewidth': 1.5,
-})
-
-# Create 3x3 subplot grid
-fig, axs = plt.subplots(3, 3, figsize=(18, 12), sharex=False, sharey=False)
-
-# Define point ordering for 3x3 grid
-point_names = ['p1', 'p2', 'p3', 'q1', 'q2', 'q3', 'r1', 'r2', 'r3']
-
-all_handles = []
-all_labels = []
-
-# Plot each point
-for idx, point_name in enumerate(point_names):
-    row, col = divmod(idx, 3)
-    ax = axs[row, col]
-
-    # Get data for this point
-    tuple_point = (points_dates[point_name], latencies[0], fixed_flex_window,
-                   fixed_delta_notification, fixed_beta, fixed_gamma_buffer)
-
-    t0 = res_dfs[tuple_point]['t0']
-    t1 = res_dfs[tuple_point]['t1']
-    t2 = res_dfs[tuple_point]['t2']
-    tend = res_dfs[tuple_point]['tend']
-
-    power_t0_tend_def = res_dfs[tuple_point]['df_t0_to_tend_def'].power_kW
-    # power_t0_tend_total = res_dfs[tuple_point]['df_t0_to_tend_total'].power_kW
-
-    # Plot notification period and flexibility window
-    h1 = ax.axvspan(t0, t1, color='green', alpha=0.3, label='Notification Period')
-    h2 = ax.axvspan(t1, t2, color='red', alpha=0.3, label='Flexibility Window')
-    h3, = ax.step(power_t0_tend_def.index, power_t0_tend_def.values, where='post', label='Deferred Power')
-    # Uncomment if you want to include total power as well
-    # ax.step(power_t0_tend_total.index, power_t0_tend_total.values, where='post', label='Total Power')
-
-    # Styling
-    ax.set_title(f'{point_name.upper()} - Power Consumption')
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Power (kW)')
-    ax.tick_params(axis='x', rotation=45)
-
-    # Format x-axis to show time more clearly
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval=2))
-
-    # Collect handles and labels from first subplot only
-    if idx == 0:
-        all_handles.extend([h1, h2, h3])
-        all_labels.extend(['Notification Period', 'Flexibility Window', 'Deferred Power'])
-
-# Add single legend at the bottom
-fig.legend(all_handles, all_labels, loc='lower center', ncol=3, bbox_to_anchor=(0.5, 0.01), fontsize=14)
-
-# Adjust layout
-plt.tight_layout()
-plt.subplots_adjust(bottom=0.15)  # Make space for the legend
-
-# Save high-resolution figure
-plt.savefig(f'PLOTS/power_consumption_3x3_{SIMULATION}_{SCENARIO}.png', dpi=300)
-plt.savefig(f'PLOTS/power_consumption_3x3_{SIMULATION}_{SCENARIO}.pdf')
-
-plt.show()
-
-# Reset matplotlib parameters to default
-plt.rcParams.update(plt.rcParamsDefault)
 
 # %%3x3 plot - LARGE FONTS VERSION
 # Use seaborn style
