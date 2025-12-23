@@ -157,21 +157,8 @@ def plot_actual_vs_predicted(df, gamma_label):
 # Create scatter plots
 plot_actual_vs_predicted(df_gamma_020, 'γ=0.20')
 
-# ============================================================================
-# FOR LAD-FLEX USAGE
-# ============================================================================
 
-# Now you can pass these dataframes to your LAD-Flex function
-# The key difference: use 'duration_predicted' instead of 'runtime_i' 
-# for scheduling decisions
-
-print("\n" + "="*60)
-print("READY FOR LAD-FLEX ANALYSIS")
-print("="*60)
-print(f"df_perfect: {len(df_perfect)} tasks (baseline, no uncertainty)")
-print(f"df_gamma_010: {len(df_gamma_010)} tasks (10% prediction error)")
-print(f"df_gamma_020: {len(df_gamma_020)} tasks (20% prediction error)")
-print(f"df_gamma_030: {len(df_gamma_030)} tasks (30% prediction error)")
-print("\nUse 'duration_predicted' column for LAD-Flex scheduling decisions")
-print("Use 'end_time' for actual task completion (perturbed)")
-print("="*60)
+# Exporting
+df_gamma_010.to_csv("df_tasks_gamma_010.csv", index=False)
+df_gamma_020.to_csv("df_tasks_gamma_020.csv", index=False)
+df_gamma_030.to_csv("df_tasks_gamma_030.csv", index=False)

@@ -165,8 +165,8 @@ for latency in latencies:
 df_summary = pd.DataFrame(summary_data)
 df_summary.set_index(['timestamp', 'latency', 'flex_window', 'delta_notification', 'beta', 'gamma_buffer'], inplace=True)
 
-joblib.dump(df_summary, 'df_summary_' + SIMULATION + '_' + SCENARIO + '.joblib')
-joblib.dump(res_dfs, 'res_dfs_' + SIMULATION + '_' + SCENARIO + '.joblib')
+joblib.dump(df_summary, 'EXPORTS/df_summary_' + SIMULATION + '_' + SCENARIO + '.joblib')
+joblib.dump(res_dfs, 'EXPORTS/res_dfs_' + SIMULATION + '_' + SCENARIO + '.joblib')
 
 checkpoint_time = time.time()
 print("Checkpoint time: ", checkpoint_time)

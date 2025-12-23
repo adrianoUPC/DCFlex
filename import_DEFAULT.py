@@ -12,7 +12,7 @@ SCENARIO = "mFRR"
 
 # %% Load Data
 # Load summary DataFrame
-filename = "df_summary_" + SIMULATION + "_" + SCENARIO + ".joblib"
+filename = "EXPORTS/df_summary_" + SIMULATION + "_" + SCENARIO + ".joblib"
 df_summary = joblib.load(filename)
 """
 df_summary: pd.DataFrame
@@ -36,7 +36,7 @@ df_summary: pd.DataFrame
 """
 
 # Load detailed results dictionary
-filename = "res_dfs_" + SIMULATION + "_" + SCENARIO + ".joblib"
+filename = "EXPORTS/res_dfs_" + SIMULATION + "_" + SCENARIO + ".joblib"
 res_dfs = joblib.load(filename)
 """
 res_dfs: dict
@@ -250,7 +250,7 @@ points_dates = {
     "r1": r1, "r2": r2, "r3": r3
 }
 
-joblib.dump(points_dates, "points_dates_" + SIMULATION + "_" + SCENARIO + ".joblib")
+joblib.dump(points_dates, "EXPORTS/points_dates_" + SIMULATION + "_" + SCENARIO + ".joblib")
 
 
 # %% Plot for P1 only
@@ -277,7 +277,7 @@ ax.set_ylabel('Total Power (kW)')
 ax.legend(fontsize=14)
 plt.xticks(rotation=45)
 plt.tight_layout()
-# plt.savefig("LAD_flex_default_plot.png", dpi=300)
+# plt.savefig("PLOTS/LAD_flex_default_plot.png", dpi=300)
 plt.show()
 
 # %%3x3 plot - Publication Quality
@@ -352,8 +352,8 @@ plt.tight_layout()
 plt.subplots_adjust(bottom=0.15)  # Make space for the legend
 
 # Save high-resolution figure
-plt.savefig(f'power_consumption_3x3_{SIMULATION}_{SCENARIO}.png', dpi=300)
-plt.savefig(f'power_consumption_3x3_{SIMULATION}_{SCENARIO}.pdf')
+plt.savefig(f'PLOTS/power_consumption_3x3_{SIMULATION}_{SCENARIO}.png', dpi=300)
+plt.savefig(f'PLOTS/power_consumption_3x3_{SIMULATION}_{SCENARIO}.pdf')
 
 plt.show()
 
@@ -444,8 +444,8 @@ plt.tight_layout()
 plt.subplots_adjust(bottom=0.16)
 
 # Save + show
-plt.savefig(f'power_consumption_3x3_LARGE_{SIMULATION}_{SCENARIO}.png', dpi=300)
-plt.savefig(f'power_consumption_3x3_LARGE_{SIMULATION}_{SCENARIO}.pdf', dpi=300)
+plt.savefig(f'PLOTS/power_consumption_3x3_LARGE_{SIMULATION}_{SCENARIO}.png', dpi=300)
+plt.savefig(f'PLOTS/power_consumption_3x3_LARGE_{SIMULATION}_{SCENARIO}.pdf', dpi=300)
 plt.show()
 
 # %%3x3 plot - ALTERNATIVE MEDIUM VERSION
@@ -529,7 +529,7 @@ plt.tight_layout()
 plt.subplots_adjust(bottom=0.15)
 
 # Save + show
-# plt.savefig(f'power_consumption_3x3_ALT_{SIMULATION}_{SCENARIO}.png', dpi=300)
+# plt.savefig(f'PLOTS/power_consumption_3x3_ALT_{SIMULATION}_{SCENARIO}.png', dpi=300)
 plt.show()
 
 # %%TOTAL DC VS AFTER FLEX ACTIVATION
@@ -600,7 +600,7 @@ for spine in ax.spines.values():
 
 plt.tight_layout()
 # Save as high resolution png
-# plt.savefig(f'LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png', dpi=300)
+# plt.savefig(f'PLOTS/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png', dpi=300)
 plt.show()
 
 # %%KDE plot
@@ -628,6 +628,6 @@ plt.xlabel('Deferrable Energy (kWh)')
 plt.ylabel('Density')
 plt.grid(True)
 plt.tight_layout()
-# plt.savefig(f'KDE_deferrable_energy_{SIMULATION}_{SCENARIO}.png', dpi=300)
+# plt.savefig(f'PLOTS/KDE_deferrable_energy_{SIMULATION}_{SCENARIO}.png', dpi=300)
 plt.show()
 

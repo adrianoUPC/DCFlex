@@ -170,6 +170,6 @@ def apply_duration_uncertainty(df, gamma, random_seed=42):
     
     # Modify end_time based on predicted duration
     df_perturbed["end_time_actual"] = df_perturbed["end_time"]  # Keep original
-    df_perturbed["end_time"] = df_perturbed["start_time"] + pd.to_timedelta(d_predicted, unit="s")
+    df_perturbed["end_time"] = df_perturbed["start_time"] + pd.to_timedelta(d_predicted, unit="s") + pd.to_timedelta(df_perturbed["wait_time"], unit="s")
     
     return df_perturbed
