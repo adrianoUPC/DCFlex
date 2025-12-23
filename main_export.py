@@ -17,7 +17,7 @@ cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i",
 
 
 # OBS: we can use this to get results for the duration uncertainty scenarios too (but only if the columns are the same)
-GAMMA = 0.10
+GAMMA = 0.30
 
 # Format GAMMA suffix for filenames
 if GAMMA == 0:

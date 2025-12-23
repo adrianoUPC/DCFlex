@@ -6,10 +6,11 @@ import matplotlib.dates as mdates
 import seaborn as sns
 from utils import *
 from get_parameters import *
+from utils_plotting import *
 
 SIMULATION = "DEFAULT"
 SCENARIO = "BASELINE"
-GAMMA = 0.10  # Task duration uncertainty level: 0, 0.10, 0.20, or 0.30
+GAMMA = 0.20  # Task duration uncertainty level: 0, 0.10, 0.20, or 0.30
 
 # Format GAMMA suffix for filenames
 if GAMMA == 0:
@@ -544,75 +545,19 @@ plt.subplots_adjust(bottom=0.15)
 plt.show()
 
 # %%TOTAL DC VS AFTER FLEX ACTIVATION
-# Access P1 data
-tuple_p1 = (points_dates['p1'], latencies[0], fixed_flex_window,
-            fixed_delta_notification, fixed_beta, fixed_gamma_buffer)
-
-t_1 = res_dfs[tuple_p1]['t1']
-t_2 = res_dfs[tuple_p1]['t2']
-t_0 = res_dfs[tuple_p1]['t0']
-t_end = res_dfs[tuple_p1]['tend']
-LATENCY = res_dfs[tuple_p1]['latency']
-delta_notification = res_dfs[tuple_p1]['delta_notification']
-gamma_buffer = res_dfs[tuple_p1]['gamma_buffer']
-beta = res_dfs[tuple_p1]['beta']
-
-power_def = res_dfs[tuple_p1]['df_t0_to_tend_def'].power_kW
-power_total = res_dfs[tuple_p1]['df_t0_to_tend_total'].power_kW
-
-common_index = power_def.index.union(power_total.index)
-
-# Reindex both series
-power_def_aligned = power_def.reindex(common_index, method='nearest')
-power_total_aligned = power_total.reindex(common_index, method='nearest')
-
-# Subtract
-power_diff = power_total_aligned - power_def_aligned
-
-start_point = power_def.index[0]
-vertical_line_point = t_1
-tend = t_end
-vertical_line_point2 = t_2
-
-fig, ax = plt.subplots(figsize=(14, 6))
-ax.step(power_total.index, power_total.values, where='post', label='DC Total Power', color='blue', linewidth=2)
-ax.step(power_diff.index, power_diff.values, where='post', linestyle='--', color='purple',
-        label='DC Power after LAD-Flex', linewidth=2)
-# Fill between power_total and power_diff only until t1
-ax.fill_between(power_total.index, power_total.values, power_diff.values,
-                where=(power_total.index <= vertical_line_point), color='lightblue', alpha=0.5)
-# Fill between power_total and power_diff only between t1 and t2
-ax.fill_between(power_total.index, power_total.values, power_diff.values,
-                where=((power_total.index > vertical_line_point) & (power_total.index <= vertical_line_point2)),
-                color='lightgreen', alpha=0.5, label='Flexible energy')
-# Fill between power_total and power_diff only after t2
-ax.fill_between(power_total.index, power_total.values, power_diff.values,
-                where=(power_total.index > vertical_line_point2), color='lightblue', alpha=0.5, label='Rebound energy')
-
-# Add xtick labels
-for t, label in zip([t_0, t_1, t_2, t_end], ['$t_0$', '$t_1$', '$t_2$', '$t_{end}$']):
-    ax.axvline(t, linestyle='--', color='red', alpha=0.3, linewidth=2)
-    ax.text(t, -0.01, label, color="red",
-            ha='center', va='top', fontsize=16,
-            transform=ax.get_xaxis_transform(), clip_on=False)
-
-# Xticks label size
-ax.tick_params(axis='x', labelsize=14)
-ax.grid(True)
-ax.set_title('P1: LAD-Flex Before and After', fontsize=18)
-ax.set_xlabel('Time', fontsize=16)
-ax.set_ylabel('Power (kW)', fontsize=16)
-ax.legend(fontsize=14, loc='lower right')
-# Show dark spines
-for spine in ax.spines.values():
-    spine.set_visible(True)
-    spine.set_color('black')
-    spine.set_linewidth(1.2)
-
-plt.tight_layout()
-# Save as high resolution png
-# plt.savefig(f'PLOTS/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png', dpi=300)
-plt.show()
+# Plot P1 using the utility function
+plot_ladflex_before_after(
+    point_name='p1',
+    points_dates=points_dates,
+    res_dfs=res_dfs,
+    latencies=latencies,
+    fixed_flex_window=fixed_flex_window,
+    fixed_delta_notification=fixed_delta_notification,
+    fixed_beta=fixed_beta,
+    fixed_gamma_buffer=fixed_gamma_buffer,
+    save_path=None,  # Uncomment to save: f'PLOTS/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png'
+    show=True
+)
 
 # %%KDE plot
 energy_values = []
