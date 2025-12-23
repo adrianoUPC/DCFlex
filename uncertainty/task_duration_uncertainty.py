@@ -1,15 +1,15 @@
 import pandas as pd
-from utils import *
+from utils_uncertainty import *
 import numpy as np
 
 # make dataset lighter
 N_slice = 100000        # Number of rows to analyze
-N_slice_start = 170100  # Starting index
+N_slice_start = 170000  # Starting index
 
 # Define only the columns we need (excluding the ones we would drop)
 cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i", "plan_power"]
 
-df_tasks = pd.read_csv("df_aa_full_sorted_power.csv", 
+df_tasks = pd.read_csv("../DATA/df_aa_full_sorted_power.csv", 
                        index_col=0,
                        skiprows=range(1, N_slice_start + 1),  # Skip first 170k data rows
                        nrows=N_slice,  # Read only 100k rows
@@ -112,7 +112,7 @@ def plot_prediction_errors(dataframes, labels, colors):
     ax2.grid(alpha=0.3)
     
     plt.tight_layout()
-    plt.savefig('prediction_error_distributions.png', dpi=300, bbox_inches='tight')
+    # plt.savefig('prediction_error_distributions.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 # Plot distributions
@@ -150,8 +150,8 @@ def plot_actual_vs_predicted(df, gamma_label):
     ax.set_aspect('equal', adjustable='box')
     
     plt.tight_layout()
-    plt.savefig(f'actual_vs_predicted_{gamma_label.replace("=", "").replace(".", "")}.png', 
-                dpi=300, bbox_inches='tight')
+    # plt.savefig(f'actual_vs_predicted_{gamma_label.replace("=", "").replace(".", "")}.png', 
+    #             dpi=300, bbox_inches='tight')
     plt.show()
 
 # Create scatter plots
@@ -159,6 +159,13 @@ plot_actual_vs_predicted(df_gamma_020, 'γ=0.20')
 
 
 # Exporting
-df_gamma_010.to_csv("df_tasks_gamma_010.csv", index=False)
-df_gamma_020.to_csv("df_tasks_gamma_020.csv", index=False)
-df_gamma_030.to_csv("df_tasks_gamma_030.csv", index=False)
+df_gamma_010.to_csv("../DATA/df_gamma_010.csv", index=False)
+df_gamma_020.to_csv("../DATA/df_gamma_020.csv", index=False)
+df_gamma_030.to_csv("../DATA/df_gamma_030.csv", index=False)
+
+# Export choosing the columns so that it matches df_tasks structure
+# Reset index to include task_name as a column
+cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i", "plan_power"]
+df_gamma_010.reset_index()[cols_to_keep].to_csv("../DATA/df_tasks_gamma_010.csv", index=False)
+df_gamma_020.reset_index()[cols_to_keep].to_csv("../DATA/df_tasks_gamma_020.csv", index=False)
+df_gamma_030.reset_index()[cols_to_keep].to_csv("../DATA/df_tasks_gamma_030.csv", index=False)

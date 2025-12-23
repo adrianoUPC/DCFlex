@@ -8,11 +8,22 @@ from utils import *
 from get_parameters import *
 
 SIMULATION = "DEFAULT"
-SCENARIO = "mFRR"
+SCENARIO = "BASELINE"
+GAMMA = 0.10  # Task duration uncertainty level: 0, 0.10, 0.20, or 0.30
+
+# Format GAMMA suffix for filenames
+if GAMMA == 0:
+    gamma_suffix = "GAMMA_0"
+elif GAMMA == 0.10:
+    gamma_suffix = "GAMMA_010"
+elif GAMMA == 0.20:
+    gamma_suffix = "GAMMA_020"
+elif GAMMA == 0.30:
+    gamma_suffix = "GAMMA_030"
 
 # %% Load Data
 # Load summary DataFrame
-filename = "EXPORTS/df_summary_" + SIMULATION + "_" + SCENARIO + ".joblib"
+filename = f"EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib"
 df_summary = joblib.load(filename)
 """
 df_summary: pd.DataFrame
@@ -36,7 +47,7 @@ df_summary: pd.DataFrame
 """
 
 # Load detailed results dictionary
-filename = "EXPORTS/res_dfs_" + SIMULATION + "_" + SCENARIO + ".joblib"
+filename = f"EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib"
 res_dfs = joblib.load(filename)
 """
 res_dfs: dict
@@ -250,7 +261,7 @@ points_dates = {
     "r1": r1, "r2": r2, "r3": r3
 }
 
-joblib.dump(points_dates, "EXPORTS/points_dates_" + SIMULATION + "_" + SCENARIO + ".joblib")
+joblib.dump(points_dates, f"EXPORTS/points_dates_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib")
 
 
 # %% Plot for P1 only

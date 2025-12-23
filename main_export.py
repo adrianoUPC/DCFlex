@@ -15,24 +15,51 @@ N_slice_start = 170000  # Starting index
 # Define only the columns we need (excluding the ones we would drop)
 cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i", "plan_power"]
 
-df_tasks = pd.read_csv("df_aa_full_sorted_power.csv", 
+
+# OBS: we can use this to get results for the duration uncertainty scenarios too (but only if the columns are the same)
+GAMMA = 0.10
+
+# Format GAMMA suffix for filenames
+if GAMMA == 0:
+    filename = "DATA/df_aa_full_sorted_power.csv"
+    gamma_suffix = "GAMMA_0"
+    df_tasks = pd.read_csv(filename, 
                        index_col=0,
                        skiprows=range(1, N_slice_start + 1),  # Skip first 170k data rows
                        nrows=N_slice,  # Read only 100k rows
                        usecols=cols_to_keep,   
                        parse_dates=["start_time", "end_time"])  # Parse dates during read
 
+elif GAMMA == 0.10:
+    filename = "DATA/df_tasks_gamma_010.csv"
+    gamma_suffix = "GAMMA_010"
+elif GAMMA == 0.20:
+    filename = "DATA/df_tasks_gamma_020.csv"
+    gamma_suffix = "GAMMA_020"
+elif GAMMA == 0.30:
+    filename = "DATA/df_tasks_gamma_030.csv"
+    gamma_suffix = "GAMMA_030"
+    
+df_tasks = pd.read_csv(filename, 
+                       index_col=0,
+                    #    skiprows=range(1, N_slice_start + 1),  # Skip first 170k data rows
+                    #    nrows=N_slice,  # Read only 100k rows
+                       usecols=cols_to_keep,   
+                       parse_dates=["start_time", "end_time"])  # Parse dates during read
+
 # Compute t_request
 df_tasks["t_request"] = df_tasks["start_time"] - pd.to_timedelta(df_tasks["wait_time"], unit="s")
 
-#%% 
+# %% Applying the LAD-FLEX algorithm and exporting results
+# TODO: to integrate task duration uncertainty we need the same columns as df_tasks
+
 # Compute timeline and power series
 timeline = get_timeline(df_tasks)
 df_power_energy = fast_power_energy_series(df_tasks, timeline)
 
-SIMULATION = "DEFAULT"
+SIMULATION = "DEFAULT" # choices: "DEFAULT", "SENSITIVE", "OPT"
 # SCENARIO = "BASELINE"
-SCENARIO = "mFRR"
+SCENARIO = "BASELINE" # choices: "BASELINE", "mFRR", "DAM"
 
 if SIMULATION == "DEFAULT":
     #consider the dates for the full time period (only for the default simulation)
@@ -165,11 +192,12 @@ for latency in latencies:
 df_summary = pd.DataFrame(summary_data)
 df_summary.set_index(['timestamp', 'latency', 'flex_window', 'delta_notification', 'beta', 'gamma_buffer'], inplace=True)
 
-joblib.dump(df_summary, 'EXPORTS/df_summary_' + SIMULATION + '_' + SCENARIO + '.joblib')
-joblib.dump(res_dfs, 'EXPORTS/res_dfs_' + SIMULATION + '_' + SCENARIO + '.joblib')
+joblib.dump(df_summary, f'EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib')
+joblib.dump(res_dfs, f'EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib')
 
 checkpoint_time = time.time()
 print("Checkpoint time: ", checkpoint_time)
 
 end_time = time.time()
 print("End time: ", end_time)
+# %%
