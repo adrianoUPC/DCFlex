@@ -9,7 +9,7 @@ from get_parameters import *
 from utils_plotting import *
 
 SIMULATION = "DEFAULT"
-SCENARIO = "BASELINE"
+SCENARIO = "DAM" # choose from: BASELINE, mFRR, DAM
 GAMMA = 0  # Task duration uncertainty level: 0, 0.10, 0.20, 0.30, 0.50, or 0.70
 
 # Format GAMMA suffix for filenames
@@ -268,6 +268,42 @@ points_dates = {
 
 joblib.dump(points_dates, f"EXPORTS/points_dates_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib")
 
+# %% Table: Breakdown of task and energy flexibility by point
+
+# Create table data
+table_data = []
+
+for point_name in ['p1', 'p2', 'p3', 'q1', 'q2', 'q3', 'r1', 'r2', 'r3']:
+    point_date = points_dates[point_name]
+    
+    # Extract data from df_summary for this point
+    point_data = df_summary.loc[
+        (point_date, latencies[0], fixed_flex_window, 
+         fixed_delta_notification, fixed_beta, fixed_gamma_buffer)
+    ]
+    
+    table_data.append({
+        'Point': point_name.upper(),
+        'Tasks Count': int(point_data['deferrable_task_count']),
+        'Deferrable (kWh)': point_data['deferrable_energy_kWh'],
+        'Total (kWh)': point_data['total_energy_kWh'],
+        'Percentage Def. (%)': point_data['percentage_flexible_energy']
+    })
+
+# Create DataFrame
+df_table = pd.DataFrame(table_data)
+
+# Display table
+print("\nTable: Breakdown of task and energy flexibility by point")
+print("="*70)
+print(df_table.to_string(index=False))
+print("="*70)
+
+# Save to CSV
+df_table.to_csv(f'EXPORTS/task_energy_breakdown_{SIMULATION}_{SCENARIO}_{gamma_suffix}.csv', index=False)
+print(f"\nTable saved to EXPORTS/task_energy_breakdown_{SIMULATION}_{SCENARIO}_{gamma_suffix}.csv")
+print()
+
 
 # %% Plot for P1 only
 point = p1
@@ -479,7 +515,7 @@ plot_ladflex_before_after(
     fixed_delta_notification=fixed_delta_notification,
     fixed_beta=fixed_beta,
     fixed_gamma_buffer=fixed_gamma_buffer,
-    save_path=None,  # Uncomment to save: f'PLOTS/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png'
+    save_path=f'PLOTS/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png',
     show=True
 )
 

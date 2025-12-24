@@ -86,7 +86,7 @@ def plot_ladflex_before_after(point_name, points_dates, res_dfs, latencies,
     # Add vertical lines and labels
     for t, label in zip([t_0, t_1, t_2, t_end], ['$t_0$', '$t_1$', '$t_2$', '$t_{end}$']):
         ax.axvline(t, linestyle='--', color='red', alpha=0.3, linewidth=2)
-        ax.text(t, -0.01, label, color="red",
+        ax.text(t, -0.07, label, color="red",
                 ha='center', va='top', fontsize=16,
                 transform=ax.get_xaxis_transform(), clip_on=False)
     
@@ -96,7 +96,7 @@ def plot_ladflex_before_after(point_name, points_dates, res_dfs, latencies,
     ax.set_title(f'{point_name.upper()}: LAD-Flex Before and After', fontsize=18)
     ax.set_xlabel('Time', fontsize=16)
     ax.set_ylabel('Power (kW)', fontsize=16)
-    ax.legend(fontsize=14, loc='lower right')
+    ax.legend(fontsize=14, loc="best")
     
     # Show dark spines
     for spine in ax.spines.values():
