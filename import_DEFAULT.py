@@ -3,13 +3,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
 import matplotlib.dates as mdates
+from matplotlib.ticker import MaxNLocator
 import seaborn as sns
 from utils import *
 from get_parameters import *
 from utils_plotting import *
 
 SIMULATION = "DEFAULT"
-SCENARIO = "BASELINE" # choose from: BASELINE, mFRR, DAM
+SCENARIO = "mFRR" # choose from: BASELINE, mFRR, DAM
 ZETA = 0  # Task duration uncertainty level: 0, 0.10, 0.20, 0.30, 0.50, or 0.70
 
 # Format ZETA suffix for filenames
@@ -26,6 +27,13 @@ elif ZETA == 0.50:
 elif ZETA == 0.70:
     zeta_suffix = "ZETA_070"
 
+if SCENARIO == "BASELINE":
+    title_string = "Baseline Scenario"
+elif SCENARIO == "mFRR":
+    title_string = "mFRR Scenario"
+elif SCENARIO == "DAM":
+    title_string = "Intraday Scenario"
+    
 # Create plot subfolder for this scenario configuration
 import os
 plot_subfolder = f"PLOTS/{SIMULATION}_{SCENARIO}_{zeta_suffix}"
@@ -175,8 +183,8 @@ notif_str = format_timedelta_h(fixed_delta_notification)
 
 # Set title
 ax.set_title(
-    f"Baseline Scenario: LAD-Flex for the Chosen Sample Week\n"
-    f"$\hat \lambda$ = {latency}, $\beta$ = {fixed_beta} $\eta \Delta t$ = {flex_str}, $\delta$ = {notif_str}",
+    f"{title_string}\n"
+    rf"$\hat{{\lambda}}$ = {latency}, $\beta$ = {fixed_beta}, $\eta \Delta t$ = {flex_str}, $\delta$ = {notif_str}",
     fontsize=18
 )
 
@@ -219,6 +227,7 @@ notif_color = '#A6D854'  # soft green
 flex_color = '#FC9272'   # soft red
 line_color = '#0571B0'   # blue
 
+
 # Plot each point
 for idx, point_name in enumerate(point_names):
     row, col = divmod(idx, 3)
@@ -250,15 +259,21 @@ for idx, point_name in enumerate(point_names):
 
     # Formatting
     ax.set_title(f"{point_name.upper()}: " + str(points_dates[point_name].date()),
-                 fontweight='bold', fontsize=19)
-    ax.set_xlabel('Time', fontsize=17)
-    ax.set_ylabel('Power (kW)', fontsize=17)
-    ax.tick_params(axis='x', rotation=0, labelsize=14)
-    ax.tick_params(axis='y', labelsize=14)
+                 fontsize=20)
+    ax.set_xlabel('Time', fontsize=18)
+    ax.set_ylabel('Power (kW)', fontsize=18)
+    ax.tick_params(axis='x', rotation=0, labelsize=16)
+    ax.tick_params(axis='y', labelsize=16)
 
-    # Date formatting on x-axis
+    # Date formatting on x-axis with ticks at hour boundaries
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval=1))  # Show every hour
+    ax.xaxis.set_major_locator(mdates.HourLocator(byhour=range(0, 25, 2)))
+    
+    # Set common xlim for all subplots
+    # Floor t0 to previous hour, ceil tend to next hour
+    xlim_start = t0.floor('h')
+    xlim_end = tend.ceil('h')
+    ax.set_xlim(xlim_start, xlim_end)
 
     # Thicker, visible spines
     for spine in ax.spines.values():
@@ -272,11 +287,14 @@ for idx, point_name in enumerate(point_names):
         all_labels.extend(['Notification Period', 'Flexibility Window', 'Deferred Power'])
 
 # Shared legend at the bottom
-fig.legend(all_handles, all_labels, loc='lower center', ncol=3, bbox_to_anchor=(0.5, 0.015), fontsize=18)
+fig.legend(all_handles, all_labels, loc='lower center', ncol=3, bbox_to_anchor=(0.5, 0.015), fontsize=22)
+
+# Add suptitle with scenario and more space
+fig.suptitle(title_string, fontsize=30, y=0.98)
 
 # Adjust layout
 plt.tight_layout()
-plt.subplots_adjust(bottom=0.16)
+plt.subplots_adjust(bottom=0.12, top=0.92)
 
 # Save + show
 plt.savefig(f'{plot_subfolder}/power_consumption_3x3_LARGE_{SIMULATION}_{SCENARIO}.png', dpi=300)
@@ -296,7 +314,8 @@ plot_ladflex_before_after(
     fixed_beta=fixed_beta,
     fixed_gamma_buffer=fixed_gamma_buffer,
     save_path=f'{plot_subfolder}/LAD_flex_P1_explanation_{SIMULATION}_{SCENARIO}.png',
-    show=True
+    show=True,
+    title_string=title_string
 )
 
 # %%KDE plot
@@ -317,12 +336,13 @@ for latency in df_summary_week.index.get_level_values('latency').unique():
 energy_series = pd.Series(energy_values)
 
 # Plot KDE
-plt.figure(figsize=(10, 5))
-sns.kdeplot(energy_series, fill=True, bw_adjust=0.3, clip=(0, None))
-plt.title('KDE of Deferrable Energy (kWh)')
-plt.xlabel('Deferrable Energy (kWh)')
-plt.ylabel('Density')
-plt.grid(True)
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.kdeplot(energy_series, fill=True, bw_adjust=0.3, clip=(0, None), ax=ax)
+ax.set_title(f'{title_string}\nKDE of Deferrable Energy', fontsize=18, fontweight='bold')
+ax.set_xlabel('Deferrable Energy (kWh)', fontsize=16)
+ax.set_ylabel('Density', fontsize=16)
+ax.tick_params(axis='both', labelsize=14)
+ax.grid(True, alpha=0.3)
 plt.tight_layout()
 # plt.savefig(f'{plot_subfolder}/KDE_deferrable_energy.png', dpi=300)
 plt.show()

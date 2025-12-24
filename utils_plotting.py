@@ -5,7 +5,7 @@ import pandas as pd
 def plot_ladflex_before_after(point_name, points_dates, res_dfs, latencies, 
                                fixed_flex_window, fixed_delta_notification, 
                                fixed_beta, fixed_gamma_buffer,
-                               save_path=None, show=True):
+                               save_path=None, show=True, title_string=None):
     """
     Generate a LAD-Flex before/after plot showing DC total power vs power after LAD-Flex.
     
@@ -31,6 +31,8 @@ def plot_ladflex_before_after(point_name, points_dates, res_dfs, latencies,
         Path to save the figure. If None, figure is not saved.
     show : bool, default=True
         Whether to display the plot
+    title_string : str, optional
+        Scenario description string to prepend to the title
         
     Returns:
     --------
@@ -91,9 +93,17 @@ def plot_ladflex_before_after(point_name, points_dates, res_dfs, latencies,
                 transform=ax.get_xaxis_transform(), clip_on=False)
     
     # Styling
-    ax.tick_params(axis='x', labelsize=14)
-    ax.grid(True)
-    ax.set_title(f'{point_name.upper()}: LAD-Flex Before and After', fontsize=18)
+    ax.tick_params(axis='both', labelsize=14)
+    ax.grid(True, alpha=0.3)
+    
+    # Set title with optional scenario string
+    if title_string:
+        ax.set_title(f'{title_string}: LAD-Flex Before and After', 
+                    fontsize=18)
+    else:
+        ax.set_title(f'{point_name.upper()}: LAD-Flex Before and After', 
+                    fontsize=18)
+    
     ax.set_xlabel('Time', fontsize=16)
     ax.set_ylabel('Power (kW)', fontsize=16)
     ax.legend(fontsize=14, loc="best")
