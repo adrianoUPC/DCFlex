@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
     
-def apply_duration_uncertainty(df, gamma, random_seed=42):
+def apply_duration_uncertainty(df, zeta, random_seed=42):
     """
     Apply normally distributed prediction error to task durations.
     
@@ -10,7 +10,7 @@ def apply_duration_uncertainty(df, gamma, random_seed=42):
     -----------
     df : pd.DataFrame
         Original dataframe with 'runtime_i' and 'start_time'
-    gamma : float
+    zeta : float
         Relative prediction error (e.g., 0.2 for 20% error)
     random_seed : int
         Random seed for reproducibility
@@ -29,8 +29,8 @@ def apply_duration_uncertainty(df, gamma, random_seed=42):
     # Actual duration in seconds
     d_actual = df_perturbed["runtime_i"].values
     
-    # Generate prediction errors: ε_k ~ N(0, (γ * d_k)²)
-    sigma = gamma * d_actual
+    # Generate prediction errors: ε_k ~ N(0, (ζ * d_k)^2)
+    sigma = zeta * d_actual
     epsilon = np.random.normal(loc=0, scale=sigma, size=len(d_actual))
     
     # Predicted duration: d̂_k = d_k + ε_k

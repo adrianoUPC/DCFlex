@@ -3,7 +3,9 @@
     "allow": [
       "Bash(python compare_uncertainty.py:*)",
       "Bash(ls:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(python -c:*)",
+      "Bash(python:*)"
     ]
   }
 }
