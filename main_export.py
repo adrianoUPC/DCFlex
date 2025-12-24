@@ -17,12 +17,12 @@ cols_to_keep = ["task_name", "start_time", "end_time", "wait_time", "runtime_i",
 
 
 # OBS: we can use this to get results for the duration uncertainty scenarios too (but only if the columns are the same)
-GAMMA = 0.70
+ZETA = 0.70
 
-# Format GAMMA suffix for filenames
-if GAMMA == 0:
+# Format ZETA suffix for filenames
+if ZETA == 0:
     filename = "DATA/df_aa_full_sorted_power.csv"
-    gamma_suffix = "GAMMA_0"
+    zeta_suffix = "ZETA_0"
     df_tasks = pd.read_csv(filename, 
                        index_col=0,
                        skiprows=range(1, N_slice_start + 1),  # Skip first 170k data rows
@@ -30,21 +30,21 @@ if GAMMA == 0:
                        usecols=cols_to_keep,   
                        parse_dates=["start_time", "end_time"])  # Parse dates during read
 
-elif GAMMA == 0.10:
-    filename = "DATA/df_tasks_gamma_010.csv"
-    gamma_suffix = "GAMMA_010"
-elif GAMMA == 0.20:
-    filename = "DATA/df_tasks_gamma_020.csv"
-    gamma_suffix = "GAMMA_020"
-elif GAMMA == 0.30:
-    filename = "DATA/df_tasks_gamma_030.csv"
-    gamma_suffix = "GAMMA_030"
-elif GAMMA == 0.50:
-    filename = "DATA/df_tasks_gamma_050.csv"
-    gamma_suffix = "GAMMA_050"
-elif GAMMA == 0.70:
-    filename = "DATA/df_tasks_gamma_070.csv"
-    gamma_suffix = "GAMMA_070"
+elif ZETA == 0.10:
+    filename = "DATA/df_tasks_zeta_010.csv"
+    zeta_suffix = "ZETA_010"
+elif ZETA == 0.20:
+    filename = "DATA/df_tasks_zeta_020.csv"
+    zeta_suffix = "ZETA_020"
+elif ZETA == 0.30:
+    filename = "DATA/df_tasks_zeta_030.csv"
+    zeta_suffix = "ZETA_030"
+elif ZETA == 0.50:
+    filename = "DATA/df_tasks_zeta_050.csv"
+    zeta_suffix = "ZETA_050"
+elif ZETA == 0.70:
+    filename = "DATA/df_tasks_zeta_070.csv"
+    zeta_suffix = "ZETA_070"
     
 df_tasks = pd.read_csv(filename, 
                        index_col=0,
@@ -198,8 +198,8 @@ for latency in latencies:
 df_summary = pd.DataFrame(summary_data)
 df_summary.set_index(['timestamp', 'latency', 'flex_window', 'delta_notification', 'beta', 'gamma_buffer'], inplace=True)
 
-joblib.dump(df_summary, f'EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib')
-joblib.dump(res_dfs, f'EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib')
+joblib.dump(df_summary, f'EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{zeta_suffix}.joblib')
+joblib.dump(res_dfs, f'EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{zeta_suffix}.joblib')
 
 checkpoint_time = time.time()
 print("Checkpoint time: ", checkpoint_time)
@@ -207,3 +207,4 @@ print("Checkpoint time: ", checkpoint_time)
 end_time = time.time()
 print("End time: ", end_time)
 # %%
+

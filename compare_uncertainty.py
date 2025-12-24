@@ -1,23 +1,23 @@
 """
 compare_uncertainty.py
 
-This script compares the impact of task duration uncertainty (gamma parameter) on
+This script compares the impact of task duration uncertainty (zeta parameter) on
 LAD-Flex's task deferability classification. It creates confusion matrices comparing
-gamma scenarios (0.10, 0.20, 0.30) against the baseline (gamma=0) by aggregating
+zeta scenarios (0.10, 0.20, 0.30) against the baseline (zeta=0) by aggregating
 decisions across all parameter combinations.
 
 Inputs:
-    - EXPORTS/res_dfs_DEFAULT_BASELINE_GAMMA_0.joblib
-    - EXPORTS/res_dfs_DEFAULT_BASELINE_GAMMA_010.joblib
-    - EXPORTS/res_dfs_DEFAULT_BASELINE_GAMMA_020.joblib
-    - EXPORTS/res_dfs_DEFAULT_BASELINE_GAMMA_030.joblib
+    - EXPORTS/res_dfs_DEFAULT_BASELINE_ZETA_0.joblib
+    - EXPORTS/res_dfs_DEFAULT_BASELINE_ZETA_010.joblib
+    - EXPORTS/res_dfs_DEFAULT_BASELINE_ZETA_020.joblib
+    - EXPORTS/res_dfs_DEFAULT_BASELINE_ZETA_030.joblib
 
 Outputs:
-    - PLOTS/confusion_matrix_gamma_comparison_DEFAULT_BASELINE.png
-    - PLOTS/confusion_matrix_gamma_comparison_DEFAULT_BASELINE.pdf
-    - PLOTS/metrics_trend_gamma_DEFAULT_BASELINE.png (optional)
-    - PLOTS/metrics_trend_gamma_DEFAULT_BASELINE.pdf (optional)
-    - EXPORTS/metrics_gamma_comparison_DEFAULT_BASELINE.csv
+    - PLOTS/confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png
+    - PLOTS/confusion_matrix_zeta_comparison_DEFAULT_BASELINE.pdf
+    - PLOTS/metrics_trend_zeta_DEFAULT_BASELINE.png (optional)
+    - PLOTS/metrics_trend_zeta_DEFAULT_BASELINE.pdf (optional)
+    - EXPORTS/metrics_zeta_comparison_DEFAULT_BASELINE.csv
     - EXPORTS/confusion_matrix_counts_DEFAULT_BASELINE.csv
 
 Author: LAD-Flex Research Team
@@ -33,30 +33,30 @@ import seaborn as sns
 
 SIMULATION = "DEFAULT"
 SCENARIO = "BASELINE"
-GAMMA = [0, 0.10, 0.30, 0.50]
+ZETA = [0, 0.10, 0.30, 0.50]
 
 # %% Load Data
 print("="*70)
-print("Loading gamma scenario data...")
+print("Loading zeta scenario data...")
 print("="*70)
 
-# Gamma suffix mapping (following import_DEFAULT.py pattern)
-gamma_suffix_map = {
-    0: "GAMMA_0",
-    0.10: "GAMMA_010",
-    0.20: "GAMMA_020",
-    0.30: "GAMMA_030",
-    0.50: "GAMMA_050",
-    0.70: "GAMMA_070"
+# Zeta suffix mapping (following import_DEFAULT.py pattern)
+zeta_suffix_map = {
+    0: "ZETA_0",
+    0.10: "ZETA_010",
+    0.20: "ZETA_020",
+    0.30: "ZETA_030",
+    0.50: "ZETA_050",
+    0.70: "ZETA_070"
 }
 
 # Load all res_dfs dictionaries
-res_dfs_by_gamma = {}
-for gamma in GAMMA:
-    suffix = gamma_suffix_map[gamma]
+res_dfs_by_zeta = {}
+for zeta in ZETA:
+    suffix = zeta_suffix_map[zeta]
     filename = f"EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{suffix}.joblib"
-    res_dfs_by_gamma[gamma] = joblib.load(filename)
-    print(f"Loaded gamma={gamma}: {len(res_dfs_by_gamma[gamma])} parameter combinations")
+    res_dfs_by_zeta[zeta] = joblib.load(filename)
+    print(f"Loaded zeta={zeta}: {len(res_dfs_by_zeta[zeta])} parameter combinations")
 
 print()
 
@@ -102,15 +102,15 @@ print("-"*70)
 
 # Extract for each gamma
 task_sets = {}
-for gamma in GAMMA:
-    deferrable, not_deferrable = extract_all_tasks(res_dfs_by_gamma[gamma])
+for zeta in GAMMA:
+    deferrable, not_deferrable = extract_all_tasks(res_dfs_by_zeta[gamma])
     all_tasks = deferrable | not_deferrable
     task_sets[gamma] = {
         'deferrable': deferrable,
         'not_deferrable': not_deferrable,
         'all_tasks': all_tasks
     }
-    print(f"Gamma {gamma}: {len(deferrable)} deferrable, {len(not_deferrable)} not deferrable, {len(all_tasks)} total tasks")
+    print(f"zeta {gamma}: {len(deferrable)} deferrable, {len(not_deferrable)} not deferrable, {len(all_tasks)} total tasks")
 
 print()
 
@@ -118,7 +118,7 @@ print()
 
 def build_confusion_matrix(baseline_tasks, comparison_tasks):
     """
-    Build confusion matrix comparing gamma scenario against baseline.
+    Build confusion matrix comparing zeta scenario against baseline.
 
     Args:
         baseline_tasks: dict with 'deferrable', 'not_deferrable', 'all_tasks'
@@ -150,12 +150,12 @@ print("-"*70)
 
 # Build confusion matrices
 confusion_matrices = {}
-baseline_tasks = task_sets[0]  # gamma = 0 is baseline
+baseline_tasks = task_sets[0]  # zeta = 0 is baseline
 
-for gamma in [0.10, 0.30, 0.50]:
+for zeta in [0.10, 0.30, 0.50]:
     cm = build_confusion_matrix(baseline_tasks, task_sets[gamma])
     confusion_matrices[gamma] = cm
-    print(f"Gamma {gamma} vs 0: TP={cm['TP']}, FP={cm['FP']}, FN={cm['FN']}, TN={cm['TN']}")
+    print(f"zeta {gamma} vs 0: TP={cm['TP']}, FP={cm['FP']}, FN={cm['FN']}, TN={cm['TN']}")
 
     # Validation: check that TP + FP + FN + TN equals total tasks
     total = cm['TP'] + cm['FP'] + cm['FN'] + cm['TN']
@@ -205,7 +205,7 @@ def calculate_metrics(cm_dict):
 
 # Calculate metrics for all comparisons
 metrics = {}
-for gamma in [0.10, 0.30, 0.50]:
+for zeta in [0.10, 0.30, 0.50]:
     metrics[gamma] = calculate_metrics(confusion_matrices[gamma])
 
 # %% Visualize Confusion Matrices
@@ -222,7 +222,7 @@ cmap = sns.color_palette("Blues", as_cmap=True)
 
 gamma_list = [0.10, 0.30, 0.50]
 
-for idx, gamma in enumerate(gamma_list):
+for idx, zeta in enumerate(gamma_list):
     ax = axes[idx]
     cm = confusion_matrices[gamma]
     met = metrics[gamma]
@@ -266,14 +266,14 @@ fig.suptitle('Task Deferability Classification: Impact of Duration Uncertainty (
 plt.tight_layout()
 
 # Save figures
-plt.savefig(f'PLOTS/confusion_matrix_gamma_comparison_{SIMULATION}_{SCENARIO}.png',
+plt.savefig(f'PLOTS/confusion_matrix_zeta_comparison_{SIMULATION}_{SCENARIO}.png',
             dpi=300, bbox_inches='tight')
-plt.savefig(f'PLOTS/confusion_matrix_gamma_comparison_{SIMULATION}_{SCENARIO}.pdf',
+plt.savefig(f'PLOTS/confusion_matrix_zeta_comparison_{SIMULATION}_{SCENARIO}.pdf',
             bbox_inches='tight')
 
 print("Confusion matrix plots saved:")
-print(f"  - PLOTS/confusion_matrix_gamma_comparison_{SIMULATION}_{SCENARIO}.png")
-print(f"  - PLOTS/confusion_matrix_gamma_comparison_{SIMULATION}_{SCENARIO}.pdf")
+print(f"  - PLOTS/confusion_matrix_zeta_comparison_{SIMULATION}_{SCENARIO}.png")
+print(f"  - PLOTS/confusion_matrix_zeta_comparison_{SIMULATION}_{SCENARIO}.pdf")
 print()
 
 plt.show()
@@ -331,9 +331,9 @@ def extract_tasks_for_date_range(res_dfs_dict, start_date, end_date):
 
 # Extract tasks for sample week
 task_sets_week = {}
-for gamma in GAMMA:
+for zeta in GAMMA:
     deferrable, not_deferrable = extract_tasks_for_date_range(
-        res_dfs_by_gamma[gamma], start_date, end_date
+        res_dfs_by_zeta[gamma], start_date, end_date
     )
     all_tasks = deferrable | not_deferrable
     task_sets_week[gamma] = {
@@ -341,7 +341,7 @@ for gamma in GAMMA:
         'not_deferrable': not_deferrable,
         'all_tasks': all_tasks
     }
-    print(f"Gamma {gamma} (sample week): {len(deferrable)} deferrable, {len(not_deferrable)} not deferrable, {len(all_tasks)} total tasks")
+    print(f"zeta {gamma} (sample week): {len(deferrable)} deferrable, {len(not_deferrable)} not deferrable, {len(all_tasks)} total tasks")
 
 print()
 
@@ -349,16 +349,16 @@ print()
 confusion_matrices_week = {}
 baseline_tasks_week = task_sets_week[0]
 
-for gamma in [0.10, 0.30, 0.50]:
+for zeta in [0.10, 0.30, 0.50]:
     cm = build_confusion_matrix(baseline_tasks_week, task_sets_week[gamma])
     confusion_matrices_week[gamma] = cm
-    print(f"Sample Week - Gamma {gamma} vs 0: TP={cm['TP']}, FP={cm['FP']}, FN={cm['FN']}, TN={cm['TN']}")
+    print(f"Sample Week - zeta {gamma} vs 0: TP={cm['TP']}, FP={cm['FP']}, FN={cm['FN']}, TN={cm['TN']}")
 
 print()
 
 # Calculate metrics for sample week
 metrics_week = {}
-for gamma in [0.10, 0.30, 0.50]:
+for zeta in [0.10, 0.30, 0.50]:
     metrics_week[gamma] = calculate_metrics(confusion_matrices_week[gamma])
 
 # %% Visualize Sample Week Confusion Matrices
@@ -372,7 +372,7 @@ cmap = sns.color_palette("Blues", as_cmap=True)
 
 gamma_list = [0.10, 0.30, 0.50]
 
-for idx, gamma in enumerate(gamma_list):
+for idx, zeta in enumerate(gamma_list):
     ax = axes[idx]
     cm = confusion_matrices_week[gamma]
     met = metrics_week[gamma]
@@ -416,14 +416,14 @@ fig.suptitle('Task Deferability Classification (Sample Week): Impact of Duration
 plt.tight_layout()
 
 # Save figures
-plt.savefig(f'PLOTS/confusion_matrix_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.png',
+plt.savefig(f'PLOTS/confusion_matrix_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.png',
             dpi=300, bbox_inches='tight')
-plt.savefig(f'PLOTS/confusion_matrix_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.pdf',
+plt.savefig(f'PLOTS/confusion_matrix_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.pdf',
             bbox_inches='tight')
 
 print("Sample week confusion matrix plots saved:")
-print(f"  - PLOTS/confusion_matrix_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.png")
-print(f"  - PLOTS/confusion_matrix_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.pdf")
+print(f"  - PLOTS/confusion_matrix_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.png")
+print(f"  - PLOTS/confusion_matrix_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.pdf")
 print()
 
 plt.show()
@@ -439,8 +439,8 @@ print(metrics_week_df.to_string())
 print("="*70)
 print()
 
-metrics_week_df.to_csv(f'EXPORTS/metrics_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.csv')
-print(f"Sample week metrics saved to EXPORTS/metrics_gamma_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.csv")
+metrics_week_df.to_csv(f'EXPORTS/metrics_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.csv')
+print(f"Sample week metrics saved to EXPORTS/metrics_zeta_comparison_SAMPLE_WEEK_{SIMULATION}_{SCENARIO}.csv")
 print()
 
 sns.reset_defaults()
@@ -459,8 +459,8 @@ print("="*70)
 print()
 
 # Save metrics
-metrics_df.to_csv(f'EXPORTS/metrics_gamma_comparison_{SIMULATION}_{SCENARIO}.csv')
-print(f"Metrics saved to EXPORTS/metrics_gamma_comparison_{SIMULATION}_{SCENARIO}.csv")
+metrics_df.to_csv(f'EXPORTS/metrics_zeta_comparison_{SIMULATION}_{SCENARIO}.csv')
+print(f"Metrics saved to EXPORTS/metrics_zeta_comparison_{SIMULATION}_{SCENARIO}.csv")
 print()
 
 # Create confusion matrix counts summary
@@ -472,7 +472,7 @@ cm_summary = pd.DataFrame({
         'TN': confusion_matrices[gamma]['TN'],
         'Total': sum([confusion_matrices[gamma][k] for k in ['TP', 'FP', 'FN', 'TN']])
     }
-    for gamma in [0.10, 0.30, 0.50]
+    for zeta in [0.10, 0.30, 0.50]
 }).T
 
 cm_summary.index.name = 'Gamma'
@@ -489,7 +489,7 @@ print()
 
 # %% Additional Analysis: Metrics Trend Plot
 
-# Plot metrics trends across gamma values
+# Plot metrics trends across zeta values
 fig, ax = plt.subplots(figsize=(12, 6))
 
 gamma_vals = [0.10, 0.30, 0.50]
@@ -512,26 +512,26 @@ ax.set_ylim([0, 1.05])
 ax.set_xticks(gamma_vals)
 
 plt.tight_layout()
-plt.savefig(f'PLOTS/metrics_trend_gamma_{SIMULATION}_{SCENARIO}.png', dpi=300)
-plt.savefig(f'PLOTS/metrics_trend_gamma_{SIMULATION}_{SCENARIO}.pdf')
+plt.savefig(f'PLOTS/metrics_trend_zeta_{SIMULATION}_{SCENARIO}.png', dpi=300)
+plt.savefig(f'PLOTS/metrics_trend_zeta_{SIMULATION}_{SCENARIO}.pdf')
 
 print("Metrics trend plots saved:")
-print(f"  - PLOTS/metrics_trend_gamma_{SIMULATION}_{SCENARIO}.png")
-print(f"  - PLOTS/metrics_trend_gamma_{SIMULATION}_{SCENARIO}.pdf")
+print(f"  - PLOTS/metrics_trend_zeta_{SIMULATION}_{SCENARIO}.png")
+print(f"  - PLOTS/metrics_trend_zeta_{SIMULATION}_{SCENARIO}.pdf")
 print()
 
 plt.show()
 
-# %% Deferred Power Time Series: 3x3 Grid Comparison Across Gamma Values
+# %% Deferred Power Time Series: 3x3 Grid Comparison Across zeta Values
 
 print("="*70)
 print("Creating 3x3 deferred power time series comparison...")
 print("="*70)
 
-# Load notable points from baseline (gamma=0)
+# Load notable points from baseline (zeta=0)
 points_dates = joblib.load(f"EXPORTS/points_dates_{SIMULATION}_{SCENARIO}_GAMMA_0.joblib")
 
-# Get parameters (assuming same across all gamma scenarios)
+# Get parameters (assuming same across all zeta scenarios)
 from get_parameters import return_params
 params = return_params(SIMULATION, SCENARIO)
 latencies = params['latencies']
@@ -552,7 +552,7 @@ fig, axs = plt.subplots(3, 3, figsize=(20, 14), sharex=False, sharey=False)
 # Define point ordering for 3x3 grid
 point_names = ['p1', 'p2', 'p3', 'q1', 'q2', 'q3', 'r1', 'r2', 'r3']
 
-# Color palette for different gamma values
+# Color palette for different zeta values
 colors = {
     0: '#2E86AB',      # blue
     0.10: '#A23B72',   # purple
@@ -568,9 +568,9 @@ for idx, point_name in enumerate(point_names):
     row, col = divmod(idx, 3)
     ax = axs[row, col]
     
-    # Plot power curves for each gamma value
-    for gamma in sorted(GAMMA):
-        res_dfs = res_dfs_by_gamma[gamma]
+    # Plot power curves for each zeta value
+    for zeta in sorted(zeta):
+        res_dfs = res_dfs_by_zeta[gamma]
         
         # Get data for this point
         tuple_point = (points_dates[point_name], latencies[0], fixed_flex_window,
@@ -589,8 +589,8 @@ for idx, point_name in enumerate(point_names):
                         where='post', linewidth=2, alpha=0.8,
                         color=colors[gamma], label=f'γ={gamma}')
             
-            # Add shaded regions only on the first gamma (to avoid overlapping)
-            if gamma == 0:
+            # Add shaded regions only on the first zeta (to avoid overlapping)
+            if zeta == 0:
                 ax.axvspan(t0, t1, color='green', alpha=0.15)
                 ax.axvspan(t1, t2, color='red', alpha=0.15)
     
@@ -615,7 +615,7 @@ for idx, point_name in enumerate(point_names):
         all_labels = labels
 
 # Add single legend at the bottom
-fig.legend(all_handles, all_labels, loc='lower center', ncol=len(GAMMA), 
+fig.legend(all_handles, all_labels, loc='lower center', ncol=len(zeta), 
           bbox_to_anchor=(0.5, 0.015), fontsize=20)
 
 # Adjust layout
@@ -637,3 +637,4 @@ print("="*70)
 print("Analysis complete!")
 print("="*70)
 # %%
+

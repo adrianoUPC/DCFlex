@@ -10,30 +10,30 @@ from utils_plotting import *
 
 SIMULATION = "DEFAULT"
 SCENARIO = "BASELINE" # choose from: BASELINE, mFRR, DAM
-GAMMA = 0  # Task duration uncertainty level: 0, 0.10, 0.20, 0.30, 0.50, or 0.70
+ZETA = 0  # Task duration uncertainty level: 0, 0.10, 0.20, 0.30, 0.50, or 0.70
 
-# Format GAMMA suffix for filenames
-if GAMMA == 0:
-    gamma_suffix = "GAMMA_0"
-elif GAMMA == 0.10:
-    gamma_suffix = "GAMMA_010"
-elif GAMMA == 0.20:
-    gamma_suffix = "GAMMA_020"
-elif GAMMA == 0.30:
-    gamma_suffix = "GAMMA_030"
-elif GAMMA == 0.50:
-    gamma_suffix = "GAMMA_050"
-elif GAMMA == 0.70:
-    gamma_suffix = "GAMMA_070"
+# Format ZETA suffix for filenames
+if ZETA == 0:
+    zeta_suffix = "ZETA_0"
+elif ZETA == 0.10:
+    zeta_suffix = "ZETA_010"
+elif ZETA == 0.20:
+    zeta_suffix = "ZETA_020"
+elif ZETA == 0.30:
+    zeta_suffix = "ZETA_030"
+elif ZETA == 0.50:
+    zeta_suffix = "ZETA_050"
+elif ZETA == 0.70:
+    zeta_suffix = "ZETA_070"
 
 # Create plot subfolder for this scenario configuration
 import os
-plot_subfolder = f"PLOTS/{SIMULATION}_{SCENARIO}_{gamma_suffix}"
+plot_subfolder = f"PLOTS/{SIMULATION}_{SCENARIO}_{zeta_suffix}"
 os.makedirs(plot_subfolder, exist_ok=True)
 
 # %% Load Data
 # Load summary DataFrame
-filename = f"EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib"
+filename = f"EXPORTS/df_summary_{SIMULATION}_{SCENARIO}_{zeta_suffix}.joblib"
 df_summary = joblib.load(filename)
 """
 df_summary: pd.DataFrame
@@ -57,7 +57,7 @@ df_summary: pd.DataFrame
 """
 
 # Load detailed results dictionary
-filename = f"EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib"
+filename = f"EXPORTS/res_dfs_{SIMULATION}_{SCENARIO}_{zeta_suffix}.joblib"
 res_dfs = joblib.load(filename)
 """
 res_dfs: dict
@@ -187,7 +187,7 @@ plt.xticks(rotation=0)
 plt.tight_layout()
 
 # Save and show
-plt.savefig(f'{plot_subfolder}/deferrable_energy_notable_points_LARGE_{SIMULATION}_{SCENARIO}_{gamma_suffix}.png', dpi=300)
+plt.savefig(f'{plot_subfolder}/deferrable_energy_notable_points_LARGE_{SIMULATION}_{SCENARIO}_{zeta_suffix}.png', dpi=300)
 plt.show()
 
 # %%Extracting data to get 3x3 PLOTS
@@ -197,7 +197,7 @@ points_dates = {
     "r1": r1, "r2": r2, "r3": r3
 }
 
-joblib.dump(points_dates, f"EXPORTS/points_dates_{SIMULATION}_{SCENARIO}_{gamma_suffix}.joblib")
+joblib.dump(points_dates, f"EXPORTS/points_dates_{SIMULATION}_{SCENARIO}_{zeta_suffix}.joblib")
 
 
 
@@ -359,5 +359,5 @@ print(df_table.to_string(index=False))
 print("="*70)
 
 # Save to CSV
-df_table.to_csv(f'{plot_subfolder}/task_energy_breakdown_{SIMULATION}_{SCENARIO}_{gamma_suffix}.csv', index=False)
+df_table.to_csv(f'{plot_subfolder}/task_energy_breakdown_{SIMULATION}_{SCENARIO}_{zeta_suffix}.csv', index=False)
 
