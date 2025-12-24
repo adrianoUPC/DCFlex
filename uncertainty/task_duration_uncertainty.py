@@ -162,8 +162,6 @@ def plot_actual_vs_predicted(df, gamma_label):
     #             dpi=300, bbox_inches='tight')
     plt.show()
 
-# Create scatter plots
-plot_actual_vs_predicted(df_gamma_020, 'γ=0.20')
 
 # ============================================================================
 # STANDALONE PLOT: Comparison of Error Distributions (ALL GAMMAS)
@@ -591,8 +589,8 @@ def plot_error_and_scatter_combined(df_010, df_030, df_050, save_path=None):
     
     ax2.set_xlabel('Actual Duration (minutes)\nb)', fontsize=13)
     ax2.set_ylabel('Predicted Duration (minutes)', fontsize=13)
-    ax2.set_title('Actual vs Predicted Task Duration (γ=0.50)', 
-                 fontsize=14, fontweight='bold')
+    ax2.set_title('Actual vs Predicted Task Duration ($\zeta$=0.50)', 
+                 fontsize=14)
     ax2.legend(fontsize=11)
     ax2.grid(alpha=0.3)
     ax2.tick_params(labelsize=11)
