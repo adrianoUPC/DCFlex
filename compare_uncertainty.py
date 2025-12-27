@@ -248,7 +248,7 @@ for idx, zeta in enumerate(zeta_list):
     # Set labels
     ax.set_xlabel(f'Predicted (ζ = {zeta:.2f})', fontsize=14)
     ax.set_ylabel('Actual (ζ = 0, Baseline)', fontsize=14)
-    ax.set_title(f'(zeta=0 vs zeta={zeta:g})', fontsize=13, fontweight='bold')
+    ax.set_title(f'(ζ=0 vs ζ={zeta:g})', fontsize=13, fontweight='bold')
 
     # Set tick labels
     ax.set_xticklabels(['Deferrable', 'Not Deferrable'], rotation=0, fontsize=12)
@@ -421,7 +421,7 @@ plt.show()
 # Save sample week metrics
 
 metrics_week_df = pd.DataFrame(metrics_week).T
-metrics_week_df.index.name = 'Zeta'
+metrics_week_df.index.name = 'ζ'
 metrics_week_df = metrics_week_df.round(4)
 
 print("Sample Week Classification Metrics Summary:")
@@ -441,7 +441,7 @@ sns.reset_defaults()
 # Create metrics summary DataFrame
 
 metrics_df = pd.DataFrame(metrics).T
-metrics_df.index.name = 'Zeta'
+metrics_df.index.name = 'ζ'
 metrics_df = metrics_df.round(4)
 
 print("Classification Metrics Summary:")
