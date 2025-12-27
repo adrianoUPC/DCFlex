@@ -22,6 +22,7 @@ import seaborn as sns
 import joblib
 import os
 import matplotlib.dates as mdates
+from matplotlib.lines import Line2D
 
 # Configuration
 SIMULATION = "DEFAULT"
@@ -43,6 +44,13 @@ SCENARIO_LABELS = {
     'BASELINE': 'BASELINE\n(600s, 3h, β=0.7)',
     'DAM': 'DAM\n(1800s, 4h, β=0.8)',
     'mFRR': 'mFRR\n(180s, 1h, β=0.9)'
+}
+
+# Short display labels for plots/legends (DAM is shown as INTRADAY)
+DISPLAY_LABELS = {
+    'BASELINE': 'BASELINE',
+    'DAM': 'INTRADAY',
+    'mFRR': 'mFRR'
 }
 
 # Sample week date range
@@ -89,196 +97,6 @@ print("="*70)
 
 # %% Section 3: Helper Functions
 
-def create_boxplot_comparison(scenario_data, metrics, save_path, save_pdf=True):
-    """
-    Create side-by-side boxplots comparing scenarios across all metrics.
-
-    Parameters:
-    -----------
-    scenario_data : dict
-        Dictionary with {scenario_name: df_summary_filtered}
-    metrics : list
-        List of metric column names to plot
-    save_path : str
-        Path to save output PNG file (without extension)
-    save_pdf : bool
-        Whether to also save PDF version
-    """
-    sns.set(style="whitegrid")
-
-    fig, axes = plt.subplots(1, len(metrics), figsize=(20, 6))
-
-    for idx, metric in enumerate(metrics):
-        ax = axes[idx]
-
-        # Prepare data for boxplot
-        data_to_plot = []
-        labels = []
-        colors = []
-
-        for scenario in ['BASELINE', 'DAM', 'mFRR']:
-            data_to_plot.append(scenario_data[scenario][metric].values)
-            labels.append(SCENARIO_LABELS[scenario])
-            colors.append(SCENARIO_COLORS[scenario])
-
-        # Create boxplot
-        bp = ax.boxplot(data_to_plot, labels=labels, patch_artist=True,
-                        widths=0.6, showfliers=True, flierprops={'markersize': 4})
-
-        # Color boxes
-        for patch, color in zip(bp['boxes'], colors):
-            patch.set_facecolor(color)
-            patch.set_alpha(0.7)
-
-        # Color whiskers and caps
-        for whisker in bp['whiskers']:
-            whisker.set_linewidth(1.5)
-        for cap in bp['caps']:
-            cap.set_linewidth(1.5)
-        for median in bp['medians']:
-            median.set_color('black')
-            median.set_linewidth(2)
-
-        # Styling
-        ax.set_title(METRIC_INFO[metric]['short'], fontsize=14, fontweight='bold')
-        ax.set_ylabel('Value', fontsize=13)
-        ax.tick_params(axis='both', labelsize=11)
-        ax.tick_params(axis='x', rotation=0)
-        ax.grid(axis='y', alpha=0.3)
-
-        # Thicker spines
-        for spine in ax.spines.values():
-            spine.set_visible(True)
-            spine.set_color('black')
-            spine.set_linewidth(1.2)
-
-    fig.suptitle('Scenario Comparison: Sample Week Flexibility Metrics (Feb 1-7, 1970)',
-                 fontsize=18, fontweight='bold', y=0.98)
-
-    plt.tight_layout()
-    plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
-    if save_pdf:
-        plt.savefig(f'{save_path}.pdf', bbox_inches='tight')
-    plt.show()
-
-    sns.reset_defaults()
-    print(f"Boxplot comparison saved to {save_path}.png/.pdf")
-
-
-def create_bar_chart_comparison(scenario_data, metrics, save_path, save_pdf=True):
-    """
-    Create bar charts with error bars (mean ± std) comparing scenarios.
-
-    Parameters:
-    -----------
-    scenario_data : dict
-        Dictionary with {scenario_name: df_summary_filtered}
-    metrics : list
-        List of metric column names to plot
-    save_path : str
-        Path to save output PNG file (without extension)
-    save_pdf : bool
-        Whether to also save PDF version
-    """
-    sns.set(style="whitegrid")
-
-    # Create 2×3 grid (5 metrics + 1 normalized comparison)
-    fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-    axes = axes.flatten()
-
-    # Compute statistics
-    stats = {}
-    for scenario in ['BASELINE', 'DAM', 'mFRR']:
-        stats[scenario] = {}
-        for metric in metrics:
-            stats[scenario][metric] = {
-                'mean': scenario_data[scenario][metric].mean(),
-                'std': scenario_data[scenario][metric].std()
-            }
-
-    # Plot first 5 metrics
-    for idx, metric in enumerate(metrics):
-        ax = axes[idx]
-
-        means = [stats[s][metric]['mean'] for s in ['BASELINE', 'DAM', 'mFRR']]
-        stds = [stats[s][metric]['std'] for s in ['BASELINE', 'DAM', 'mFRR']]
-        colors = [SCENARIO_COLORS[s] for s in ['BASELINE', 'DAM', 'mFRR']]
-        labels = [SCENARIO_LABELS[s] for s in ['BASELINE', 'DAM', 'mFRR']]
-
-        x_pos = np.arange(len(labels))
-        bars = ax.bar(x_pos, means, yerr=stds, capsize=5, color=colors, alpha=0.7,
-                      edgecolor='black', linewidth=1.5)
-
-        ax.set_xlabel('Scenario', fontsize=13, fontweight='bold')
-        ax.set_ylabel('Mean ± Std', fontsize=13, fontweight='bold')
-        ax.set_title(METRIC_INFO[metric]['short'], fontsize=14, fontweight='bold')
-        ax.set_xticks(x_pos)
-        ax.set_xticklabels(labels, fontsize=11)
-        ax.tick_params(axis='y', labelsize=11)
-        ax.grid(axis='y', alpha=0.3)
-
-        # Thicker spines
-        for spine in ax.spines.values():
-            spine.set_visible(True)
-            spine.set_color('black')
-            spine.set_linewidth(1.2)
-
-    # Panel 6: Normalized comparison
-    ax = axes[5]
-
-    # Normalize each metric to [0, 1] based on max across scenarios
-    normalized_data = {}
-    for scenario in ['BASELINE', 'DAM', 'mFRR']:
-        normalized_data[scenario] = []
-
-    for metric in metrics:
-        max_val = max([stats[s][metric]['mean'] for s in ['BASELINE', 'DAM', 'mFRR']])
-        if max_val > 0:
-            for scenario in ['BASELINE', 'DAM', 'mFRR']:
-                normalized_data[scenario].append(stats[scenario][metric]['mean'] / max_val)
-        else:
-            for scenario in ['BASELINE', 'DAM', 'mFRR']:
-                normalized_data[scenario].append(0)
-
-    # Grouped bar chart
-    x = np.arange(len(metrics))
-    width = 0.25
-
-    for i, scenario in enumerate(['BASELINE', 'DAM', 'mFRR']):
-        offset = (i - 1) * width
-        ax.bar(x + offset, normalized_data[scenario], width,
-               label=SCENARIO_LABELS[scenario], color=SCENARIO_COLORS[scenario],
-               alpha=0.7, edgecolor='black', linewidth=1.5)
-
-    ax.set_xlabel('Metric', fontsize=13, fontweight='bold')
-    ax.set_ylabel('Normalized Value [0-1]', fontsize=13, fontweight='bold')
-    ax.set_title('Normalized Comparison (All Metrics)', fontsize=14, fontweight='bold')
-    ax.set_xticks(x)
-    ax.set_xticklabels([METRIC_INFO[m]['short'] for m in metrics], fontsize=9, rotation=15, ha='right')
-    ax.tick_params(axis='y', labelsize=11)
-    ax.legend(fontsize=10, loc='upper left')
-    ax.grid(axis='y', alpha=0.3)
-    ax.set_ylim(0, 1.1)
-
-    # Thicker spines
-    for spine in ax.spines.values():
-        spine.set_visible(True)
-        spine.set_color('black')
-        spine.set_linewidth(1.2)
-
-    fig.suptitle('Mean ± Std Comparison: Sample Week (Feb 1-7, 1970)',
-                 fontsize=18, fontweight='bold', y=0.98)
-
-    plt.tight_layout()
-    plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
-    if save_pdf:
-        plt.savefig(f'{save_path}.pdf', bbox_inches='tight')
-    plt.show()
-
-    sns.reset_defaults()
-    print(f"Bar chart comparison saved to {save_path}.png/.pdf")
-
-
 def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
     """
     Create combined publication-ready figure with boxplots and bar charts.
@@ -297,9 +115,9 @@ def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
     """
     sns.set(style="whitegrid")
 
-    fig, axes = plt.subplots(2, 3, figsize=(18, 10))
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
-    # Compute statistics
+    # Compute statistics (kept for possible downstream use)
     stats = {}
     for scenario in ['BASELINE', 'DAM', 'mFRR']:
         stats[scenario] = {}
@@ -309,9 +127,9 @@ def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
                 'std': scenario_data[scenario][metric].std()
             }
 
-    # Row 1: Boxplots
+    # Single row: Boxplots only
     for idx, metric in enumerate(metrics):
-        ax = axes[0, idx]
+        ax = axes[idx]
 
         # Prepare data for boxplot
         data_to_plot = []
@@ -320,7 +138,7 @@ def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
 
         for scenario in ['BASELINE', 'DAM', 'mFRR']:
             data_to_plot.append(scenario_data[scenario][metric].values)
-            labels.append(scenario.replace('_', '\n'))
+            labels.append(DISPLAY_LABELS.get(scenario, scenario))
             colors.append(SCENARIO_COLORS[scenario])
 
         # Create boxplot
@@ -338,9 +156,19 @@ def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
             median.set_linewidth(2)
 
         # Styling
-        ax.set_title(METRIC_INFO[metric]['short'], fontsize=14, fontweight='bold')
-        ax.set_ylabel('Value', fontsize=12)
-        ax.tick_params(axis='both', labelsize=11)
+        ax.set_title(METRIC_INFO[metric]['short'], fontsize=20)
+        # Per-metric y-axis label
+        if metric == 'deferrable_energy_kWh':
+            ylabel = 'Energy (kWh)'
+        elif metric == 'deferrable_task_count':
+            ylabel = 'n_tasks'
+        elif metric == 'percentage_flexible_energy':
+            ylabel = 'Flexible (%)'
+        else:
+            ylabel = 'Value'
+
+        ax.set_ylabel(ylabel, fontsize=18)
+        ax.tick_params(axis='both', labelsize=16)
         ax.grid(axis='y', alpha=0.3)
 
         # Thicker spines
@@ -349,43 +177,14 @@ def create_combined_figure(scenario_data, metrics, save_path, save_pdf=True):
             spine.set_color('black')
             spine.set_linewidth(1.2)
 
-    # Row 2: Bar charts
-    for idx, metric in enumerate(metrics):
-        ax = axes[1, idx]
+    # Improve layout and x-tick styling
+    for ax in axes:
+        # Bold & larger x tick labels
+        xticklabels = [t.get_text() for t in ax.get_xticklabels()]
+        ax.set_xticklabels(xticklabels, fontsize=18, fontweight='bold')
 
-        means = [stats[s][metric]['mean'] for s in ['BASELINE', 'DAM', 'mFRR']]
-        stds = [stats[s][metric]['std'] for s in ['BASELINE', 'DAM', 'mFRR']]
-        colors = [SCENARIO_COLORS[s] for s in ['BASELINE', 'DAM', 'mFRR']]
-        labels = [s for s in ['BASELINE', 'DAM', 'mFRR']]
-
-        x_pos = np.arange(len(labels))
-        bars = ax.bar(x_pos, means, yerr=stds, capsize=5, color=colors, alpha=0.7,
-                      edgecolor='black', linewidth=1.5)
-
-        ax.set_xlabel('Scenario', fontsize=12, fontweight='bold')
-        ax.set_ylabel('Mean ± Std', fontsize=12)
-        ax.set_title(METRIC_INFO[metric]['short'], fontsize=14, fontweight='bold')
-        ax.set_xticks(x_pos)
-        ax.set_xticklabels(labels, fontsize=11)
-        ax.tick_params(axis='y', labelsize=11)
-        ax.grid(axis='y', alpha=0.3)
-
-        # Thicker spines
-        for spine in ax.spines.values():
-            spine.set_visible(True)
-            spine.set_color('black')
-            spine.set_linewidth(1.2)
-
-    # Add row labels
-    axes[0, 0].text(-0.3, 0.5, 'Distribution (Boxplots)', transform=axes[0, 0].transAxes,
-                    fontsize=16, fontweight='bold', va='center', ha='right', rotation=90)
-    axes[1, 0].text(-0.3, 0.5, 'Summary Statistics', transform=axes[1, 0].transAxes,
-                    fontsize=16, fontweight='bold', va='center', ha='right', rotation=90)
-
-    fig.suptitle('Scenario Comparison: Key Flexibility Metrics (Sample Week)',
-                 fontsize=18, fontweight='bold', y=0.98)
-
-    plt.tight_layout()
+    # Suptitle and layout: reserve top space so title doesn't overlap
+    plt.tight_layout(rect=[0, 0, 1, 0.92])
     plt.subplots_adjust(left=0.08, top=0.94)
     plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
     if save_pdf:
@@ -436,17 +235,27 @@ def create_time_series_overlay(scenario_data, metrics, save_path, save_pdf=True)
                            color=SCENARIO_COLORS[scenario], alpha=0.2)
 
         # Formatting
-        ax.set_title(METRIC_INFO[metric]['short'], fontsize=14, fontweight='bold')
-        ax.set_xlabel('Time', fontsize=13)
-        ax.set_ylabel('Value', fontsize=13)
-        ax.tick_params(axis='both', labelsize=11)
-        ax.legend(fontsize=11, loc='best')
+        ax.set_title(METRIC_INFO[metric]['short'], fontsize=16, fontweight='bold')
+
+        # Per-metric y-axis label
+        if metric == 'deferrable_energy_kWh':
+            ylabel = 'Energy (kWh)'
+        elif metric == 'deferrable_task_count':
+            ylabel = 'n_tasks'
+        elif metric == 'percentage_flexible_energy':
+            ylabel = 'Flexible (%)'
+        else:
+            ylabel = 'Value'
+
+        ax.set_ylabel(ylabel, fontsize=18)
+        ax.tick_params(axis='both', labelsize=16)
+        # ax.legend(fontsize=12, loc='best')
         ax.grid(alpha=0.3)
 
         # Format x-axis
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
         ax.xaxis.set_major_locator(mdates.DayLocator())
-        plt.setp(ax.xaxis.get_majorticklabels(), rotation=0)
+        plt.setp(ax.xaxis.get_majorticklabels(), rotation=0, fontsize=16)
 
         # Thicker spines
         for spine in ax.spines.values():
@@ -454,10 +263,15 @@ def create_time_series_overlay(scenario_data, metrics, save_path, save_pdf=True)
             spine.set_color('black')
             spine.set_linewidth(1.2)
 
-    fig.suptitle('Time Series Comparison: Sample Week (Feb 1-7, 1970)',
-                 fontsize=18, fontweight='bold', y=0.98)
+    # Reserve top space for suptitle
+    # Reserve top/bottom space for suptitle and shared legend
+    plt.tight_layout(rect=[0, 0.06, 1, 0.92])
 
-    plt.tight_layout()
+    # Shared legend at the bottom (3 columns)
+    handles = [Line2D([0], [0], color=SCENARIO_COLORS[s], lw=3) for s in ['BASELINE', 'DAM', 'mFRR']]
+    labels = [DISPLAY_LABELS.get(s, s) for s in ['BASELINE', 'DAM', 'mFRR']]
+    fig.subplots_adjust(bottom=0.17)
+    fig.legend(handles, labels, loc='lower center', ncol=3, fontsize=20, frameon=False)
     plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
     if save_pdf:
         plt.savefig(f'{save_path}.pdf', bbox_inches='tight')
@@ -465,101 +279,6 @@ def create_time_series_overlay(scenario_data, metrics, save_path, save_pdf=True)
 
     sns.reset_defaults()
     print(f"Time series overlay saved to {save_path}.png/.pdf")
-
-
-def create_percentage_breakdown(scenario_data, save_path, save_pdf=True):
-    """
-    Create stacked horizontal bar chart showing energy composition breakdown.
-
-    Parameters:
-    -----------
-    scenario_data : dict
-        Dictionary with {scenario_name: df_summary_filtered}
-    save_path : str
-        Path to save output PNG file (without extension)
-    save_pdf : bool
-        Whether to also save PDF version
-    """
-    sns.set(style="whitegrid")
-
-    fig, ax = plt.subplots(figsize=(12, 5))
-
-    # Compute means for each scenario
-    breakdown = {}
-    for scenario in ['BASELINE', 'DAM', 'mFRR']:
-        deferrable = scenario_data[scenario]['deferrable_energy_kWh'].mean()
-        total = scenario_data[scenario]['total_energy_kWh'].mean()
-        rebound = scenario_data[scenario]['rebound_energy_kWh'].mean()
-        non_deferrable = total - deferrable
-
-        breakdown[scenario] = {
-            'deferrable': deferrable,
-            'non_deferrable': max(0, non_deferrable),  # Ensure non-negative
-            'rebound': rebound,
-            'total': total
-        }
-
-    # Create stacked horizontal bars
-    scenarios_list = ['BASELINE', 'DAM', 'mFRR']
-    y_pos = np.arange(len(scenarios_list))
-
-    # Deferrable portion (green)
-    deferrable_vals = [breakdown[s]['deferrable'] for s in scenarios_list]
-    non_deferrable_vals = [breakdown[s]['non_deferrable'] for s in scenarios_list]
-    rebound_vals = [breakdown[s]['rebound'] for s in scenarios_list]
-
-    # Plot stacked bars
-    p1 = ax.barh(y_pos, deferrable_vals, color='#66C2A5', alpha=0.8,
-                 edgecolor='black', linewidth=1.5, label='Deferrable Energy')
-    p2 = ax.barh(y_pos, non_deferrable_vals, left=deferrable_vals,
-                 color='#CCCCCC', alpha=0.8, edgecolor='black', linewidth=1.5,
-                 label='Non-Deferrable Energy')
-
-    # Add rebound as separate component (not stacked, offset below)
-    y_offset = 0.3
-    p3 = ax.barh(y_pos - y_offset, rebound_vals, height=0.2, color='#FC8D62',
-                 alpha=0.8, edgecolor='black', linewidth=1.5, label='Rebound Energy')
-
-    # Add percentage annotations
-    for i, scenario in enumerate(scenarios_list):
-        total = breakdown[scenario]['total']
-        deferrable_pct = (breakdown[scenario]['deferrable'] / total) * 100 if total > 0 else 0
-        non_deferrable_pct = (breakdown[scenario]['non_deferrable'] / total) * 100 if total > 0 else 0
-
-        # Deferrable annotation
-        ax.text(breakdown[scenario]['deferrable'] / 2, y_pos[i],
-               f'{deferrable_pct:.1f}%', ha='center', va='center',
-               fontsize=12, fontweight='bold', color='black')
-
-        # Non-deferrable annotation
-        ax.text(breakdown[scenario]['deferrable'] + breakdown[scenario]['non_deferrable'] / 2,
-               y_pos[i], f'{non_deferrable_pct:.1f}%', ha='center', va='center',
-               fontsize=12, fontweight='bold', color='black')
-
-    # Formatting
-    ax.set_yticks(y_pos)
-    ax.set_yticklabels([SCENARIO_LABELS[s] for s in scenarios_list], fontsize=13)
-    ax.set_xlabel('Energy (kWh)', fontsize=14, fontweight='bold')
-    ax.set_title('Energy Composition Breakdown by Scenario (Mean, Sample Week)',
-                 fontsize=16, fontweight='bold')
-    ax.legend(fontsize=12, loc='upper right')
-    ax.grid(axis='x', alpha=0.3)
-    ax.tick_params(axis='x', labelsize=12)
-
-    # Thicker spines
-    for spine in ax.spines.values():
-        spine.set_visible(True)
-        spine.set_color('black')
-        spine.set_linewidth(1.2)
-
-    plt.tight_layout()
-    plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
-    if save_pdf:
-        plt.savefig(f'{save_path}.pdf', bbox_inches='tight')
-    plt.show()
-
-    sns.reset_defaults()
-    print(f"Percentage breakdown saved to {save_path}.png/.pdf")
 
 
 def create_summary_table(scenario_data, metrics, save_path):
@@ -670,19 +389,18 @@ def create_notable_points_comparison(scenario_data_full, save_path, save_pdf=Tru
 
         # Add value labels on bars (only if value > 1)
         for j, (bar, val) in enumerate(zip(bars, values)):
-            if val > 1:
-                ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-                       f'{val:.1f}', ha='center', va='bottom', fontsize=9)
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+                f'{val:.1f}', ha='center', va='bottom', fontsize=12)
 
     # Formatting
-    ax.set_xlabel('Notable Points', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Deferrable Energy (kWh)', fontsize=14, fontweight='bold')
+    ax.set_xlabel('Notable Points', fontsize=18)
+    ax.set_ylabel('Deferrable Energy (kWh)', fontsize=18)
     ax.set_title('Comparison of 9 Notable Points Across Scenarios\n(P1-P3: Top flexibility | Q1-Q3: 75th percentile | R1-R3: 50th percentile)',
-                 fontsize=16, fontweight='bold')
+                 fontsize=20)
     ax.set_xticks(x)
-    ax.set_xticklabels(point_names, fontsize=13)
-    ax.tick_params(axis='y', labelsize=12)
-    ax.legend(fontsize=13, loc='upper right', framealpha=0.95)
+    ax.set_xticklabels(point_names, fontsize=18)
+    ax.tick_params(axis='y', labelsize=16)
+    ax.legend(fontsize=20, loc='upper right', framealpha=0.95)
     ax.grid(axis='y', alpha=0.3)
 
     # Add separator lines between P, Q, R groups
@@ -760,30 +478,22 @@ def create_hourly_efficiency_plot(scenario_data, save_path, save_pdf=True):
         # Efficiency value on top of bar
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
                f'{eff:.2f} kWh/h', ha='center', va='bottom',
-               fontsize=14, fontweight='bold')
+               fontsize=14)
 
-        # Formula below bar
-        ax.text(bar.get_x() + bar.get_width()/2, -0.15,
-               f'{avg_def:.1f} kWh / {window} h',
-               ha='center', va='top', fontsize=11, style='italic')
 
     # Highlight highest efficiency
     max_idx = np.argmax(efficiencies)
     bars[max_idx].set_linewidth(3)
     bars[max_idx].set_edgecolor('darkgreen')
 
-    # Add annotation for highest
-    ax.text(max_idx, efficiencies[max_idx] + 0.2,
-           '← HIGHEST efficiency!', ha='left', va='center',
-           fontsize=12, fontweight='bold', color='darkgreen',
-           bbox=dict(boxstyle='round,pad=0.5', facecolor='lightgreen', alpha=0.7))
-
     # Formatting
-    ax.set_ylabel('Energy per Hour of Flexibility Window (kWh/h)', fontsize=14, fontweight='bold')
-    ax.set_xlabel('Scenario', fontsize=14, fontweight='bold')
-    ax.set_title('Hourly Efficiency Comparison\nE_norm = (Avg Deferrable Energy) / (Window Duration)',
-                 fontsize=16, fontweight='bold')
-    ax.tick_params(axis='both', labelsize=13)
+    ax.set_ylabel('Energy per Hour of Flexibility Window (kWh/h)', fontsize=16)
+    ax.set_title('Hourly Efficiency Comparison',
+                 fontsize=18)
+    ax.tick_params(axis='both', labelsize=14)
+    # make xticks larger
+    ax.set_xticklabels(scenarios_list, fontsize=16)
+    
     ax.grid(axis='y', alpha=0.3)
     ax.set_ylim(0, max(efficiencies) * 1.3)
 
@@ -820,23 +530,6 @@ print("\n" + "="*70)
 print("GENERATING PLOTS")
 print("="*70 + "\n")
 
-# Plot 1: Boxplot comparison (all 5 metrics)
-print("1. Creating boxplot comparison (5 metrics)...")
-create_boxplot_comparison(
-    scenario_sample_week,
-    METRICS,
-    f'{OUTPUT_DIR}/boxplot_comparison_5metrics_sample_week',
-    save_pdf=True
-)
-
-# Plot 2: Bar chart comparison (mean ± std)
-print("\n2. Creating bar chart comparison (mean ± std)...")
-create_bar_chart_comparison(
-    scenario_sample_week,
-    METRICS,
-    f'{OUTPUT_DIR}/bar_chart_comparison_sample_week',
-    save_pdf=True
-)
 
 # Plot 3: Combined publication figure (3 key metrics)
 print("\n3. Creating combined publication figure...")
@@ -857,13 +550,6 @@ create_time_series_overlay(
     save_pdf=True
 )
 
-# Plot 5: Percentage breakdown stacked bar
-print("\n5. Creating percentage breakdown stacked bar chart...")
-create_percentage_breakdown(
-    scenario_sample_week,
-    f'{OUTPUT_DIR}/percentage_breakdown_stacked',
-    save_pdf=True
-)
 
 # Plot 6: Notable points comparison (9 points across scenarios)
 print("\n6. Creating notable points comparison (P1-P3, Q1-Q3, R1-R3)...")
@@ -889,20 +575,3 @@ df_summary_table = create_summary_table(
     METRICS,
     'EXPORTS/scenario_comparison_summary_sample_week.csv'
 )
-
-print("\n" + "="*70)
-print("ALL PLOTS AND TABLES GENERATED SUCCESSFULLY!")
-print("="*70)
-print(f"\nOutputs saved to:")
-print(f"  - Plots: {OUTPUT_DIR}/")
-print(f"  - Table: EXPORTS/scenario_comparison_summary_sample_week.csv")
-print("\nGenerated files:")
-print("  1. boxplot_comparison_5metrics_sample_week.png/pdf")
-print("  2. bar_chart_comparison_sample_week.png/pdf")
-print("  3. combined_comparison_publication_ready.png/pdf")
-print("  4. time_series_overlay_sample_week.png/pdf")
-print("  5. percentage_breakdown_stacked.png/pdf")
-print("  6. notable_points_comparison.png/pdf")
-print("  7. hourly_efficiency_comparison.png/pdf")
-print("  8. scenario_comparison_summary_sample_week.csv")
-print("="*70)
