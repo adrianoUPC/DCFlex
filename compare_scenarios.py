@@ -384,7 +384,7 @@ def create_notable_points_comparison(scenario_data_full, save_path, save_pdf=Tru
         values = [points_data[scenario][p] for p in point_names]
 
         bars = ax.bar(x + offset, values, width,
-                      label=scenario, color=SCENARIO_COLORS[scenario],
+                      label=DISPLAY_LABELS[scenario], color=SCENARIO_COLORS[scenario],
                       alpha=0.8, edgecolor='black', linewidth=1.5)
 
         # Add value labels on bars (only if value > 1)
@@ -492,7 +492,7 @@ def create_hourly_efficiency_plot(scenario_data, save_path, save_pdf=True):
                  fontsize=18)
     ax.tick_params(axis='both', labelsize=14)
     # make xticks larger
-    ax.set_xticklabels(scenarios_list, fontsize=16)
+    ax.set_xticklabels([DISPLAY_LABELS[s] for s in scenarios_list], fontsize=16)
     
     ax.grid(axis='y', alpha=0.3)
     ax.set_ylim(0, max(efficiencies) * 1.3)
