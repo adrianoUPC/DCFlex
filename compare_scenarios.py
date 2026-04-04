@@ -67,7 +67,8 @@ METRIC_INFO = {
     'total_energy_kWh': {'label': 'Total Energy (kWh)', 'short': 'Total Energy'},
     'percentage_flexible_energy': {'label': 'Flexible Energy (%)', 'short': 'Flexible %'},
     'deferrable_task_count': {'label': 'Deferrable Task Count', 'short': 'Task Count'},
-    'rebound_energy_kWh': {'label': 'Rebound Energy (kWh)', 'short': 'Rebound Energy'}
+    'rebound_energy_kWh': {'label': 'Rebound Energy (kWh)', 'short': 'Rebound Energy'},
+    'rebound_ratio': {'label': 'Rebound Ratio', 'short': 'Rebound Ratio'}
 }
 
 METRICS = list(METRIC_INFO.keys())
@@ -84,6 +85,9 @@ for scenario in scenarios:
     filename = f'EXPORTS/df_summary_{SIMULATION}_{scenario}_{zeta_suffix}.joblib'
     print(f"Loading {scenario}: {filename}")
     df = joblib.load(filename)
+    denominator = df['deferrable_energy_kWh'] + df['rebound_energy_kWh']
+    df['rebound_ratio'] = np.where(denominator == 0, 0.0,
+                                    df['deferrable_energy_kWh'] / denominator)
     scenario_data[scenario] = df
 
     # Filter to sample week
@@ -488,7 +492,7 @@ def create_hourly_efficiency_plot(scenario_data, save_path, save_pdf=True):
 
     # Formatting
     ax.set_ylabel('Energy per Hour of Flexibility Window (kWh/h)', fontsize=16)
-    ax.set_title('Hourly Efficiency Comparison',
+    ax.set_title('Hourly Yield Comparison',
                  fontsize=18)
     ax.tick_params(axis='both', labelsize=14)
     # make xticks larger
@@ -522,6 +526,113 @@ def create_hourly_efficiency_plot(scenario_data, save_path, save_pdf=True):
     print("="*70)
     print(f"Key insight: {scenarios_list[max_idx]} delivers HIGHEST energy per hour despite {'lowest' if max_idx == 2 else 'different'} total volume!")
     print("="*70 + "\n")
+
+
+def create_rebound_energy_summary(scenario_data, save_path, save_pdf=True):
+    """
+    Create 3x1 figure summarizing rebound_ratio across scenarios.
+
+    rebound_ratio = deferrable_energy / (deferrable_energy + rebound_energy)
+    Values 0-1; higher means less rebound cost relative to useful deferral.
+
+    Panel 1: Time series (hourly mean + std shading)
+    Panel 2: Boxplot distribution
+    Panel 3: Mean bar chart with value labels
+    """
+    sns.set(style="whitegrid")
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    metric = 'rebound_ratio'
+    scenarios_list = ['BASELINE', 'DAM', 'mFRR']
+
+    # --- Panel 1: Time Series ---
+    ax = axes[0]
+    for scenario in scenarios_list:
+        df = scenario_data[scenario].reset_index()
+        grouped = df.groupby('timestamp')[metric].agg(['mean', 'std'])
+        grouped['std'] = grouped['std'].fillna(0)
+
+        timestamps = grouped.index
+        means = grouped['mean'].values
+        stds = grouped['std'].values
+
+        ax.plot(timestamps, means, color=SCENARIO_COLORS[scenario],
+                linewidth=2.5, alpha=0.9)
+        ax.fill_between(timestamps, means - stds, means + stds,
+                        color=SCENARIO_COLORS[scenario], alpha=0.2)
+
+    ax.set_title('Rebound Ratio (Time Series)', fontsize=16, fontweight='bold')
+    ax.set_ylabel('Ratio', fontsize=18)
+    ax.tick_params(axis='both', labelsize=16)
+    ax.grid(alpha=0.3)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
+    ax.xaxis.set_major_locator(mdates.DayLocator())
+    plt.setp(ax.xaxis.get_majorticklabels(), rotation=0, fontsize=16)
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color('black')
+        spine.set_linewidth(1.2)
+
+    # --- Panel 2: Boxplot ---
+    ax = axes[1]
+    data_to_plot = []
+    labels = []
+    colors = []
+    for scenario in scenarios_list:
+        data_to_plot.append(scenario_data[scenario][metric].values)
+        labels.append(DISPLAY_LABELS[scenario])
+        colors.append(SCENARIO_COLORS[scenario])
+
+    bp = ax.boxplot(data_to_plot, labels=labels, patch_artist=True,
+                    widths=0.5, showfliers=True, flierprops={'markersize': 4})
+    for patch, color in zip(bp['boxes'], colors):
+        patch.set_facecolor(color)
+        patch.set_alpha(0.7)
+    for median in bp['medians']:
+        median.set_color('black')
+        median.set_linewidth(2)
+
+    ax.set_title('Rebound Ratio (Distribution)', fontsize=16, fontweight='bold')
+    ax.set_ylabel('Ratio', fontsize=18)
+    ax.tick_params(axis='both', labelsize=16)
+    ax.set_xticklabels(labels, fontsize=18)
+    ax.grid(axis='y', alpha=0.3)
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color('black')
+        spine.set_linewidth(1.2)
+
+    # --- Panel 3: Mean Bar Chart ---
+    ax = axes[2]
+    mean_values = [scenario_data[s][metric].mean() for s in scenarios_list]
+    bar_colors = [SCENARIO_COLORS[s] for s in scenarios_list]
+    bar_labels = [DISPLAY_LABELS[s] for s in scenarios_list]
+
+    bars = ax.bar(bar_labels, mean_values, color=bar_colors, alpha=0.8,
+                  edgecolor='black', linewidth=2)
+    for bar, val in zip(bars, mean_values):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.01,
+                f'{val:.3f}', ha='center', va='bottom', fontsize=14)
+
+    ax.set_title('Mean Rebound Ratio', fontsize=16, fontweight='bold')
+    ax.set_ylabel('Ratio', fontsize=18)
+    ax.tick_params(axis='both', labelsize=16)
+    ax.set_ylim(0, max(mean_values) * 1.3)
+    ax.grid(axis='y', alpha=0.3)
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+        spine.set_color('black')
+        spine.set_linewidth(1.2)
+
+    plt.tight_layout()
+
+    plt.savefig(f'{save_path}.png', dpi=300, bbox_inches='tight')
+    if save_pdf:
+        plt.savefig(f'{save_path}.pdf', bbox_inches='tight')
+    plt.show()
+
+    sns.reset_defaults()
+    print(f"Rebound energy summary saved to {save_path}.png/.pdf")
 
 
 # %% Section 4: Generate Plots
@@ -567,9 +678,17 @@ create_hourly_efficiency_plot(
     save_pdf=True
 )
 
+# Plot 8: Rebound energy summary
+print("\n8. Creating rebound energy summary...")
+create_rebound_energy_summary(
+    scenario_sample_week,
+    f'{OUTPUT_DIR}/rebound_energy_summary',
+    save_pdf=True
+)
+
 # %% Section 5: Export Summary Table
 
-print("\n8. Exporting summary statistics table...")
+print("\n9. Exporting summary statistics table...")
 df_summary_table = create_summary_table(
     scenario_sample_week,
     METRICS,

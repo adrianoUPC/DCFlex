@@ -222,7 +222,7 @@ $t_0$ & Time when flexibility notification is received \\
 $t_1$ & Start time of flexibility window \\
 $t_2$ & End time of flexibility window \\
 $t_{\text{end}}^{\text{flex}}$ & End of buffer-extended window ($t_2 + \gamma_{\text{buffer}}$) \\
-$\theta$ & Hourly flexibility efficiency \\
+$\theta$ & Hourly flexibility yield \\
 $E_h^{\text{def}}$ & Deferrable energy identified by LAD-Flex at hour h \\
 \end{tabular}
 
@@ -1124,26 +1124,26 @@ At mid-range points (Q1-Q3), representing the 75th percentile of flexibility pot
     \label{fig:notable_points_comparison}
 \end{figure}
 
-Finally, to enable a fair comparison across scenarios with different flexibility window durations, a normalized efficiency metric is introduced. The hourly flexibility efficiency $\theta$ is defined as the average deferrable energy per hour of flexibility window, computed across all hourly activations in the sample week:
+Finally, to enable a fair comparison across scenarios with different flexibility window durations, a new metric is introduced. The hourly flexibility yield $\theta$ is defined as the average deferrable energy per hour of flexibility window, computed across all hourly activations in the sample week:
 
 \begin{equation}
     \theta = \frac{1}{168} \sum_{h=1}^{168} \frac{E_h^{\text{def}}}{\eta \Delta T}
-    \label{eq:hourly_efficiency}
+    \label{eq:hourly_yield}
 \end{equation}
 
 \noindent where 168 is the number of hours in the sample week and $E_h^{\text{def}}$ is the deferrable energy when a flexibility window begins at hour $h$.
 
-Fig.~\ref{fig:hourly_efficiency} presents the hourly flexibility efficiency for each scenario. The Intraday scenario achieves the highest efficiency at 2.51~kWh/h, followed closely by the baseline at 2.17~kWh/h. The mFRR scenario exhibits a lower efficiency of 0.50~kWh/h.
+Fig.~\ref{fig:hourly_yield} presents the hourly flexibility yield for each scenario. The Intraday scenario achieves the highest yield at 2.51~kWh/h, followed closely by the baseline at 2.17~kWh/h. The mFRR scenario exhibits a lower yield of 0.50~kWh/h.
 
-This metric reveals that the Intraday scenario not only delivers more total energy but also extracts flexibility more efficiently per unit time of the flexibility window. The Baseline scenario, despite its shorter 3-hour window compared to the intraday's 4-hour window, achieves comparable efficiency, suggesting that the additional hour in the Intraday scenario provides diminishing returns in terms of energy capture rate.
+This metric reveals that the Intraday scenario not only delivers more total energy but also extracts flexibility more efficiently per unit time of the flexibility window. The Baseline scenario, despite its shorter 3-hour window compared to the intraday's 4-hour window, achieves comparable yield, suggesting that the additional hour in the Intraday scenario provides diminishing returns in terms of energy capture rate.
 
-The low efficiency of the mFRR scenario reflects the fundamental challenge of providing balancing reserves through workload deferral: the short notification period (15~min) limits the strategy's ability to accumulate deferrable tasks before the flexibility window begins. However, this lower efficiency must be weighed against the higher market value typically associated with fast-response flexibility products.
+The low yield of the mFRR scenario reflects the fundamental challenge of providing balancing reserves through workload deferral: the short notification period (15~min) limits the strategy's ability to accumulate deferrable tasks before the flexibility window begins. However, this lower yield must be weighed against the higher market value typically associated with fast-response flexibility products.
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\textwidth]{hourly_efficiency_comparison.png}
-    \caption{Hourly flexibility efficiency comparison across the three market scenarios, measuring average deferrable energy per hour of flexibility window.}
-    \label{fig:hourly_efficiency}
+    \includegraphics[width=0.8\textwidth]{hourly_yield_comparison.png}
+    \caption{Hourly flexibility yield comparison across the three market scenarios, measuring average deferrable energy per hour of flexibility window.}
+    \label{fig:hourly_yield}
 \end{figure}
 
 Concluding the comparison of the scenarios, Table~\ref{tab:scenario_summary} summarizes the key performance indicators across the three scenarios. The results demonstrate that DCs can participate in multiple electricity market products through latency-aware workload deferral, with the choice of market depending on operational priorities and revenue optimization strategies.
@@ -1158,7 +1158,7 @@ Concluding the comparison of the scenarios, Table~\ref{tab:scenario_summary} sum
 Flexibility window duration & 3 h & 4 h & 1 h \\
 Notification period & 60 min & 3 h & 15 min \\
 Peak deferrable energy (kWh) & 51.1 & 108.7 & 7.3 \\
-Hourly efficiency (kWh/h) & 2.17 & 2.51 & 0.50 \\
+Hourly yield (kWh/h) & 2.17 & 2.51 & 0.50 \\
 Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
 \bottomrule
 \end{tabular}
@@ -1166,7 +1166,7 @@ Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
 \label{tab:scenario_summary}
 \end{table}
 
-The Intraday scenario offers the highest flexibility volume and efficiency, making it suitable for DCs seeking to maximize energy-based revenue streams. The Baseline scenario provides a balanced approach with moderate advance notice requirements and competitive efficiency. The mFRR scenario, while delivering lower volumes, enables participation in high-value balancing markets where premium compensation for rapid response may offset the reduced flexibility quantity. 
+The Intraday scenario offers the highest flexibility volume and yield, making it suitable for DCs seeking to maximize energy-based revenue streams. The Baseline scenario provides a balanced approach with moderate advance notice requirements and competitive yield. The mFRR scenario, while delivering lower volumes, enables participation in high-value balancing markets where premium compensation for rapid response may offset the reduced flexibility quantity. 
 
 
 
