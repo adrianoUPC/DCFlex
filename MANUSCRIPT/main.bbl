@@ -373,24 +373,6 @@ F.~D'Ettorre, M.~Banaei, R.~Ebrahimy, S.~A. Pourmousavi, E.~M. Blomgren,
   {\path{doi:10.1016/J.RSER.2022.112605}}.
 \newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S1364032122005007}
 
-\bibitem{Wang2024}
-S.~Wang, S.~Chen, Y.~Shi,
-  \href{https://link.springer.com/article/10.1007/s11227-023-05807-x}{Utilization-prediction-aware
-  energy optimization approach for heterogeneous gpu clusters}, Journal of
-  Supercomputing 80 (2024) 9554--9578.
-\newblock \href {https://doi.org/10.1007/S11227-023-05807-X/FIGURES/11}
-  {\path{doi:10.1007/S11227-023-05807-X/FIGURES/11}}.
-\newline\urlprefix\url{https://link.springer.com/article/10.1007/s11227-023-05807-x}
-
-\bibitem{Shehabi2024}
-A.~Shehabi, S.~J. Smith, A.~Hubbard, A.~Newkirk, N.~Lei, M.~A. Siddik,
-  B.~Holecek, J.~G. Koomey, E.~R. Masanet, D.~A. Sartor,
-  \href{https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report}{2024
-  united states data center energy usage report}, Tech. rep., Lawrence Berkeley
-  National Laboratory (12 2024).
-\newblock \href {https://doi.org/10.71468/P1WC7Q} {\path{doi:10.71468/P1WC7Q}}.
-\newline\urlprefix\url{https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report}
-
 \bibitem{Amaris2016}
 M.~Amaris, R.~Y.~D. Camargo, M.~Dyab, A.~Goldman, D.~Trystram, A comparison of
   gpu execution time prediction using machine learning and analytical modeling,

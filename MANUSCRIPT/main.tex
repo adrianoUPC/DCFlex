@@ -496,7 +496,7 @@ A threshold latency value $\hat{\lambda}$ is defined to separate tasks into two 
 \mathcal{T}_{>b_L} = \left\{ k \in \mathcal{T} \,\middle|\, \lambda_k > \hat{\lambda} \right\}
 \end{equation}
 
-This classification enables focused analysis on workloads that are not immediately critical, assuming they are suitable to be studied for the assessment of flexibility potentials of the DC.
+This classification enables focused analysis on workloads that are not immediately critical, assuming they are suitable to be studied for the assessment of flexibility potentials of the DC. It should be noted that this classification operates at the individual task level and does not account for potential inter-task dependencies within multi-task jobs. However, as shown in Section~\ref{case study}, multi-task jobs represent only 2.5\% of the cleaned dataset, and deferred tasks are not cancelled but postponed, limiting the scope of possible cascading effects on downstream tasks.
 
 \subsubsection{Incorporating task duration prediction uncertainty} \label{prediction_uncertainty_methods}
 As the aim of this work is to match deferrable tasks with a specific flexibility window, knowing the expected duration of each task is essential. Tasks are assumed to run to completion without interruption and are not split over multiple time periods. 
@@ -636,6 +636,8 @@ The considered machine specifications are summarized in Table \ref{tab:specs}. T
 
  
 As part of the dataset anonymization process, all original date and time information was reset, even though the data was originally recorded between 2019 and 2020. As a result, the timestamps in the dataset default to the Unix epoch year of 1970. For consistency and reproducibility, this study refers to the sample week using the trace-provided dates, specifically from "01/02/1970" to "08/02/1970", even though these dates do not reflect the actual period of data collection.
+
+Analysis of the cleaned dataset reveals that 97.5\% of jobs consist of a single task, with only 2.5\% containing multiple tasks. This confirms that workflow-level dependencies across tasks within the same job are structurally rare in the studied workload, and supports the assumption introduced in Section~\ref{a_posteriori} that treating tasks independently introduces a negligible approximation.
 
 Further describing the data, Fig. \ref{fig:A_1a} shows the Cumulative Distribution Function (CDF) of task duration across the recorded trace. The distribution is heavily skewed, with a long tail indicating the presence of a small number of very long-running tasks, while the vast majority of tasks are relatively short. A more exhaustive characterization of this workload trace is presented in \cite{Weng2022}.
 
@@ -1146,6 +1148,30 @@ The low yield of the mFRR scenario reflects the fundamental challenge of providi
     \label{fig:hourly_yield}
 \end{figure}
 
+While the hourly flexibility yield quantifies the rate of energy capture per unit time of the flexibility window, it does not characterize the extent to which the energy impact of deferral is contained within the contracted flexibility period. In any LAD-Flex activation, two distinct forms of rebound may arise, and it is important to distinguish between them.
+
+The first is \textit{activation-window spillover}: energy from tasks classified as deferrable that is consumed outside the flexibility window $[t_1, t_2]$ but is still part of the same activation event. This spillover has two sources. During the notification period preceding $t_1$, tasks begin transitioning into deferral, and some task energy is consumed before the window opens. Similarly, during the buffer period following $t_2$, tasks permitted by the overhang parameter $\beta$ may finish executing beyond the window boundary. The rebound energy $E_{\text{rebound}}$ reported in this study captures precisely this spillover component.
+
+The second form is \textit{rescheduling rebound}: the deferred tasks must eventually execute, consuming the same energy at a later time. Unlike classical demand-response rebound in thermal systems, where deferred cooling or heating creates a compensatory surge driven by physical dynamics, workload deferral involves no such physical penalty. The deferred tasks consume identical energy regardless of when they are executed, and the DC operator retains full discretion over when to reschedule them, subject only to the constraint of avoiding overlap with future flexibility activations. The rescheduling of deferred workloads is therefore a DC-internal scheduling optimization problem, separate from the flexibility assessment framework presented here, and is not quantified in this analysis.
+
+To quantify activation-window spillover, the Rebound Ratio ($RR$) is defined as the fraction of total activation-related energy that falls outside the flexibility window:
+
+\begin{equation}
+    RR = \frac{E_{\text{rebound}}}{E_{\text{def}} + E_{\text{rebound}}}
+    \label{eq:rebound_ratio}
+\end{equation}
+
+\noindent where $E_{\text{def}}$ is the deferrable energy within $[t_1, t_2]$ and $E_{\text{rebound}}$ is the energy consumed in the notification and buffer periods $[t_0, t_1) \cup (t_2, t_{\text{end}}]$. Low values of $RR$ indicate that the flexibility delivery is well contained within the contracted window, with minimal energy spillover.
+
+Fig.~\ref{fig:rebound_ratio} presents the Rebound Ratio across the three scenarios over the sample week. The Baseline scenario exhibits the highest mean $RR$ of 0.044, reflecting its longer notification period (60~min) and wider overhang tolerance ($\beta = 0.7$), which allow more task energy to spill outside the flexibility window boundaries. The Intraday scenario achieves an intermediate value of 0.029, while the mFRR scenario yields the lowest mean $RR$ of 0.014, consistent with its stringent timing constraints (15~min notification, $\beta = 0.9$) that restrict eligibility to tasks whose execution fits tightly within the activation window. Across all three scenarios, the Rebound Ratio remains between 1.4\% and 4.4\%, confirming that activation-window spillover is limited and that the vast majority of the energy impact of LAD-Flex is contained within the contracted flexibility period.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{rebound_energy_summary.png}
+    \caption{Rebound Ratio across the three market scenarios: time series over the sample week (left), distribution (center), and mean values (right). The Rebound Ratio measures the fraction of activation-related energy that falls outside the flexibility window.}
+    \label{fig:rebound_ratio}
+\end{figure}
+
 Concluding the comparison of the scenarios, Table~\ref{tab:scenario_summary} summarizes the key performance indicators across the three scenarios. The results demonstrate that DCs can participate in multiple electricity market products through latency-aware workload deferral, with the choice of market depending on operational priorities and revenue optimization strategies.
 
 \begin{table}[h!]
@@ -1160,6 +1186,7 @@ Notification period & 60 min & 3 h & 15 min \\
 Peak deferrable energy (kWh) & 51.1 & 108.7 & 7.3 \\
 Hourly yield (kWh/h) & 2.17 & 2.51 & 0.50 \\
 Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
+Mean Rebound Ratio & 0.044 & 0.029 & 0.014 \\
 \bottomrule
 \end{tabular}
 \caption{Summary of key performance indicators across the three market scenarios.}
@@ -1505,11 +1532,13 @@ Thirdly, the current framework should be interpreted as an IT-side flexibility a
 
 The robustness analysis demonstrates that LAD-Flex maintains high accuracy under simulated prediction uncertainty. The stochastic error is based on reported prediction performance from the dataset publishers, however, does not incorporate a trained duration predictor. Developing and integrating an actual prediction model, potentially leveraging historical task features and recurrence patterns, would strengthen the operational validity of the approach. The interaction between prediction accuracy and strategy performance across different market scenarios also warrants further investigation.
 
-Deferring workloads temporarily shifts rather than eliminates power consumption, potentially resulting in subsequent demand surges known as the rebound effect. While the buffer period and overhang parameters help distribute rebound energy, large-scale deferral events could create secondary peaks that stress grid infrastructure or reduce net flexibility value. Quantifying and mitigating rebound effects, particularly under repeated or consecutive flexibility activations, remains an important area for refinement.
+Regarding the rebound effect, two distinct components were identified in Section~\ref{sec:scenario_comparison}. Activation-window spillover, the energy from deferred tasks that executes outside the contracted flexibility window, has been quantified through the Rebound Ratio metric (Eq.~\ref{eq:rebound_ratio}) and shown to remain below 4.4\% across all scenarios. The second component, rescheduling rebound, arises because deferred tasks must eventually execute. Unlike thermal demand-response systems, workload deferral involves no physical penalty: the tasks consume identical energy regardless of when they run, and the DC operator retains discretion over rescheduling timing. However, if large volumes of deferred tasks are rescheduled concurrently, secondary demand peaks could stress grid infrastructure or reduce the net flexibility value. Rescheduling rebound is not modeled in the present framework, as it depends on DC-internal scheduling decisions and coordination with future flexibility requests. Future work should investigate rescheduling strategies that spread deferred workloads across time to avoid concentrated demand surges, particularly under repeated or consecutive flexibility activations.
 
 The scenarios analyzed assume that the DC operates through an aggregator without explicit minimum bid size constraints. In practice, participation in mFRR or intraday markets involves prequalification requirements, minimum capacity thresholds, and regulatory heterogeneity across European member states. The communication and coordination overhead between DCs and aggregators, may introduce additional complexity not captured in the current framework. Future work should examine how LAD-Flex integrates with specific market rules and aggregator operational practices.
 
 A further limitation concerns the valuation function used in the notification-period optimization. Although $V_{\max}$ and $V_{\min}$ are selected to be consistent with representative market price ranges, the decay parameters $\tau$ and $\alpha$ are not calibrated from historical market-clearing data or aggregator contract data. Instead, they are used as stylized parameters in a sensitivity framework. Future work should estimate these parameters empirically, for instance by fitting the decay function to observed flexibility product prices indexed by activation lead time or notification period, enabling tighter market-specific calibration of the proposed optimization model.
+
+Additionally, the current framework treats tasks independently and does not model inter-task dependencies within multi-task jobs. Although multi-task jobs account for only 2.5\% of the cleaned dataset, cascading delays could in principle propagate to downstream tasks when an upstream task is deferred. Since the Alibaba Cluster Trace does not include explicit dependency metadata such as directed acyclic graph structures, this effect cannot be formally quantified. Future work should validate the deferral strategy on dependency-annotated traces to assess the extent of cascading QoS degradation, particularly for workloads with tighter inter-task coupling than those observed in the studied MLaaS environment.
 
 Finally, it is assumed that deferring tasks within a predefined timeframe incurs no additional costs based on historical observations of similar task waiting times. In practice, delaying a task may incur performance or economic penalties. A cost model that incorporates a ratio between task latency and deferral time could provide a better understanding of the trade-offs involved. For example, tasks with strict latency requirements may experience a disproportionate degradation in service quality when deferred, which should be reflected in scheduling decisions. Future work will intend to include such cost functions directly into the decision-making layer, enabling a more precise balance between flexibility provisioning and service quality.
 
