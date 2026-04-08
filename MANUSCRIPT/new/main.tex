@@ -111,7 +111,7 @@
 %% Abstract
 
 \begin{abstract}
-The growing energy demand of data centers, particularly those offering machine learning services, poses significant challenges to power system stability. As electricity grids become more dynamic due to the increasing penetration of renewable generation, data centers represent a promising but underutilized source of demand-side flexibility. This paper presents a quantitative framework to assess and activate the flexibility potential of data centers by deferring non-critical, high-latency IT workloads. Using real-world workload traces from the Alibaba Cluster Trace dataset, tasks are classified based on observed queuing latency, and a power model is developed to estimate energy consumption associated with different latency groups. A Latency-Aware Deferral for Flexibility (LAD-Flex) strategy is proposed to temporarily reduce data center power consumption in response to aggregator requests, while maintaining quality of service. The strategy accounts for estimated task duration, latency thresholds, and flexibility window constraints. Results from a one-week case study show that up to 22\% of load can be deferred during flexibility windows, and that more than 20\% of total data center power is attributable to tasks with deferrable latency. Additionally, an optimization framework is introduced to identify the notification period that maximizes the value of flexibility under a time-sensitive pricing scheme. The findings demonstrate that data centers, coupled with an aggregator, can reliably participate in short-notice demand response by leveraging workload-aware deferral strategies, offering both operational and economic benefits.
+The growing energy demand of data centers, particularly those offering machine learning services, poses significant challenges to power system stability. As electricity grids become more dynamic due to the increasing penetration of renewable generation, data centers represent a promising but underutilized source of demand-side flexibility. This paper presents a quantitative framework to assess and activate the flexibility potential of data centers by deferring non-critical, high-latency IT workloads. Using real-world workload traces from the Alibaba Cluster Trace dataset, tasks are classified based on observed queuing latency, and a power model is developed to estimate energy consumption associated with different latency groups. A Latency-Aware Deferral for Flexibility (LAD-Flex) strategy is proposed to temporarily reduce modeled IT-side power demand in response to aggregator requests, while maintaining quality of service. The strategy accounts for estimated task duration, latency thresholds, and flexibility window constraints. Results from a one-week case study show that up to 22\% of load can be deferred during flexibility windows, and that more than 20\% of estimated GPU-side power is attributable to tasks with deferrable latency. Additionally, an optimization framework is introduced to identify the notification period that maximizes the value of flexibility under a time-sensitive pricing scheme. The findings demonstrate that data centers, coupled with an aggregator, can reliably participate in short-notice demand response by leveraging workload-aware deferral strategies, offering both operational and economic benefits.
 \end{abstract}
 
 %% Keywords
@@ -202,8 +202,8 @@ $P^{node}_{it}$ & Power draw of node type $i$ at time $t$ \\
 
 \subsection*{Data Center-Level Variables}
 \begin{tabular}{ll}
-$P^{DC}_t$ & Total data center power at time $t$ \\
-$P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}}$ & Power at $t$ from tasks in latency group $(a_\ell, b_\ell]$ \\
+$P^{DC}_t$ & Estimated GPU-side power of the modeled IT workload at time $t$ \\
+$P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}}$ & Estimated GPU-side power at $t$ from tasks in latency group $(a_\ell, b_\ell]$ \\
 $E^{(a_\ell, b_\ell]}_{[t_1, t_2]}$ & Energy from latency group $(a_\ell, b_\ell]$ over $[t_1, t_2]$ \\
 \end{tabular}
 
@@ -222,7 +222,7 @@ $t_0$ & Time when flexibility notification is received \\
 $t_1$ & Start time of flexibility window \\
 $t_2$ & End time of flexibility window \\
 $t_{\text{end}}^{\text{flex}}$ & End of buffer-extended window ($t_2 + \gamma_{\text{buffer}}$) \\
-$\theta$ & Hourly flexibility efficiency \\
+$\theta$ & Hourly flexibility yield \\
 $E_h^{\text{def}}$ & Deferrable energy identified by LAD-Flex at hour h \\
 \end{tabular}
 
@@ -262,7 +262,7 @@ Each flexibility resource operates on different time scales and is suited to spe
 
 %%PAR 4: the concept of latency as an enabler of flexibility
 This paper focuses specifically on temporal workload shifting, where a portion of tasks is deferred in time to provide flexibility services to the power system. A key enabler in this case is the concept of latency or queueing delay, which is defined as the time interval between the submission of a task and the start of its execution. %%As illustrated in Fig \ref{fig:latency_visual}, 
-Different workloads have varying latency tolerances and power consumption levels depending on their criticality and functional requirements. For instance, video streaming or user-facing services like financial transactions require real-time access to computing power, whereas tasks such as Machine Learning (ML) training or batch processing can tolerate longer delays without compromising QoS. By identifying tasks that are not bound by tight deadlines, DCs can strategically defer their execution to respond to grid signals \cite{Liu2013, Dabbagh2019}.
+The proposed methodology therefore acts directly on IT workloads and quantifies the flexibility of the modeled IT-side power only. Non-IT subsystems such as cooling, UPS, and auxiliary infrastructure are discussed for context but are not explicitly modeled in the present analysis, and dynamic PUE behavior cannot be inferred from the available trace. Different workloads have varying latency tolerances and power consumption levels depending on their criticality and functional requirements. For instance, video streaming or user-facing services like financial transactions require real-time access to computing power, whereas tasks such as Machine Learning (ML) training or batch processing can tolerate longer delays without compromising QoS. By identifying tasks that are not bound by tight deadlines, DCs can strategically defer their execution to respond to grid signals \cite{Liu2013, Dabbagh2019}.
 
 
 
@@ -300,12 +300,12 @@ Then, the LAD-Flex scheduling strategy is proposed as a practical mechanism for 
 
 Finally, an optimization framework is introduced to determine the notification period that maximizes the value of delivered flexibility, balancing aggregator preferences for rapid response against DC rescheduling capabilities.
 
-The Alibaba Cluster Trace is employed to evaluate the feasibility of latency-aware task deferral as a mechanism for assessing workload flexibility. Using realistic scheduling patterns and corresponding power consumption profiles, the trace allows quantification of flexibility potential for real workloads of production scale DCs, with insights tested on the trace being applicable to larger GPU-based infrastructures.
+The Alibaba Cluster Trace is employed to evaluate the feasibility of latency-aware task deferral as a mechanism for assessing workload flexibility. Using realistic scheduling patterns and corresponding IT-side power estimates, the trace allows quantification of flexibility potential for real workloads of production scale DCs, with insights tested on the trace being applicable to larger GPU-based infrastructures.
 
 By bridging power system flexibility needs and workload scheduling constraints, this work provides a transferable methodology for assessing and activating DC flexibility, with practical implications for DC operators, aggregators, and system operators supporting renewable integration.
 
 \subsection{Paper Organization}
-The remainder of this paper is organized as follows. Section \ref{problem_description} provides an overview of the studied problem, defining the key operating conditions of the studied DC and its interaction with external markets and aggregators. Section \ref{methodology} presents the structure of the methodology. Section \ref{case study} introduces key details about the case study used to model DC power consumption patterns and market scenarios. Finally, in Section \ref{results} the results are illustrated and interpreted, with limitations of the study and future research lines presented in \ref{Limitations_and_future_work} and final remarks proposed in Section \ref{conclusion}.
+The remainder of this paper is organized as follows. Section \ref{problem_description} provides an overview of the studied problem, defining the key operating conditions of the studied DC and its interaction with external markets and aggregators. Section \ref{methodology} presents the structure of the methodology. Section \ref{case study} introduces key details about the case study used to model IT-side power patterns and market scenarios. Finally, in Section \ref{results} the results are illustrated and interpreted, with limitations of the study and future research lines presented in \ref{Limitations_and_future_work} and final remarks proposed in Section \ref{conclusion}.
 
 
 \section{Problem Description}\label{problem_description}
@@ -386,7 +386,7 @@ In a real operational setting, not all tasks can be executed successfully due to
 
 \
 %Formula to get power from GPU utilization (sum over different GPUs of heterogeneous cluster)
-To evaluate the flexibility potential of the DC, an estimate of GPU-side IT power is required. However, the Alibaba trace does not provide measured per-device power telemetry, nor a reliable mapping from each task to a specific physical GPU utilization trajectory over time. The available information identifies the GPU model/group associated with a task together with the allocated GPU fraction, but not the instantaneous machine-level operating point of the underlying device. For this reason, this study adopts a first-order GPU power model in which power is approximated as proportional to the allocated utilization fraction for the corresponding GPU model/group. This model is used to construct workload-level estimates suitable for flexibility-potential assessment, rather than hardware-accurate GPU power characterization.
+To evaluate the flexibility potential of the DC, an estimate of GPU-side IT power is required. However, the Alibaba trace does not provide measured per-device power telemetry, nor a reliable mapping from each task to a specific physical GPU utilization trajectory over time. The available information identifies the GPU model/group associated with a task together with the allocated GPU fraction, but not the instantaneous machine-level operating point of the underlying device. For this reason, this study adopts a first-order GPU power model in which power is approximated as proportional to the allocated utilization fraction for the corresponding GPU model/group. This model is used to construct workload-level estimates suitable for flexibility-potential assessment, rather than hardware-accurate GPU power characterization. The present framework therefore quantifies IT-side flexible power rather than full-facility demand, and it does not model the response of cooling, UPS, or auxiliary systems during flexibility activation.
 
 Under this approximation, the utilization attributed to a task is treated as constant during its execution and equal to the GPU resources allocated by the scheduler. This enables consistent aggregation across heterogeneous GPU models/groups using the information available in the trace, while acknowledging that real GPU power curves are device-dependent and generally non-linear.
 
@@ -425,9 +425,9 @@ An additional group for high-latency tasks can be defined as:
 \mathcal{T}_{>b_L} = \left\{ k \in \mathcal{T} \,\middle|\, \lambda_k > b_L \right\}
 \end{equation}
 
-These groups enable conditional analysis of DC power consumption by applying the power estimation models in Equations~\ref{eq:power_DC1} and~\ref{eq:power_DC2} to filtered task sets. Specifically, for each group $\mathcal{T}_{(a_\ell, b_\ell]}$, the aggregated power consumption can be computed, assessing its deferrability, identifying segments of workload with inherent temporal flexibility.
+These groups enable conditional analysis of estimated GPU-side power by applying the power estimation models in Equations~\ref{eq:power_DC1} and~\ref{eq:power_DC2} to filtered task sets. Specifically, for each group $\mathcal{T}_{(a_\ell, b_\ell]}$, the aggregated estimated power consumption can be computed, assessing its deferrability, identifying segments of workload with inherent temporal flexibility.
 
-To quantify the power consumption attributable to specific latency groups over a given time interval, a discrete-time summation is applied. Let $[t_1, t_2]$ be the time interval of interest, divided into time steps of duration $\Delta t$. For each latency group $\mathcal{T}_{(a_\ell, b_\ell]}$, the total energy consumed by its associated tasks during $[t_1, t_2]$ is computed as:
+To quantify the estimated GPU-side power consumption attributable to specific latency groups over a given time interval, a discrete-time summation is applied. Let $[t_1, t_2]$ be the time interval of interest, divided into time steps of duration $\Delta t$. For each latency group $\mathcal{T}_{(a_\ell, b_\ell]}$, the total energy consumed by its associated tasks during $[t_1, t_2]$ is computed as:
 
 \begin{equation}
 E^{(a_\ell, b_\ell]}_{[t_1, t_2]} = \sum_{t = t_1}^{t_2} P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}} \cdot \Delta t
@@ -496,7 +496,7 @@ A threshold latency value $\hat{\lambda}$ is defined to separate tasks into two 
 \mathcal{T}_{>b_L} = \left\{ k \in \mathcal{T} \,\middle|\, \lambda_k > \hat{\lambda} \right\}
 \end{equation}
 
-This classification enables focused analysis on workloads that are not immediately critical, assuming they are suitable to be studied for the assessment of flexibility potentials of the DC.
+This classification enables focused analysis on workloads that are not immediately critical, assuming they are suitable to be studied for the assessment of flexibility potentials of the DC. It should be noted that this classification operates at the individual task level and does not account for potential inter-task dependencies within multi-task jobs. However, as shown in Section~\ref{case study}, multi-task jobs represent only 2.5\% of the cleaned dataset, and deferred tasks are not cancelled but postponed, limiting the scope of possible cascading effects on downstream tasks.
 
 \subsubsection{Incorporating task duration prediction uncertainty} \label{prediction_uncertainty_methods}
 As the aim of this work is to match deferrable tasks with a specific flexibility window, knowing the expected duration of each task is essential. Tasks are assumed to run to completion without interruption and are not split over multiple time periods. 
@@ -593,7 +593,7 @@ V(\delta) = V_{\min} + \frac{V_{\max} - V_{\min}}{1 + \left( \frac{\delta}{\tau}
 \label{smooth_decay}
 \end{equation}
 
-where \( V_{\min} \) and \( V_{\max} \) represent the lower and upper bounds of the value (€/kWh), \( \tau \) determines the scale of decay, and \( \alpha \) controls the steepness of the decline.
+where \( V_{\min} \) and \( V_{\max} \) represent the lower and upper bounds of the value (€/kWh), \( \tau \) determines the characteristic time scale of value decay, and \( \alpha \) controls the steepness of the decline. In this formulation, \( V_{\min} \) and \( V_{\max} \) define empirically informed bounds on flexibility remuneration, while \( \tau \) and \( \alpha \) are reduced-form shape parameters. They are not directly estimated from historical electricity market data but are instead used as scenario parameters to represent alternative plausible aggregator valuation profiles and to assess the robustness of the proposed notification-period optimization framework under different assumptions on the time-sensitivity of flexibility remuneration.
 
 This formulation reflects the fact that the economic value of flexibility diminishes as the required response time increases, since delayed responses are less effective in time-critical market operations. The function \( V(\delta) \) therefore provides a tunable mechanism to model this compromise within the optimization process. Additionally, by changing the values of the parameters $\alpha$ and $\tau$, the framework can adapt to different ranges, capturing ranges of prices of the flexibility bids.
 
@@ -613,7 +613,7 @@ The resulting value of \( \delta^* \) represents a point that optimizes the aggr
 \section{Case Study}\label{case study}
 \subsection{Case study assumptions}
 To assess the flexibility potential of the DC, this section outlines the key assumptions adopted in the case study. First, it is assumed that once a task begins execution, it runs to completion without interruption; task fragmentation across multiple time periods is not considered in this analysis. Given that GPUs are significantly more energy-intensive than CPUs and that a larger share of IT workload-related power is allocated to GPUs, particularly for AI tasks \cite{LLM}, this study focuses on estimated GPU-side power. As the raw dataset does not include measured time-series power traces or machine-level monitoring that would permit calibration of device-specific nonlinear power curves, GPU power is estimated using the class-based model introduced in Section \ref{a_posteriori}.
-The considered machine specifications are summarized in Table \ref{tab:specs}. The nominal power values are taken from commercial datasheets for the identified GPU models/groups; for the anonymized "Misc." category, a representative nominal value is assumed, and the "N/A" GPU entries are excluded from the estimated GPU-power analysis. CPUs and memory are not included in the present power calculation, as their contribution is assumed to be secondary relative to GPUs for the workloads under study.
+The considered machine specifications are summarized in Table \ref{tab:specs}. The nominal power values are taken from commercial datasheets for the identified GPU models/groups; for the anonymized "Misc." category, a representative nominal value is assumed, and the "N/A" GPU entries are excluded from the estimated GPU-power analysis. CPUs and memory are not included in the present power calculation, as their contribution is assumed to be secondary relative to GPUs for the workloads under study. Accordingly, facility-level response and short-term PUE effects remain outside the modeled scope of the present analysis.
 
 \begin{table}[h!]
 \centering
@@ -636,6 +636,8 @@ The considered machine specifications are summarized in Table \ref{tab:specs}. T
 
  
 As part of the dataset anonymization process, all original date and time information was reset, even though the data was originally recorded between 2019 and 2020. As a result, the timestamps in the dataset default to the Unix epoch year of 1970. For consistency and reproducibility, this study refers to the sample week using the trace-provided dates, specifically from "01/02/1970" to "08/02/1970", even though these dates do not reflect the actual period of data collection.
+
+Analysis of the cleaned dataset reveals that 97.5\% of jobs consist of a single task, with only 2.5\% containing multiple tasks. This confirms that workflow-level dependencies across tasks within the same job are structurally rare in the studied workload, and supports the assumption introduced in Section~\ref{a_posteriori} that treating tasks independently introduces a negligible approximation.
 
 Further describing the data, Fig. \ref{fig:A_1a} shows the Cumulative Distribution Function (CDF) of task duration across the recorded trace. The distribution is heavily skewed, with a long tail indicating the presence of a small number of very long-running tasks, while the vast majority of tasks are relatively short. A more exhaustive characterization of this workload trace is presented in \cite{Weng2022}.
 
@@ -754,7 +756,7 @@ The shape of the curve defined by equation \ref{smooth_decay} captures the relat
 
 This is shown in Fig.~\ref{fig:flex_value_vs_time}, where the effects of different values of \( \tau \) and \( \alpha \) are illustrated. By exploring a range of these parameters, the robustness of the proposed bidding strategy can be assessed under different assumptions about aggregator behavior and market price dynamics.
 
-The values of \( V_{\max} \) and \( V_{\min} \) are therefore selected based on representative market data. For example, \( V_{\max} \) can be calibrated to reflect historical average activation prices in FCR or mFRR markets (e.g., 200–300 \texteuro/MWh), while \( V_{\min} \) may correspond to average day-ahead prices or avoided energy costs (e.g., 50–70 \texteuro/MWh). These ranges ensure that the flexibility valuation remains grounded in practical operational conditions while allowing sensitivity analysis through the tunable parameters \( \tau \) and \( \alpha \). For the purposes of this study, the analysis is carried out setting $V_{max} = 2$ \texteuro/kWh and $V_{min} = 0.05$ \texteuro/kWh.
+The values of \( V_{\max} \) and \( V_{\min} \) are therefore selected based on representative market data. For example, \( V_{\max} \) can be calibrated to reflect historical average activation prices in FCR or mFRR markets (e.g., 200–300 \texteuro/MWh), while \( V_{\min} \) may correspond to average day-ahead prices or avoided energy costs (e.g., 50–70 \texteuro/MWh). These ranges ensure that the flexibility valuation remains grounded in practical operational conditions while allowing sensitivity analysis through the tunable parameters \( \tau \) and \( \alpha \). For the purposes of this study, the analysis is carried out setting $V_{\max} = 2$~\texteuro/kWh and $V_{\min} = 0.05$~\texteuro/kWh. These values are selected to span the range of compensation observed across electricity market products. $V_{\min}$ represents lower-value flexibility opportunities, such as day-ahead energy price levels or avoided energy costs, consistent with average clearing prices observed in Iberian and Central European day-ahead markets. $V_{\max}$ represents an upper-bound remuneration level associated with near-immediate activation under scarcity-driven balancing conditions. It should not be interpreted as an average balancing price, but rather as a ceiling value capturing high-value system-stress scenarios; analysis of European balancing activation prices confirms that scarcity-driven mFRR activations can reach price levels of this order of magnitude~\cite{entsoe_balancing}. This parametrization allows $V(\delta)$ to span the full range from routine energy arbitrage to premium short-notice response. While the bounds $V_{\max}$ and $V_{\min}$ are empirically informed, the intermediate decay profile of $V(\delta)$ is not uniquely determined from available market data. The parameters $\tau$ and $\alpha$ are therefore varied parametrically to represent different rates at which flexibility value may decrease with notification time, enabling a structured sensitivity analysis under alternative assumptions regarding aggregator preferences and market time-sensitivity.
 
 
 
@@ -764,7 +766,7 @@ The values of \( V_{\max} \) and \( V_{\min} \) are therefore selected based on 
 
 \subsection{"A posteriori" flexibility assessment} \label{a_posteriori_results}
 
-To assess the inherent flexibility within the DC workload, power consumption is disaggregated by task latency classes as defined in Section~\ref{a_posteriori}. Two sets of latency classes are chosen to characterize the latency distribution of the DC power trace and to explore the potential for demand-side flexibility.
+To assess the inherent flexibility within the DC workload, estimated GPU-side power is disaggregated by task latency classes as defined in Section~\ref{a_posteriori}. Two sets of latency classes are chosen to characterize the latency distribution of the DC power trace and to explore the potential for demand-side flexibility.
 
 \begin{figure}[!h]
     \centering
@@ -785,7 +787,7 @@ To assess the inherent flexibility within the DC workload, power consumption is 
         \label{fig:interval_1b}
     \end{subfigure}
 
-    \caption[Latency overview]{Stacked time series of total power consumption categorized by latency ranges: (a) full latency range, (b) focus on flexible latency range only.}
+    \caption[Latency overview]{Stacked time series of estimated GPU-side power categorized by latency ranges: (a) full latency range, (b) focus on flexible latency range only.}
     \label{fig:interval_comparison}
 \end{figure}
 
@@ -811,7 +813,7 @@ To assess the inherent flexibility within the DC workload, power consumption is 
 \textit{$(3\,\mathrm{h},\ \infty)$} & & 0.7 & 5174 & & 10.1 & 5.75 \\
 \bottomrule
 \end{tabular}
-\caption{Distribution of tasks and power across latency groups.}
+\caption{Distribution of tasks and estimated GPU-side power across latency groups.}
 \label{tab:latency_distribution}
 \end{table}
 
@@ -887,12 +889,12 @@ In contrast, during lower flexibility points (R1–R3), fewer suitable tasks are
     \label{fig:LAD_flex_points_grid_baseline}
 \end{figure}
 
-Fig.~\ref{fig:LAD_flex_summary_baseline} illustrates the power consumption profile of the DC before and after applying the LAD-Flex strategy at point P1. The original DC power demand is shown in blue, while the adjusted consumption after task deferral is depicted in purple. The green shaded area highlights the flexible energy successfully deferred during the flexibility window $[t_1, t_2]$, which was made available to the aggregator. The regions shaded in blue represent the rebound energy (i.e., corresponding to those portions of deferred tasks lying outside of the flexibility window). While this rebound does not contribute to real-time grid balancing, it is an inevitable consequence of flexibility activation.
+Fig.~\ref{fig:LAD_flex_summary_baseline} illustrates the estimated GPU-side power profile of the modeled IT workload before and after applying the LAD-Flex strategy at point P1. The original IT-side power demand is shown in blue, while the adjusted consumption after task deferral is depicted in purple. The green shaded area highlights the flexible energy successfully deferred during the flexibility window $[t_1, t_2]$, which was made available to the aggregator. The regions shaded in blue represent the rebound energy (i.e., corresponding to those portions of deferred tasks lying outside of the flexibility window). While this rebound does not contribute to real-time grid balancing, it is an inevitable consequence of flexibility activation. These profiles represent the direct IT-side response of LAD-Flex; any whole-facility reduction and associated PUE behavior would additionally depend on how cooling and auxiliary loads respond during the activation window, which is not observed in the trace.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=14cm]{LAD_flex_P1_explanation_DEFAULT_BASELINE.png}
-    \caption{Power consumption of the DC before and after LAD-Flex activation for point P1 under the Baseline scenario.}
+    \caption{Estimated GPU-side power of the modeled IT workload before and after LAD-Flex activation for point P1 under the Baseline scenario.}
     \label{fig:LAD_flex_summary_baseline}
 \end{figure}
 
@@ -961,12 +963,12 @@ Fig.~\ref{fig:LAD_flex_points_grid_intraday} illustrates the deferred power prof
     \label{fig:LAD_flex_points_grid_intraday}
 \end{figure}
 
-Fig.~\ref{fig:LAD_flex_summary_intraday} presents the DC power consumption before and after LAD-Flex activation at point P1. The original power demand (blue) shows significant variability, reaching peaks above 100~kW during the flexibility window. After applying LAD-Flex, the adjusted consumption is reduced, dropping to approximately 60~kW. The rebound is more pronounced than in the Baseline scenario due to the larger volume of deferred tasks, but still contained to the periods adjacent to the beginning and end of the flexibility window.
+Fig.~\ref{fig:LAD_flex_summary_intraday} presents the estimated GPU-side power of the modeled IT workload before and after LAD-Flex activation at point P1. The original IT-side power demand (blue) shows significant variability, reaching peaks above 100~kW during the flexibility window. After applying LAD-Flex, the adjusted consumption is reduced, dropping to approximately 60~kW. The rebound is more pronounced than in the Baseline scenario due to the larger volume of deferred tasks, but still contained to the periods adjacent to the beginning and end of the flexibility window.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=14cm]{LAD_flex_P1_explanation_DEFAULT_DAM.png}
-    \caption{Power consumption of the DC before and after LAD-Flex activation for point P1 under the Intraday scenario.}
+    \caption{Estimated GPU-side power of the modeled IT workload before and after LAD-Flex activation for point P1 under the Intraday scenario.}
     \label{fig:LAD_flex_summary_intraday}
 \end{figure}
 
@@ -1037,12 +1039,12 @@ The short notification period (15~min, shown in green) provides limited time for
     \label{fig:LAD_flex_points_grid_mfrr}
 \end{figure}
 
-Fig.~\ref{fig:LAD_flex_summary_mfrr} presents the DC power consumption before and after LAD-Flex activation at point P1. The original power demand (blue) shows a significant spike reaching approximately 90~kW during the flexibility window. After applying LAD-Flex, the adjusted consumption (purple dashed line) remains stable around 50–55~kW, effectively shaving the peak demand. Notably, the rebound energy in this scenario is minimal due to the short notification period and compact flexibility window.
+Fig.~\ref{fig:LAD_flex_summary_mfrr} presents the estimated GPU-side power of the modeled IT workload before and after LAD-Flex activation at point P1. The original IT-side power demand (blue) shows a significant spike reaching approximately 90~kW during the flexibility window. After applying LAD-Flex, the adjusted consumption (purple dashed line) remains stable around 50–55~kW, effectively shaving the peak demand. Notably, the rebound energy in this scenario is minimal due to the short notification period and compact flexibility window.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=14cm]{LAD_flex_P1_explanation_DEFAULT_mFRR.png}
-    \caption{Power consumption of the DC before and after LAD-Flex activation for point P1 under the mFRR scenario.}
+    \caption{Estimated GPU-side power of the modeled IT workload before and after LAD-Flex activation for point P1 under the mFRR scenario.}
     \label{fig:LAD_flex_summary_mfrr}
 \end{figure}
 
@@ -1124,26 +1126,50 @@ At mid-range points (Q1-Q3), representing the 75th percentile of flexibility pot
     \label{fig:notable_points_comparison}
 \end{figure}
 
-Finally, to enable a fair comparison across scenarios with different flexibility window durations, a normalized efficiency metric is introduced. The hourly flexibility efficiency $\theta$ is defined as the average deferrable energy per hour of flexibility window, computed across all hourly activations in the sample week:
+Finally, to enable a fair comparison across scenarios with different flexibility window durations, a new metric is introduced. The hourly flexibility yield $\theta$ is defined as the average deferrable energy per hour of flexibility window, computed across all hourly activations in the sample week:
 
 \begin{equation}
     \theta = \frac{1}{168} \sum_{h=1}^{168} \frac{E_h^{\text{def}}}{\eta \Delta T}
-    \label{eq:hourly_efficiency}
+    \label{eq:hourly_yield}
 \end{equation}
 
 \noindent where 168 is the number of hours in the sample week and $E_h^{\text{def}}$ is the deferrable energy when a flexibility window begins at hour $h$.
 
-Fig.~\ref{fig:hourly_efficiency} presents the hourly flexibility efficiency for each scenario. The Intraday scenario achieves the highest efficiency at 2.51~kWh/h, followed closely by the baseline at 2.17~kWh/h. The mFRR scenario exhibits a lower efficiency of 0.50~kWh/h.
+Fig.~\ref{fig:hourly_yield} presents the hourly flexibility yield for each scenario. The Intraday scenario achieves the highest yield at 2.51~kWh/h, followed closely by the baseline at 2.17~kWh/h. The mFRR scenario exhibits a lower yield of 0.50~kWh/h.
 
-This metric reveals that the Intraday scenario not only delivers more total energy but also extracts flexibility more efficiently per unit time of the flexibility window. The Baseline scenario, despite its shorter 3-hour window compared to the intraday's 4-hour window, achieves comparable efficiency, suggesting that the additional hour in the Intraday scenario provides diminishing returns in terms of energy capture rate.
+This metric reveals that the Intraday scenario not only delivers more total energy but also extracts flexibility more efficiently per unit time of the flexibility window. The Baseline scenario, despite its shorter 3-hour window compared to the intraday's 4-hour window, achieves comparable yield, suggesting that the additional hour in the Intraday scenario provides diminishing returns in terms of energy capture rate.
 
-The low efficiency of the mFRR scenario reflects the fundamental challenge of providing balancing reserves through workload deferral: the short notification period (15~min) limits the strategy's ability to accumulate deferrable tasks before the flexibility window begins. However, this lower efficiency must be weighed against the higher market value typically associated with fast-response flexibility products.
+The low yield of the mFRR scenario reflects the fundamental challenge of providing balancing reserves through workload deferral: the short notification period (15~min) limits the strategy's ability to accumulate deferrable tasks before the flexibility window begins. However, this lower yield must be weighed against the higher market value typically associated with fast-response flexibility products.
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\textwidth]{hourly_efficiency_comparison.png}
-    \caption{Hourly flexibility efficiency comparison across the three market scenarios, measuring average deferrable energy per hour of flexibility window.}
-    \label{fig:hourly_efficiency}
+    \includegraphics[width=0.8\textwidth]{hourly_yield_comparison.png}
+    \caption{Hourly flexibility yield comparison across the three market scenarios, measuring average deferrable energy per hour of flexibility window.}
+    \label{fig:hourly_yield}
+\end{figure}
+
+While the hourly flexibility yield quantifies the rate of energy capture per unit time of the flexibility window, it does not characterize the extent to which the energy impact of deferral is contained within the contracted flexibility period. In any LAD-Flex activation, two distinct forms of rebound may arise, and it is important to distinguish between them.
+
+The first is \textit{activation-window spillover}: energy from tasks classified as deferrable that is consumed outside the flexibility window $[t_1, t_2]$ but is still part of the same activation event. This spillover has two sources. During the notification period preceding $t_1$, tasks begin transitioning into deferral, and some task energy is consumed before the window opens. Similarly, during the buffer period following $t_2$, tasks permitted by the overhang parameter $\beta$ may finish executing beyond the window boundary. The rebound energy $E_{\text{rebound}}$ reported in this study captures precisely this spillover component.
+
+The second form is \textit{rescheduling rebound}: the deferred tasks must eventually execute, consuming the same energy at a later time. Unlike classical demand-response rebound in thermal systems, where deferred cooling or heating creates a compensatory surge driven by physical dynamics, workload deferral involves no such physical penalty. The deferred tasks consume identical energy regardless of when they are executed, and the DC operator retains full discretion over when to reschedule them, subject only to the constraint of avoiding overlap with future flexibility activations. The rescheduling of deferred workloads is therefore a DC-internal scheduling optimization problem, separate from the flexibility assessment framework presented here, and is not quantified in this analysis.
+
+To quantify activation-window spillover, the Rebound Ratio ($RR$) is defined as the fraction of total activation-related energy that falls outside the flexibility window:
+
+\begin{equation}
+    RR = \frac{E_{\text{rebound}}}{E_{\text{def}} + E_{\text{rebound}}}
+    \label{eq:rebound_ratio}
+\end{equation}
+
+\noindent where $E_{\text{def}}$ is the deferrable energy within $[t_1, t_2]$ and $E_{\text{rebound}}$ is the energy consumed in the notification and buffer periods $[t_0, t_1) \cup (t_2, t_{\text{end}}]$. Low values of $RR$ indicate that the flexibility delivery is well contained within the contracted window, with minimal energy spillover.
+
+Fig.~\ref{fig:rebound_ratio} presents the Rebound Ratio across the three scenarios over the sample week. The Baseline scenario exhibits the highest mean $RR$ of 0.044, reflecting its longer notification period (60~min) and wider overhang tolerance ($\beta = 0.7$), which allow more task energy to spill outside the flexibility window boundaries. The Intraday scenario achieves an intermediate value of 0.029, while the mFRR scenario yields the lowest mean $RR$ of 0.014, consistent with its stringent timing constraints (15~min notification, $\beta = 0.9$) that restrict eligibility to tasks whose execution fits tightly within the activation window. Across all three scenarios, the Rebound Ratio remains between 1.4\% and 4.4\%, confirming that activation-window spillover is limited and that the vast majority of the energy impact of LAD-Flex is contained within the contracted flexibility period.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{rebound_energy_summary.png}
+    \caption{Rebound Ratio across the three market scenarios: time series over the sample week (left), distribution (center), and mean values (right). The Rebound Ratio measures the fraction of activation-related energy that falls outside the flexibility window.}
+    \label{fig:rebound_ratio}
 \end{figure}
 
 Concluding the comparison of the scenarios, Table~\ref{tab:scenario_summary} summarizes the key performance indicators across the three scenarios. The results demonstrate that DCs can participate in multiple electricity market products through latency-aware workload deferral, with the choice of market depending on operational priorities and revenue optimization strategies.
@@ -1158,15 +1184,16 @@ Concluding the comparison of the scenarios, Table~\ref{tab:scenario_summary} sum
 Flexibility window duration & 3 h & 4 h & 1 h \\
 Notification period & 60 min & 3 h & 15 min \\
 Peak deferrable energy (kWh) & 51.1 & 108.7 & 7.3 \\
-Hourly efficiency (kWh/h) & 2.17 & 2.51 & 0.50 \\
+Hourly yield (kWh/h) & 2.17 & 2.51 & 0.50 \\
 Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
+Mean Rebound Ratio & 0.044 & 0.029 & 0.014 \\
 \bottomrule
 \end{tabular}
 \caption{Summary of key performance indicators across the three market scenarios.}
 \label{tab:scenario_summary}
 \end{table}
 
-The Intraday scenario offers the highest flexibility volume and efficiency, making it suitable for DCs seeking to maximize energy-based revenue streams. The Baseline scenario provides a balanced approach with moderate advance notice requirements and competitive efficiency. The mFRR scenario, while delivering lower volumes, enables participation in high-value balancing markets where premium compensation for rapid response may offset the reduced flexibility quantity. 
+The Intraday scenario offers the highest flexibility volume and yield, making it suitable for DCs seeking to maximize energy-based revenue streams. The Baseline scenario provides a balanced approach with moderate advance notice requirements and competitive yield. The mFRR scenario, while delivering lower volumes, enables participation in high-value balancing markets where premium compensation for rapid response may offset the reduced flexibility quantity. 
 
 
 
@@ -1379,7 +1406,7 @@ In summary, the robustness analysis confirms that LAD-Flex maintains reliable pe
 
 \subsection{Notification period optimization} \label{notification_results}
 
-This section presents the results of the notification period optimization, as introduced in Section~\ref{notification_period_opt_section_methodology}. The analysis is carried out assuming a threshold latency of $\hat{\lambda} = 10$ minutes and an effective flexibility window of $\eta \Delta T = 3$ hours. The value of flexibility, $V(\delta)$, is taken from the parametrization shown in Fig.~\ref{fig:flex_value_vs_time}.
+This section presents the results of the notification period optimization, as introduced in Section~\ref{notification_period_opt_section_methodology}. The combinations of $(\tau, \alpha)$ considered in this section represent sensitivity scenarios rather than empirically fitted market coefficients; their purpose is to evaluate whether the optimal notification strategy remains robust across a range of plausible value-decay profiles. The analysis is carried out assuming a threshold latency of $\hat{\lambda} = 10$ minutes and an effective flexibility window of $\eta \Delta T = 3$ hours. The value of flexibility, $V(\delta)$, is taken from the parametrization shown in Fig.~\ref{fig:flex_value_vs_time}.
 
 For a discrete range of notification times $\delta$, both the flexible energy $F(\delta)$ and the resulting revenue $R(\delta) = F(\delta) \cdot V(\delta)$ are computed across all combinations of the parameters ($\alpha$) and ($\tau$). This computation is repeated for all the notable time points identified previously. The results are shown graphically in Fig.~\ref{fig:opt_results_sensitive}.
 
@@ -1501,12 +1528,17 @@ The analysis relies on a single workload trace from Alibaba's MLaaS platform, wh
 
 Secondly, the power estimation model should be interpreted as a first-order approximation of GPU-side IT power. Because the Alibaba trace does not provide measured per-device power telemetry or a reliable mapping from each task to an individual physical GPU utilization trace, the analysis uses GPU model/group information and allocated utilization fractions to construct estimated GPU power. Real GPU power curves are generally nonlinear, so the adopted linear approximation may misestimate absolute power and energy magnitudes, particularly for fractional-GPU allocations or operating points far from nominal utilization. Aggregation by GPU model/group can smooth some device-level variability, but it does not remove the underlying modeling bias. For this reason, the quantitative results are most robust when interpreted in relative terms, namely the temporal distribution of potentially flexible versus non-flexible workloads and the comparative effect of LAD-Flex across scenarios, rather than as hardware-accurate power measurements. Future work should calibrate nonlinear node- and GPU-level power models using measured telemetry or machine-level monitoring data and reassess the resulting flexibility estimates.
 
+Thirdly, the current framework should be interpreted as an IT-side flexibility assessment rather than a whole-facility model. Because the Alibaba trace does not include facility telemetry, cooling-system measurements, or dynamic PUE data, the effect of LAD-Flex on site-level power and short-term PUE dynamics cannot be quantified directly. In practice, whole-site response depends on how non-IT loads such as cooling, UPS, and auxiliary systems react during the flexibility window. If those loads do not decrease proportionally over short activations, instantaneous PUE may temporarily worsen even when IT demand is reduced. This does not invalidate the demand-response value of the strategy, but it means that whole-facility reduction should not be inferred directly from the IT-side results reported here. Future work should combine workload-level flexibility assessment with facility telemetry or thermal/infrastructure models to characterize whole-site response and short-term PUE dynamics.
+
 The robustness analysis demonstrates that LAD-Flex maintains high accuracy under simulated prediction uncertainty. The stochastic error is based on reported prediction performance from the dataset publishers, however, does not incorporate a trained duration predictor. Developing and integrating an actual prediction model, potentially leveraging historical task features and recurrence patterns, would strengthen the operational validity of the approach. The interaction between prediction accuracy and strategy performance across different market scenarios also warrants further investigation.
 
-Deferring workloads temporarily shifts rather than eliminates power consumption, potentially resulting in subsequent demand surges known as the rebound effect. While the buffer period and overhang parameters help distribute rebound energy, large-scale deferral events could create secondary peaks that stress grid infrastructure or reduce net flexibility value. Quantifying and mitigating rebound effects, particularly under repeated or consecutive flexibility activations, remains an important area for refinement.
+Regarding the rebound effect, two distinct components were identified in Section~\ref{sec:scenario_comparison}. Activation-window spillover, the energy from deferred tasks that executes outside the contracted flexibility window, has been quantified through the Rebound Ratio metric (Eq.~\ref{eq:rebound_ratio}) and shown to remain below 4.4\% across all scenarios. The second component, rescheduling rebound, arises because deferred tasks must eventually execute. Unlike thermal demand-response systems, workload deferral involves no physical penalty: the tasks consume identical energy regardless of when they run, and the DC operator retains discretion over rescheduling timing. However, if large volumes of deferred tasks are rescheduled concurrently, secondary demand peaks could stress grid infrastructure or reduce the net flexibility value. Rescheduling rebound is not modeled in the present framework, as it depends on DC-internal scheduling decisions and coordination with future flexibility requests. Future work should investigate rescheduling strategies that spread deferred workloads across time to avoid concentrated demand surges, particularly under repeated or consecutive flexibility activations.
 
 The scenarios analyzed assume that the DC operates through an aggregator without explicit minimum bid size constraints. In practice, participation in mFRR or intraday markets involves prequalification requirements, minimum capacity thresholds, and regulatory heterogeneity across European member states. The communication and coordination overhead between DCs and aggregators, may introduce additional complexity not captured in the current framework. Future work should examine how LAD-Flex integrates with specific market rules and aggregator operational practices.
 
+A further limitation concerns the valuation function used in the notification-period optimization. Although $V_{\max}$ and $V_{\min}$ are selected to be consistent with representative market price ranges, the decay parameters $\tau$ and $\alpha$ are not calibrated from historical market-clearing data or aggregator contract data. Instead, they are used as stylized parameters in a sensitivity framework. Future work should estimate these parameters empirically, for instance by fitting the decay function to observed flexibility product prices indexed by activation lead time or notification period, enabling tighter market-specific calibration of the proposed optimization model.
+
+Additionally, the current framework treats tasks independently and does not model inter-task dependencies within multi-task jobs. Although multi-task jobs account for only 2.5\% of the cleaned dataset, cascading delays could in principle propagate to downstream tasks when an upstream task is deferred. Since the Alibaba Cluster Trace does not include explicit dependency metadata such as directed acyclic graph structures, this effect cannot be formally quantified. Future work should validate the deferral strategy on dependency-annotated traces to assess the extent of cascading QoS degradation, particularly for workloads with tighter inter-task coupling than those observed in the studied MLaaS environment.
 
 Finally, it is assumed that deferring tasks within a predefined timeframe incurs no additional costs based on historical observations of similar task waiting times. In practice, delaying a task may incur performance or economic penalties. A cost model that incorporates a ratio between task latency and deferral time could provide a better understanding of the trade-offs involved. For example, tasks with strict latency requirements may experience a disproportionate degradation in service quality when deferred, which should be reflected in scheduling decisions. Future work will intend to include such cost functions directly into the decision-making layer, enabling a more precise balance between flexibility provisioning and service quality.
 
@@ -1546,7 +1578,7 @@ The robustness analysis confirmed that LAD-Flex maintains reliable performance u
 
 An optimization framework was also introduced to determine the notification period that maximizes the value of delivered flexibility. By modeling the trade-off between early notification—which increases available flexible energy—and real-time responsiveness—which commands higher market value—the framework allows both DCs and aggregators to align incentives. Results indicate that revenue improvements of up to 65\% can be achieved through adaptive notification timing compared to static approaches.
 
-While the framework demonstrates clear potential, its validation relies on a single dataset and several modeling assumptions, including first-order estimation of GPU-side power. The generalizability to other DC types, the integration challenges with real market mechanisms, and the practical implementation overhead in production environments remain areas requiring further investigation. Nevertheless, the methodology provides a transferable foundation that can be adapted as more diverse workload traces become available and as DC participation in flexibility markets matures.
+While the framework demonstrates clear potential, its validation relies on a single dataset and several modeling assumptions, including first-order estimation of GPU-side power. The reported results should therefore be interpreted as IT-side flexibility potential, while whole-facility response depends on non-IT dynamics and short-term PUE behavior that are not observed in the available trace. The generalizability to other DC types, the integration challenges with real market mechanisms, and the practical implementation overhead in production environments remain areas requiring further investigation. Nevertheless, the methodology provides a transferable foundation that can be adapted as more diverse workload traces become available and as DC participation in flexibility markets matures.
 
 In conclusion, this work demonstrates that DCs can evolve from passive electricity consumers into responsive participants in power system operations. By combining latency-aware workload management with aggregator-coordinated flexibility requests, DCs can contribute to grid stability across multiple market products—from day-ahead scheduling to near-real-time balancing—without compromising service quality. As electricity systems face increasing variability from renewable generation, the flexibility embedded in DC workloads represents a valuable and largely untapped resource for supporting the energy transition.
 
