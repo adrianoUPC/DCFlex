@@ -42,7 +42,6 @@
 
 \usepackage{amsmath,amssymb,amsfonts}%
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath}
 \usepackage{booktabs}
 
 \usepackage{amsthm}%
@@ -50,12 +49,10 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, decorations.pathreplacing, positioning}
 \usepackage{xcolor}
-\usepackage{amsmath}      % For aligned, subequations, and math environments
-\usepackage{amssymb} 
 \usepackage{chngcntr}       % for \numberwithin
 
 \usepackage{graphicx}%
-\usepackage{xcolor}%
+\graphicspath{{../}}
 
 \usepackage{multirow}%
 \usepackage{booktabs}%
@@ -293,16 +290,39 @@ $P^{node}_{it}$ & Power draw of node type $i$ at time $t$ \\
 \vspace{1em}
 
 \subsection*{Data Center-Level Variables}
-\begin{tabular}{ll}
-$P^{DC}_t$ & \DIFdelbegin \DIFdel{Total data center power }\DIFdelend \DIFaddbegin \DIFadd{Estimated GPU-side power of the modeled IT workload }\DIFaddend at time $t$ \\
-$P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}}$ & \DIFdelbegin \DIFdel{Power }\DIFdelend \DIFaddbegin \DIFadd{Estimated GPU-side power }\DIFaddend at $t$ from tasks in latency group $(a_\ell, b_\ell]$ \\
+\DIFdelbegin %DIFDELCMD < \begin{tabular}{ll}
+%DIFDELCMD < $P^{DC}_t$ & Total data center power at time $t$ \\
+%DIFDELCMD < $P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}}$ & Power at $t$ from tasks in latency group $(a_\ell, b_\ell]$ \\
+%DIFDELCMD < $E^{(a_\ell, b_\ell]}_{[t_1, t_2]}$ & Energy from latency group $(a_\ell, b_\ell]$ over $[t_1, t_2]$ \\
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \begin{tabular}{ll}
+$P^{DC}_t$ & Estimated GPU-side power of the modeled IT workload at time $t$ \\
+$P^{DC}_{t, \mathcal{T}_{(a_\ell, b_\ell]}}$ & Estimated GPU-side power at $t$ from tasks in latency group $(a_\ell, b_\ell]$ \\
 $E^{(a_\ell, b_\ell]}_{[t_1, t_2]}$ & Energy from latency group $(a_\ell, b_\ell]$ over $[t_1, t_2]$ \\
 \end{tabular}
+\DIFaddend 
 
 \vspace{1em}
 
 \subsection*{Flexibility Strategy}
-\begin{tabular}{ll}
+\DIFdelbegin %DIFDELCMD < \begin{tabular}{ll}
+%DIFDELCMD < $\hat{\lambda}$ & Critical queuing latency threshold \\
+%DIFDELCMD < $\delta$ & Notification period / lead time \\
+%DIFDELCMD < $\Delta T$ & Base flexibility window duration \\
+%DIFDELCMD < $\eta$ & Scaling factor for flexibility window \\
+%DIFDELCMD < $\beta$ & Allowed overhang as a fraction of task duration \\
+%DIFDELCMD < $\zeta$ & Duration prediction error scaling factor \\
+%DIFDELCMD < $\gamma_{\text{buffer}}$ & Buffer after flexibility window end \\
+%DIFDELCMD < $t_0$ & Time when flexibility notification is received \\
+%DIFDELCMD < $t_1$ & Start time of flexibility window \\
+%DIFDELCMD < $t_2$ & End time of flexibility window \\
+%DIFDELCMD < $t_{\text{end}}^{\text{flex}}$ & End of buffer-extended window ($t_2 + \gamma_{\text{buffer}}$) \\
+%DIFDELCMD < $\theta$ & Hourly flexibility efficiency \\
+%DIFDELCMD < $E_h^{\text{def}}$ & Deferrable energy identified by LAD-Flex at hour h \\
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \begin{tabular}{ll}
 $\hat{\lambda}$ & Critical queuing latency threshold \\
 $\delta$ & Notification period / lead time \\
 $\Delta T$ & Base flexibility window duration \\
@@ -314,9 +334,10 @@ $t_0$ & Time when flexibility notification is received \\
 $t_1$ & Start time of flexibility window \\
 $t_2$ & End time of flexibility window \\
 $t_{\text{end}}^{\text{flex}}$ & End of buffer-extended window ($t_2 + \gamma_{\text{buffer}}$) \\
-$\theta$ & Hourly flexibility \DIFdelbegin \DIFdel{efficiency }\DIFdelend \DIFaddbegin \DIFadd{yield }\DIFaddend \\
+$\theta$ & Hourly flexibility yield \\
 $E_h^{\text{def}}$ & Deferrable energy identified by LAD-Flex at hour h \\
 \end{tabular}
+\DIFaddend 
 
 \vspace{1em}
 
@@ -1295,19 +1316,31 @@ The low \DIFdelbegin \DIFdel{efficiency }\DIFdelend \DIFaddbegin \DIFadd{yield }
 \begin{table}[h!]
 \centering
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}lccc@{}}
+\DIFdelbeginFL %DIFDELCMD < \begin{tabular}{@{}lccc@{}}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \textbf{Metric} & \textbf{Baseline} & \textbf{Intraday} & \textbf{mFRR} \\
+%DIFDELCMD < \midrule
+%DIFDELCMD < Flexibility window duration & 3 h & 4 h & 1 h \\
+%DIFDELCMD < Notification period & 60 min & 3 h & 15 min \\
+%DIFDELCMD < Peak deferrable energy (kWh) & 51.1 & 108.7 & 7.3 \\
+%DIFDELCMD < Hourly efficiency (kWh/h) & 2.17 & 2.51 & 0.50 \\
+%DIFDELCMD < Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \begin{tabular}{@{}lccc@{}}
 \toprule
 \textbf{Metric} & \textbf{Baseline} & \textbf{Intraday} & \textbf{mFRR} \\
 \midrule
 Flexibility window duration & 3 h & 4 h & 1 h \\
 Notification period & 60 min & 3 h & 15 min \\
 Peak deferrable energy (kWh) & 51.1 & 108.7 & 7.3 \\
-Hourly \DIFdelbeginFL \DIFdelFL{efficiency }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{yield }\DIFaddendFL (kWh/h) & 2.17 & 2.51 & 0.50 \\
+Hourly yield (kWh/h) & 2.17 & 2.51 & 0.50 \\
 Max.\ flexibility percentage (\%) & 22.1 & 33.1 & 10.8 \\
-\DIFaddbeginFL \DIFaddFL{Mean Rebound Ratio }& \DIFaddFL{0.044 }& \DIFaddFL{0.029 }& \DIFaddFL{0.014 }\\
-\DIFaddendFL \bottomrule
+Mean Rebound Ratio & 0.044 & 0.029 & 0.014 \\
+\bottomrule
 \end{tabular}
-\caption{Summary of key performance indicators across the three market scenarios.}
+\DIFaddendFL \caption{Summary of key performance indicators across the three market scenarios.}
 \label{tab:scenario_summary}
 \end{table}
 
@@ -1721,6 +1754,6 @@ This work has been supported by the FLEX4FACT project, funded by the European Un
 \section*{Declaration of generative AI and AI-assisted technologies in the writing process}
 During the preparation of this work, the authors used ChatGPT in order to refine the text and improve the readability of the manuscript. After using this tool, the authors reviewed and edited the content as needed and takes full responsibility for the content of the publication.
 
-\bibliography{bibliography}
+\bibliography{../bibliography}
 
 \end{document}

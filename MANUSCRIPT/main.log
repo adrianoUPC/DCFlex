@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  5 APR 2026 00:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  8 APR 2026 16:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./main.tex
-(main.tex
+**./new/main.tex
+(new/main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (elsarticle.cls
@@ -1311,20 +1311,17 @@ Package pdftex.def Info: hourly_yield_comparison.png  used on input line 1146.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [37 <./notable_points_comparison.png>] [38 <./hourly_yield_comparison.png>]
-
-LaTeX Warning: Reference `fig:rebound_ratio' on page 39 undefined on input line
- 1166.
-
-<rebound_energy_summary.png, id=526, 1289.2968pt x 421.8159pt>
+<rebound_energy_summary.png, id=527, 1289.2968pt x 421.8159pt>
 File: rebound_energy_summary.png Graphic file (type png)
 <use rebound_energy_summary.png>
 Package pdftex.def Info: rebound_energy_summary.png  used on input line 1170.
 (pdftex.def)             Requested size: 469.75502pt x 153.68797pt.
 
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [39 <./rebound_energy_summary.png>]
-<sensitivity_grid_fixed_shading_distinct_latencies.png, id=538, 1445.4pt x 1011
+<sensitivity_grid_fixed_shading_distinct_latencies.png, id=539, 1445.4pt x 1011
 .78pt>
 File: sensitivity_grid_fixed_shading_distinct_latencies.png Graphic file (type 
 png)
@@ -1333,7 +1330,7 @@ Package pdftex.def Info: sensitivity_grid_fixed_shading_distinct_latencies.png
  used on input line 1242.
 (pdftex.def)             Requested size: 398.33858pt x 278.83473pt.
  [40 <./sensitivity_grid_fixed_shading_distinct_latencies.png>]
-<sensitivity_KDE_latency_filtered_improved.png, id=549, 1084.05pt x 722.7pt>
+<sensitivity_KDE_latency_filtered_improved.png, id=548, 1084.05pt x 722.7pt>
 File: sensitivity_KDE_latency_filtered_improved.png Graphic file (type png)
 <use sensitivity_KDE_latency_filtered_improved.png>
 Package pdftex.def Info: sensitivity_KDE_latency_filtered_improved.png  used on
@@ -1344,7 +1341,7 @@ Package pdftex.def Info: sensitivity_KDE_latency_filtered_improved.png  used on
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [41] [42 <./sensitivity_KDE_latency_filtered_improved.png>]
-<error_and_scatter_combined_zeta_010_030_050_loglog.png, id=573, 1057.7919pt x 
+<error_and_scatter_combined_zeta_010_030_050_loglog.png, id=569, 1057.7919pt x 
 421.8159pt>
 File: error_and_scatter_combined_zeta_010_030_050_loglog.png Graphic file (type
  png)
@@ -1352,7 +1349,7 @@ File: error_and_scatter_combined_zeta_010_030_050_loglog.png Graphic file (type
 Package pdftex.def Info: error_and_scatter_combined_zeta_010_030_050_loglog.png
   used on input line 1318.
 (pdftex.def)             Requested size: 469.75502pt x 187.32451pt.
-<deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png, id=575, 1445.4pt x 10
+<deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png, id=571, 1445.4pt x 10
 11.78pt>
 File: deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png Graphic file (typ
 e png)
@@ -1360,7 +1357,7 @@ e png)
 Package pdftex.def Info: deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.pn
 g  used on input line 1327.
 (pdftex.def)             Requested size: 469.75502pt x 328.8246pt.
-<confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png, id=577, 1277.9745pt x 4
+<confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png, id=573, 1277.9745pt x 4
 33.3791pt>
 File: confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png Graphic file (type 
 png)
@@ -1371,7 +1368,7 @@ Package pdftex.def Info: confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png
  [43 <./error_and_scatter_combined_zeta_010_030_050_loglog.png>] [44 <./deferre
 d_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png> <./confusion_matrix_zeta_comp
 arison_DEFAULT_BASELINE.png>]
-<flexibility_sensitivity_all_points_impr_clean.png, id=596, 1445.4pt x 867.24pt
+<flexibility_sensitivity_all_points_impr_clean.png, id=591, 1445.4pt x 867.24pt
 >
 File: flexibility_sensitivity_all_points_impr_clean.png Graphic file (type png)
 
@@ -1590,12 +1587,8 @@ Overfull \hbox (32.01457pt too wide) in paragraph at lines 1433--1460
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[45] [46 <./flexibility_sensitivity_all_points_impr_clean.png>] [47]
-
-LaTeX Warning: Reference `eq:rebound_ratio' on page 48 undefined on input line 
-1535.
-
-[48] [49] [50] (main.bbl
+[45] [46 <./flexibility_sensitivity_all_points_impr_clean.png>] [47] [48]
+[49] [50] (main.bbl
 Underfull \hbox (badness 2529) in paragraph at lines 9--12
 []\OT1/cmr/m/n/12 International En-ergy Agency, En-ergy and ai, []$\OT1/cmtt/m/
 n/12 https : / / www . iea . org / reports /
@@ -1715,79 +1708,48 @@ L3 programming layer <2026-01-19>
  ***********
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 28009 strings out of 467867
- 524688 string characters out of 5417850
- 931031 words of memory out of 5000000
+ 28004 strings out of 467867
+ 524651 string characters out of 5417850
+ 931324 words of memory out of 5000000
  56164 multiletter control sequences out of 15000+600000
  638384 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,17n,104p,2116b,780s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{table.caption.51} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.47} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.46} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.45} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.44} has been referenced but does not 
-exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{figure.caption.43} has been referenced but does not
- exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{table.caption.42} has been referenced but does not 
-exist, replaced by a fixed one
-
- <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1
-000.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\tcrm0800.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/e
-c/dpi600\tcrm1200.pk><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmbx12.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/citcea/AppData/Local/Program
-s/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/citcea/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/citcea/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users
-/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
-<C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmr10.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/citcea/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/citcea/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/citcea/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/citcea/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users
-/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
-<C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-msy7.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmsy8.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmti10.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/citcea/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/citcea/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/citcea/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (57 pages, 17629911 bytes).
+ 89i,17n,104p,2120b,780s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
+m1000.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
+600\tcrm0800.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen
+/ec/dpi600\tcrm1200.pk><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/citcea/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/citcea/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/citcea
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Use
+rs/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pf
+b><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmmi8.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr10.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmr12.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/citcea/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/citcea/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/citcea/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/citcea/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Use
+rs/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pf
+b><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmsy7.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmsy8.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmti10.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/citcea/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/citcea/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/citcea/App
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (57 pages, 17629296 bytes).
 PDF statistics:
- 1078 PDF objects out of 1200 (max. 8388607)
- 237 named destinations out of 1000 (max. 500000)
+ 1072 PDF objects out of 1200 (max. 8388607)
+ 230 named destinations out of 1000 (max. 500000)
  446 words of extra memory for PDF output out of 10000 (max. 10000000)
 
