@@ -5,7 +5,8 @@
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(python -c:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(pdflatex -interaction=nonstopmode main_diff.tex)"
     ]
   }
 }
