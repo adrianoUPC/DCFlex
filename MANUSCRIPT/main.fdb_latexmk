@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1775748571.87937 "main.aux" "main.bbl" "main" 1775748644.71486 0
+["bibtex main"] 1775749114.20415 "main.aux" "main.bbl" "main" 1775749114.59052 2
   "./bibliography.bib" 1775658292 89401 0a927c3be10b8b8f10befac91b29a1dd ""
   "./elsarticle-num.bst" 1775658292 30965 06f67189609799fefa8074e9761a771a ""
-  "main.aux" 1775748643 42924 4139010c504403c01e41e1de5d99d360 "pdflatex"
+  "main.aux" 1775749106 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1775748610.38895 "g:/My Drive/PAPERS/DATACENTERS IMPERIAL/DCFlex/MANUSCRIPT/main.tex" "main.pdf" "main" 1775748644.72332 2
+["pdflatex"] 1775749075.10048 "g:/My Drive/PAPERS/DATACENTERS IMPERIAL/DCFlex/MANUSCRIPT/main.tex" "main.pdf" "main" 1775749113.14472 2
   "A.png" 1775658292 245235 19ee6de5d0e961f2b27a7015b1533936 ""
   "B.png" 1775658292 966639 e37ce59bea01fa91055bc51e3fbeb1f6 ""
   "C:/Users/citcea/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1775660993 98337 7d9aed15b9f0415bb420182c42a8249d ""
@@ -246,13 +246,13 @@
   "error_and_scatter_combined_zeta_010_030_050_loglog.png" 1775658292 816313 a4ed663acd81d63d7b6e7ab6fab4899c ""
   "flexibility_sensitivity_all_points_impr_clean.png" 1775658292 1888514 1513bd585bf8a4ddd11e883cca992c49 ""
   "flexibility_value_function_color.png" 1775658292 335345 d37f2f3c6f78c41539c4cb7514c4a857 ""
-  "g:/My Drive/PAPERS/DATACENTERS IMPERIAL/DCFlex/MANUSCRIPT/main.tex" 1775748570 145410 d5fcb65701ad9556bfd486bd77a7064b ""
+  "g:/My Drive/PAPERS/DATACENTERS IMPERIAL/DCFlex/MANUSCRIPT/main.tex" 1775749074 145399 ec2c849e6266948b067984b69f8ef2cc ""
   "hourly_yield_comparison.png" 1775658292 146632 6fb0a417b479af7682d5b6db8b0514b1 ""
   "latencydiagram.png" 1775658292 635740 a61c7161fa899db73f24ce99e67fa6a3 ""
-  "main.aux" 1775748643 42924 4139010c504403c01e41e1de5d99d360 "pdflatex"
-  "main.bbl" 1775748572 22285 cfb09198286cd0238ca090a79315dc8c "bibtex main"
-  "main.spl" 1775748610 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1775748570 145410 d5fcb65701ad9556bfd486bd77a7064b ""
+  "main.aux" 1775749106 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "main.bbl" 1775749114 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
+  "main.spl" 1775749075 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1775749074 145399 ec2c849e6266948b067984b69f8ef2cc ""
   "methodology.drawionew.png" 1775658293 4340206 1646bcdeab3e7db4ae933c4c18f1ebbe ""
   "methodology_diagram.png" 1775658293 1186923 d7d5f289f66e0f75703b9fe500aec169 ""
   "notable_points_comparison.png" 1775658293 297231 ae6058fb5cc0fa7092b5ff79acdf5923 ""
