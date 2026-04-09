@@ -33,6 +33,7 @@ In addition to the comments from the reviewers, make sure to pay attention to th
 
    **Action taken:**  
    - **RELEVANCE:** We strengthened the connection to IJEPES by incorporating recent journal publications on power system flexibility, DC demand response, and aggregator coordination into the Introduction and Literature Review.
+   - **TITLE:** The title was revised to improve journal relevance and readability, and abbreviations were avoided in the title in line with the Associate Editor's guidance. The new title is: *Data Center Workload Flexibility for Power System Demand Response: Evidence from Alibaba Traces*.
    - **REFERENCES AND CITING:** Throughout the manuscript, grouped or lumped reference lists (e.g., [1-5]) that supported multiple distinct ideas have been replaced with claim-specific citations. Each cited work is now accompanied by a brief description of its concrete contribution, so that the reader can identify the role of every reference. This revision affects Sections 1.1, 1.2, 1.3, 2.2, 3.2, and 3.3. Grouped citations were retained only where every reference supports the exact same narrow statement.
 
 
@@ -88,3 +89,4 @@ This paper proposes the **LAD-Flex** strategy, which filters loads that can be p
    The use of “1970” in the figure is confusing, even though the authors clarify that it refers to the Unix epoch. The axis should be changed to **relative time** for better readability.  
    **Reply to reviewer:** We thank the reviewer for this observation. As stated in Section 4.1, the timestamps shown in the figures correspond to the anonymized dates of the publicly available Alibaba Cluster Trace dataset, which default to the Unix epoch year of 1970. We have retained this convention intentionally to preserve direct traceability between the results and the raw dataset, facilitating reproducibility for readers working with the same trace. Adopting relative time labels would require an additional mapping step that could introduce ambiguity when cross-referencing with the original data.  
    **Action taken:**  -
+

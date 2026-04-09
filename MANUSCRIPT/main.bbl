@@ -1,0 +1,428 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{iea2025energyai}
+{International Energy Agency}, Energy and ai,
+  \url{https://www.iea.org/reports/energy-and-ai}, iEA, Paris. Licence: CC BY
+  4.0 (2025).
+
+\bibitem{Shair2021}
+J.~Shair, H.~Li, J.~Hu, X.~Xie, Power system stability issues, classifications
+  and research prospects in the context of high-penetration of renewables and
+  power electronics, Renewable and Sustainable Energy Reviews 145 (7 2021).
+\newblock \href {https://doi.org/10.1016/j.rser.2021.111111}
+  {\path{doi:10.1016/j.rser.2021.111111}}.
+
+\bibitem{Caballero-Pea2022}
+J.~Caballero-Peña, C.~Cadena-Zarate, A.~Parrado-Duque, G.~Osma-Pinto,
+  \href{https://www.sciencedirect.com/science/article/abs/pii/S0142061521011133}{Distributed
+  energy resources on distribution networks: A systematic review of modelling,
+  simulation, metrics, and impacts}, International Journal of Electrical Power
+  \& Energy Systems 138 (2022) 107900.
+\newblock \href {https://doi.org/10.1016/J.IJEPES.2021.107900}
+  {\path{doi:10.1016/J.IJEPES.2021.107900}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/abs/pii/S0142061521011133}
+
+\bibitem{Zhang2025}
+W.~Zhang, Y.~Wen, C.~Y. Chung, Inertia security evaluation and application in
+  low-inertia power systems, IEEE Transactions on Power Systems 40 (2025)
+  1725--1737.
+\newblock \href {https://doi.org/10.1109/TPWRS.2024.3420786}
+  {\path{doi:10.1109/TPWRS.2024.3420786}}.
+
+\bibitem{Purkait2024}
+P.~Purkait, M.~Basu, S.~R. Nath, {"Renewable energy integration to electric
+  power grid: Opportunities, challenges, and solutions"}, in: Energy,
+  Environment, and Sustainability, Vol. Part F2601, Springer, 2024, pp.
+  37--100, [Online]. Available:
+  \url{https://link-springer-com.recursos.biblioteca.upc.edu/chapter/10.1007/978-981-97-1406-3_3}.
+\newblock \href {https://doi.org/10.1007/978-981-97-1406-3_3/TABLES/3}
+  {\path{doi:10.1007/978-981-97-1406-3_3/TABLES/3}}.
+
+\bibitem{Jones2018}
+N.~Jones, How to stop data centres from gobbling up the world's electricity,
+  Nature 561 (2018) 163--166.
+\newblock \href {https://doi.org/10.1038/D41586-018-06610-Y}
+  {\path{doi:10.1038/D41586-018-06610-Y}}.
+
+\bibitem{AlKez2022}
+D.~A. Kez, A.~M. Foley, D.~Laverty, D.~F.~D. Rio, B.~Sovacool,
+  \href{https://www.sciencedirect.com/science/article/pii/S0959652622032115}{Exploring
+  the sustainability challenges facing digitalization and internet data
+  centers}, Journal of Cleaner Production 371 (2022) 133633.
+\newblock \href {https://doi.org/10.1016/J.JCLEPRO.2022.133633}
+  {\path{doi:10.1016/J.JCLEPRO.2022.133633}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0959652622032115}
+
+\bibitem{Gnibga2024}
+W.~E. Gnibga, A.~Blavette, A.~C. Orgerie, Renewable energy in data centers: The
+  dilemma of electrical grid dependency and autonomy costs, IEEE Transactions
+  on Sustainable Computing 9 (2024) 315--328.
+\newblock \href {https://doi.org/10.1109/TSUSC.2023.3307790}
+  {\path{doi:10.1109/TSUSC.2023.3307790}}.
+
+\bibitem{Degefa2021}
+M.~Z. Degefa, I.~B. Sperstad, H.~Sæle,
+  \href{https://www.sciencedirect.com/science/article/pii/S037877962100002X}{Comprehensive
+  classifications and characterizations of power system flexibility resources},
+  Electric Power Systems Research 194 (2021) 107022.
+\newblock \href {https://doi.org/10.1016/J.EPSR.2021.107022}
+  {\path{doi:10.1016/J.EPSR.2021.107022}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S037877962100002X}
+
+\bibitem{Takci2025}
+M.~T. Takci, M.~Qadrdan, J.~Summers, J.~Gustafsson,
+  \href{https://www.sciencedirect.com/science/article/pii/S2352484725001623}{Data
+  centres as a source of flexibility for power systems}, Energy Reports 13
+  (2025) 3661--3671.
+\newblock \href {https://doi.org/10.1016/J.EGYR.2025.03.020}
+  {\path{doi:10.1016/J.EGYR.2025.03.020}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S2352484725001623}
+
+\bibitem{crozier2025potential}
+C.~Crozier, M.~Liska, The potential of data center energy demand to provide
+  grid flexibility, Current Sustainable/Renewable Energy Reports 12~(1) (2025)
+  1--6.
+
+\bibitem{Radovanovic2023}
+A.~Radovanovic, R.~Koningstein, I.~Schneider, B.~Chen, A.~Duarte, B.~Roy,
+  D.~Xiao, M.~Haridasan, P.~Hung, N.~Care, S.~Talukdar, E.~Mullen, K.~Smith,
+  M.~E. Cottman, W.~Cirne, Carbon-aware computing for datacenters, IEEE
+  Transactions on Power Systems 38 (2023) 1270--1280.
+\newblock \href {https://doi.org/10.1109/TPWRS.2022.3173250}
+  {\path{doi:10.1109/TPWRS.2022.3173250}}.
+
+\bibitem{arshad2022utilizing}
+U.~Arshad, M.~Aleem, G.~Srivastava, J.~C.-W. Lin, Utilizing power consumption
+  and sla violations using dynamic vm consolidation in cloud data centers,
+  Renewable and Sustainable Energy Reviews 167 (2022) 112782.
+
+\bibitem{ZHANG2024DR}
+Y.~Zhang, A.~Tsiligkaridis, I.~C. Paschalidis, A.~K. Coskun,
+  \href{https://www.sciencedirect.com/science/article/pii/S2210537924000027}{Data
+  center and load aggregator coordination towards electricity demand response},
+  Sustainable Computing: Informatics and Systems 42 (2024) 100957.
+\newblock \href {https://doi.org/https://doi.org/10.1016/j.suscom.2024.100957}
+  {\path{doi:https://doi.org/10.1016/j.suscom.2024.100957}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S2210537924000027}
+
+\bibitem{LIU2013770}
+Z.~Liu, A.~Wierman, Y.~Chen, B.~Razon, N.~Chen,
+  \href{https://www.sciencedirect.com/science/article/pii/S0166531613000928}{Data
+  center demand response: Avoiding the coincident peak via workload shifting
+  and local generation}, Performance Evaluation 70~(10) (2013) 770--791,
+  proceedings of IFIP Performance 2013 Conference.
+\newblock \href {https://doi.org/https://doi.org/10.1016/j.peva.2013.08.014}
+  {\path{doi:https://doi.org/10.1016/j.peva.2013.08.014}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0166531613000928}
+
+\bibitem{tomaszewska2019lithium}
+A.~Tomaszewska, Z.~Chu, X.~Feng, S.~O'kane, X.~Liu, J.~Chen, C.~Ji, E.~Endler,
+  R.~Li, L.~Liu, et~al., Lithium-ion battery fast charging: A review,
+  ETransportation 1 (2019) 100011.
+
+\bibitem{Alapera2019}
+I.~Alapera, J.~Paananen, K.~Dalen, S.~Honkapuro, Fast frequency response from a
+  ups system of a data center, background, and pilot results, International
+  Conference on the European Energy Market, EEM 2019-September (9 2019).
+\newblock \href {https://doi.org/10.1109/EEM.2019.8916344}
+  {\path{doi:10.1109/EEM.2019.8916344}}.
+
+\bibitem{Cui2024}
+Y.~Cui, Y.~Cheng, H.~Zhu, Y.~Zhao, W.~Zhong,
+  \href{https://www-sciencedirect-com.recursos.biblioteca.upc.edu/science/article/pii/S0142061524003533?via%3Dihub}{Stochastic
+  optimization for capacity configuration of data center microgrid thermal
+  energy management equipment considering flexible resources}, International
+  Journal of Electrical Power \& Energy Systems 160 (2024) 110132.
+\newblock \href {https://doi.org/10.1016/J.IJEPES.2024.110132}
+  {\path{doi:10.1016/J.IJEPES.2024.110132}}.
+\newline\urlprefix\url{https://www-sciencedirect-com.recursos.biblioteca.upc.edu/science/article/pii/S0142061524003533?via%3Dihub}
+
+\bibitem{JerezMonsalves2023}
+J.~J. Monsalves, C.~Bergaentzlé, D.~Keles,
+  \href{https://www.sciencedirect.com/science/article/pii/S0360544223015062}{Impacts
+  of flexible-cooling and waste-heat recovery from data centres on energy
+  systems: A danish case study}, Energy 281 (2023) 128112.
+\newblock \href {https://doi.org/10.1016/J.ENERGY.2023.128112}
+  {\path{doi:10.1016/J.ENERGY.2023.128112}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0360544223015062}
+
+\bibitem{Liu2013}
+Z.~Liu, A.~Wierman, Y.~Chen, B.~Razon, N.~Chen,
+  \href{https://www.sciencedirect.com/science/article/abs/pii/S0166531613000928?via%3Dihub}{Data
+  center demand response: Avoiding the coincident peak via workload shifting
+  and local generation}, Performance Evaluation 70 (2013) 770--791.
+\newblock \href {https://doi.org/10.1016/J.PEVA.2013.08.014}
+  {\path{doi:10.1016/J.PEVA.2013.08.014}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/abs/pii/S0166531613000928?via%3Dihub}
+
+\bibitem{Dabbagh2019}
+M.~Dabbagh, B.~Hamdaoui, A.~Rayes, M.~Guizani, Shaving data center power demand
+  peaks through energy storage and workload shifting control, IEEE Transactions
+  on Cloud Computing 7 (2019) 1095--1108.
+\newblock \href {https://doi.org/10.1109/TCC.2017.2744623}
+  {\path{doi:10.1109/TCC.2017.2744623}}.
+
+\bibitem{Fisco-Compte2025}
+P.~Fisco-Compte, M.~Juanpera, B.~Domenech, R.~Pastor, M.~Ranaboldo,
+  E.~Bullich-Massagué,
+  \href{https://www.sciencedirect.com/science/article/pii/S0306261925001333}{Sustainable
+  optimal production scheduling methodology under implicit demand response and
+  carbon policy: A manufacturing industry case study}, Applied Energy 384
+  (2025) 125403.
+\newblock \href {https://doi.org/10.1016/J.APENERGY.2025.125403}
+  {\path{doi:10.1016/J.APENERGY.2025.125403}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0306261925001333}
+
+\bibitem{CHEN2020109466}
+M.~Chen, C.~Gao, M.~Song, S.~Chen, D.~Li, Q.~Liu,
+  \href{https://www.sciencedirect.com/science/article/pii/S1364032119306744}{Internet
+  data centers participating in demand response: A comprehensive review},
+  Renewable and Sustainable Energy Reviews 117 (2020) 109466.
+\newblock \href {https://doi.org/https://doi.org/10.1016/j.rser.2019.109466}
+  {\path{doi:https://doi.org/10.1016/j.rser.2019.109466}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S1364032119306744}
+
+\bibitem{CAO2022119665}
+Y.~Cao, M.~Cheng, S.~Zhang, H.~Mao, P.~Wang, C.~Li, Y.~Feng, Z.~Ding,
+  \href{https://www.sciencedirect.com/science/article/pii/S0306261922009631}{Data-driven
+  flexibility assessment for internet data center towards periodic batch
+  workloads}, Applied Energy 324 (2022) 119665.
+\newblock \href
+  {https://doi.org/https://doi.org/10.1016/j.apenergy.2022.119665}
+  {\path{doi:https://doi.org/10.1016/j.apenergy.2022.119665}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0306261922009631}
+
+\bibitem{Zhang2023_TSC}
+W.~Zhang, L.~Roald, V.~Zavala, Exploring the impacts of power grid signals on
+  data center operations using a receding-horizon scheduling model, IEEE
+  Transactions on Sustainable Computing 8 (2023) 245--256.
+\newblock \href {https://doi.org/10.1109/TSUSC.2022.3224668}
+  {\path{doi:10.1109/TSUSC.2022.3224668}}.
+
+\bibitem{Zhang2021_DATE}
+Y.~Zhang, D.~C. Wilson, I.~C. Paschalidis, A.~K. Coskun, A data center demand
+  response policy for real-world workload scenarios in hpc, in: Proceedings
+  -Design, Automation and Test in Europe, DATE, Vol. 2021-February, Institute
+  of Electrical and Electronics Engineers Inc., 2021, pp. 282--287.
+\newblock \href {https://doi.org/10.23919/DATE51398.2021.9474075}
+  {\path{doi:10.23919/DATE51398.2021.9474075}}.
+
+\bibitem{Zhang2024_TPWRS}
+S.~Zhang, J.~Lyu, W.~Jin, H.~Cheng, C.~Li, X.~Wang, Coordinated planning of
+  multiple energy hubs considering the spatiotemporal load regulation of data
+  centers, IEEE Transactions on Power Systems 39 (2024) 4193--4207.
+\newblock \href {https://doi.org/10.1109/TPWRS.2023.3296101}
+  {\path{doi:10.1109/TPWRS.2023.3296101}}.
+
+\bibitem{Zheng2020}
+J.~Zheng, A.~A. Chien, S.~Suh, Mitigating curtailment and carbon emissions
+  through load migration between data centers, Joule 4 (2020) 2208--2222.
+\newblock \href {https://doi.org/10.1016/j.joule.2020.08.001}
+  {\path{doi:10.1016/j.joule.2020.08.001}}.
+
+\bibitem{Crozier2025}
+C.~Crozier, M.~Liska, The potential of data center energy demand to provide
+  grid flexibility (12 2025).
+\newblock \href {https://doi.org/10.1007/s40518-025-00258-9}
+  {\path{doi:10.1007/s40518-025-00258-9}}.
+
+\bibitem{AlibabaTrace2021}
+{Alibaba Group}, alibaba/clusterdata: Cluster data collected from production
+  clusters in alibaba for cluster management research,
+  \url{https://github.com/alibaba/clusterdata}, accessed: 29 Nov 2025 (2025).
+
+\bibitem{Weng2022}
+Q.~Weng, W.~Xiao, Y.~Yu, W.~Wang, C.~Wang, J.~He, Y.~Li, L.~Zhang, W.~Lin,
+  Y.~Ding,
+  \href{https://www.usenix.org/conference/nsdi22/presentation/weng}{Mlaas in
+  the wild: Workload analysis and scheduling in large-scale heterogeneous gpu
+  clusters}, in: 19th USENIX Symposium on Networked Systems Design and
+  Implementation (NSDI 22), USENIX Association, 2022, pp. 945--960.
+\newline\urlprefix\url{https://www.usenix.org/conference/nsdi22/presentation/weng}
+
+\bibitem{Hu2021}
+Q.~Hu, P.~Sun, S.~Yan, Y.~Wen, T.~Zhang, \href{http://arxiv.org/abs/2109.01313
+  http://dx.doi.org/10.1145/3458817.3476223}{Characterization and prediction of
+  deep learning workloads in large-scale gpu datacenters}, International
+  Conference for High Performance Computing, Networking, Storage and Analysis,
+  SC (9 2021).
+\newblock \href {https://doi.org/10.1145/3458817.3476223}
+  {\path{doi:10.1145/3458817.3476223}}.
+\newline\urlprefix\url{http://arxiv.org/abs/2109.01313
+  http://dx.doi.org/10.1145/3458817.3476223}
+
+\bibitem{Yeung2022}
+G.~Yeung, D.~Borowiec, R.~Yang, A.~Friday, R.~Harper, P.~Garraghan, Horus:
+  Interference-aware and prediction-based scheduling in deep learning systems,
+  IEEE Transactions on Parallel and Distributed Systems 33 (2022) 88--100.
+\newblock \href {https://doi.org/10.1109/TPDS.2021.3079202}
+  {\path{doi:10.1109/TPDS.2021.3079202}}.
+
+\bibitem{Kawaguchi2024}
+S.~Kawaguchi, Y.~Ohsita, M.~Kawashima, H.~Shimonishi, Task completion time
+  prediction scaled by machine learning model uncertainty, Proceedings of the
+  2024 20th International Conference on Network and Service Management:
+  AI-Powered Network and Service Management for Tomorrow's Digital World, CNSM
+  2024 (2024).
+\newblock \href {https://doi.org/10.23919/CNSM62983.2024.10814629}
+  {\path{doi:10.23919/CNSM62983.2024.10814629}}.
+
+\bibitem{Chen2021_TSG}
+M.~Chen, C.~Gao, M.~Shahidehpour, Z.~Li, Incentive-compatible demand response
+  for spatially coupled internet data centers in electricity markets, IEEE
+  Transactions on Smart Grid 12 (2021) 3056--3069.
+\newblock \href {https://doi.org/10.1109/TSG.2021.3053433}
+  {\path{doi:10.1109/TSG.2021.3053433}}.
+
+\bibitem{Xiao2020}
+W.~Xiao, S.~Ren, Y.~Li, Y.~Zhang, P.~Hou, Z.~Li, Y.~Feng, W.~Lin, Y.~Jia,
+  \href{https://www.scopus.com/inward/record.uri?eid=2-s2.0-85096752325&partnerID=40&md5=12b4623e05c7e5c6027abfb5d23970af}{Ant
+  man: Dynamic scaling on gpu clusters for deep learning}, 2020, p. 533 –
+  548.
+\newline\urlprefix\url{https://www.scopus.com/inward/record.uri?eid=2-s2.0-85096752325&partnerID=40&md5=12b4623e05c7e5c6027abfb5d23970af}
+
+\bibitem{Olivella-Rosell2018}
+P.~Olivella-Rosell, P.~Lloret-Gallego, Íngrid Munné-Collado,
+  R.~Villafafila-Robles, A.~Sumper, S.~Ødegaard Ottessen, J.~Rajasekharan,
+  B.~A. Bremdal, \href{https://www.mdpi.com/1996-1073/11/4/822/htm
+  https://www.mdpi.com/1996-1073/11/4/822}{Local flexibility market design for
+  aggregators providing multiple flexibility services at distribution network
+  level}, Energies 2018, Vol. 11, Page 822 11 (2018) 822.
+\newblock \href {https://doi.org/10.3390/EN11040822}
+  {\path{doi:10.3390/EN11040822}}.
+\newline\urlprefix\url{https://www.mdpi.com/1996-1073/11/4/822/htm
+  https://www.mdpi.com/1996-1073/11/4/822}
+
+\bibitem{Kerscher2022}
+S.~Kerscher, P.~Arboleya,
+  \href{https://www.sciencedirect.com/science/article/pii/S0142061521006001?via%3Dihub}{The
+  key role of aggregators in the energy transition under the latest european
+  regulatory framework}, International Journal of Electrical Power \& Energy
+  Systems 134 (2022) 107361.
+\newblock \href {https://doi.org/10.1016/J.IJEPES.2021.107361}
+  {\path{doi:10.1016/J.IJEPES.2021.107361}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S0142061521006001?via%3Dihub}
+
+\bibitem{Iria2019}
+J.~Iria, F.~Soares,
+  \href{https://www.sciencedirect.com/science/article/abs/pii/S0306261919314795?via%3Dihub}{Real-time
+  provision of multiple electricity market products by an aggregator of
+  prosumers}, Applied Energy 255 (2019) 113792.
+\newblock \href {https://doi.org/10.1016/J.APENERGY.2019.113792}
+  {\path{doi:10.1016/J.APENERGY.2019.113792}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/abs/pii/S0306261919314795?via%3Dihub}
+
+\bibitem{Lu2020}
+X.~Lu, K.~Li, H.~Xu, F.~Wang, Z.~Zhou, Y.~Zhang,
+  \href{https://www.sciencedirect.com/science/article/abs/pii/S0360544220309920?via%3Dihub}{Fundamentals
+  and business model for resource aggregator of demand response in electricity
+  markets}, Energy 204 (2020) 117885.
+\newblock \href {https://doi.org/10.1016/J.ENERGY.2020.117885}
+  {\path{doi:10.1016/J.ENERGY.2020.117885}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/abs/pii/S0360544220309920?via%3Dihub}
+
+\bibitem{entsoe_balancing}
+{ENTSO-E}, \href{https://www.entsoe.eu/publications}{Balancing in the
+  electricity transmission system}, Tech. rep., European Network of
+  Transmission System Operators for Electricity (2023).
+\newline\urlprefix\url{https://www.entsoe.eu/publications}
+
+\bibitem{Wang2019}
+W.~Wang, A.~Abdolrashidi, N.~Yu, D.~Wong, Frequency regulation service
+  provision in data center with computational flexibility, Applied Energy 251
+  (10 2019).
+\newblock \href {https://doi.org/10.1016/j.apenergy.2019.05.107}
+  {\path{doi:10.1016/j.apenergy.2019.05.107}}.
+
+\bibitem{Rasouli2023}
+V.~Rasouli, Álvaro Gomes, C.~H. Antunes, An optimization model to characterize
+  the aggregated flexibility responsiveness of residential end-users,
+  International Journal of Electrical Power and Energy Systems 144 (1 2023).
+\newblock \href {https://doi.org/10.1016/j.ijepes.2022.108563}
+  {\path{doi:10.1016/j.ijepes.2022.108563}}.
+
+\bibitem{alibaba2021clusterdata}
+{Alibaba Cluster Trace Program}, \url{https://github.com/alibaba/clusterdata},
+  accessed: 2025-07-07 (2021).
+
+\bibitem{alibaba2021mlplatform}
+{Alibaba Machine Learning Platform for AI},
+  \url{https://www.alibabacloud.com/product/machine-learning}, accessed:
+  2025-07-07 (2021).
+
+\bibitem{antMan}
+W.~Xiao, S.~Ren, Y.~Li, Y.~Zhang, P.~Hou, Z.~Li, Y.~Feng, W.~Lin, Y.~Jia,
+  \href{https://www.usenix.org/conference/osdi20/presentation/xiao}{{AntMan}:
+  Dynamic scaling on {GPU} clusters for deep learning}, in: 14th USENIX
+  Symposium on Operating Systems Design and Implementation (OSDI 20), USENIX
+  Association, 2020, pp. 533--548.
+\newline\urlprefix\url{https://www.usenix.org/conference/osdi20/presentation/xiao}
+
+\bibitem{DEttorre2022}
+F.~D'Ettorre, M.~Banaei, R.~Ebrahimy, S.~A. Pourmousavi, E.~M. Blomgren,
+  J.~Kowalski, Z.~Bohdanowicz, B.~Łopaciuk Gonczaryk, C.~Biele, H.~Madsen,
+  \href{https://www.sciencedirect.com/science/article/pii/S1364032122005007}{Exploiting
+  demand-side flexibility: State-of-the-art, open issues and social
+  perspective}, Renewable and Sustainable Energy Reviews 165 (2022) 112605.
+\newblock \href {https://doi.org/10.1016/J.RSER.2022.112605}
+  {\path{doi:10.1016/J.RSER.2022.112605}}.
+\newline\urlprefix\url{https://www.sciencedirect.com/science/article/pii/S1364032122005007}
+
+\bibitem{Amaris2016}
+M.~Amaris, R.~Y.~D. Camargo, M.~Dyab, A.~Goldman, D.~Trystram, A comparison of
+  gpu execution time prediction using machine learning and analytical modeling,
+  Proceedings - 2016 IEEE 15th International Symposium on Network Computing and
+  Applications, NCA 2016 (2016) 326--333\href
+  {https://doi.org/10.1109/NCA.2016.7778637}
+  {\path{doi:10.1109/NCA.2016.7778637}}.
+
+\bibitem{Villar2018}
+J.~Villar, R.~Bessa, M.~Matos, Flexibility products and markets: Literature
+  review, Electric Power Systems Research 154 (2018) 329--340.
+\newblock \href {https://doi.org/10.1016/j.epsr.2017.09.005}
+  {\path{doi:10.1016/j.epsr.2017.09.005}}.
+
+\bibitem{Conejo2010}
+A.~J. Conejo, J.~M. Morales, L.~Baringo, Real-time demand response model, IEEE
+  Transactions on Smart Grid 1~(3) (2010) 236--242.
+\newblock \href {https://doi.org/10.1109/TSG.2010.2089056}
+  {\path{doi:10.1109/TSG.2010.2089056}}.
+
+\bibitem{MohsenianRad2010}
+A.~H. Mohsenian-Rad, V.~W.~S. Wong, J.~Jatskevich, R.~Schober, A.~Leon-Garcia,
+  Autonomous demand-side management based on game-theoretic energy consumption
+  scheduling for the future smart grid, IEEE Transactions on Smart Grid 1~(3)
+  (2010) 320--331.
+\newblock \href {https://doi.org/10.1109/TSG.2010.2089061}
+  {\path{doi:10.1109/TSG.2010.2089061}}.
+
+\bibitem{LLM}
+P.~Patel, E.~Choukse, C.~Zhang, I.~n. Goiri, B.~Warrier, N.~Mahalingam,
+  R.~Bianchini, \href{https://doi.org/10.1145/3620666.3651329}{Characterizing
+  power management opportunities for llms in the cloud}, in: Proceedings of the
+  29th ACM International Conference on Architectural Support for Programming
+  Languages and Operating Systems, Volume 3, ASPLOS '24, Association for
+  Computing Machinery, New York, NY, USA, 2024, p. 207–222.
+\newblock \href {https://doi.org/10.1145/3620666.3651329}
+  {\path{doi:10.1145/3620666.3651329}}.
+\newline\urlprefix\url{https://doi.org/10.1145/3620666.3651329}
+
+\bibitem{ENTSOE_MARI_IG_v1_7}
+{ENTSO-E}, \href{https://www.entsoe.eu}{Common platform for manually activated
+  frequency restoration reserves: Implementation guide}, Tech. rep., European
+  Network of Transmission System Operators for Electricity, Brussels, Belgium,
+  accessed: 15 November 2024 (2024).
+\newline\urlprefix\url{https://www.entsoe.eu}
+
+\bibitem{ENTSOE_Market_Report_2024}
+{European Network of Transmission System Operators for Electricity (ENTSO-E)},
+  Entso-e market report 2024,
+  \url{https://eepublicdownloads.entsoe.eu/clean-documents/nc-tasks/240628_ENTSO-E_Market_Report_2024.pdf},
+  accessed: 15 Nov 2025 (2024).
+
+\end{thebibliography}

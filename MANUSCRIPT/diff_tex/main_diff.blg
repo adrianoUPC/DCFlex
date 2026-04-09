@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main_diff.aux
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+The style file: elsarticle-num.bst
+Reallocating 'name_of_file' (item size: 1) to 16 items.
+Database file #1: ../bibliography.bib
+Warning--empty booktitle in Xiao2020
+You've used 56 entries,
+            2952 wiz_defined-function locations,
+            1096 strings with 21052 characters,
+and the built_in function-call counts, 19764 in all, are:
+= -- 1901
+> -- 815
+< -- 8
++ -- 309
+- -- 253
+* -- 1630
+:= -- 2782
+add.period$ -- 98
+call.type$ -- 56
+change.case$ -- 67
+chr.to.int$ -- 0
+cite$ -- 57
+duplicate$ -- 593
+empty$ -- 2039
+format.name$ -- 301
+if$ -- 5047
+int.to.chr$ -- 0
+int.to.str$ -- 56
+missing$ -- 47
+newline$ -- 244
+num.names$ -- 54
+pop$ -- 326
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1189
+stack$ -- 0
+substring$ -- 894
+swap$ -- 240
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 104
+width$ -- 58
+write$ -- 586
+(There was 1 warning)
