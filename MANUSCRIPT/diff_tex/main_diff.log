@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  9 APR 2026 17:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  9 APR 2026 17:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1828,7 +1828,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  28498 strings out of 467867
  533610 string characters out of 5417850
- 968396 words of memory out of 5000000
+ 967396 words of memory out of 5000000
  56636 multiletter control sequences out of 15000+600000
  644847 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1866,9 +1866,9 @@ ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/citcea/
 AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/User
 s/citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/latxfont/las
 y6.pfb>
-Output written on main_diff.pdf (57 pages, 17705812 bytes).
+Output written on main_diff.pdf (57 pages, 17702914 bytes).
 PDF statistics:
- 1599 PDF objects out of 1728 (max. 8388607)
+ 1591 PDF objects out of 1728 (max. 8388607)
  232 named destinations out of 1000 (max. 500000)
  446 words of extra memory for PDF output out of 10000 (max. 10000000)
 
