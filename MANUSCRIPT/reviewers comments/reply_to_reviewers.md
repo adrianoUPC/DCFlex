@@ -1,3 +1,43 @@
+Associate Editor:
+
+In addition to the comments from the reviewers, make sure to pay attention to the following aspects while improving the quality of your manuscript:
+
+**RELEVANCE:** The relevance to IJEPES should be enhanced with the considerations of scope and readership of the Journal. This should be addressed in the references cited and discussed in the Introduction. For example, considering the evolving journal scope modifications, it is recommended to check whether IJEPES has publications in the past 2-3 years with similar research subject.
+
+**PROOF READING:** A proof reading by a native English speaker should be conducted to improve both language and organization quality.
+
+**ABBREVIATIONS:** Please avoid using abbreviations in the TITLE, HIGHLIGHTS, ABSTRACT, and CONCLUSION if possible.
+
+**REFERENCES AND CITING:** Avoid "lump sum references", such as XXXXX [1-5], OR 1, 2, 3, 4, 5; all references should be cited with detailed and specific descriptions. In the references, all authors if less than 6 authors should be included, avoiding using "et al", for more than 6 authors, the first 6 should be listed followed by "et al".
+
+**TITLE:** It normally consists of about 12-15 keywords which shall not be too general or too narrow.
+
+**HIGHLIGHTS:** Highlights are mandatory for our journal. They consist of a short collection of bullet points that convey the core findings/novelties/contributions of the article and should be submitted in a separate editable file in the online submission system. Please use 'Highlights' in the file name and include 3 to 5 bullet points (maximum 85 characters, including spaces, per bullet point).
+
+**ABSTRACT:** It should be about 150-250 words with concise text in a single paragraph. Make sure to answer the following questions: a) which problem did you study and why is it important? b) which methods did you use? c) what are your main results? d) which conclusions can you draw from your results?
+
+**FIGURE AND TABLE CAPTIONS:** they should be concise and specific, clearly addressing key messages.
+
+**UNITS:** SI units shall be used.
+
+**CONCLUSION:** it should be a paragraph in which key conclusions are drawn. It should be concise, including the most important new findings. Make sure that the conclusion is not a repetition of the Abstract.
+
+**LITERATURE REVIEW:** An updated and complete literature review should be conducted to present the state-of-the-art and knowledge gaps of the research with strong relevance to the topic of the paper. Here the RELEVANCE to our journal (IJEPES) must be clearly demonstrated.
+
+**VALIDATION OF THE PROPOSED NEW CONCEPT:** a combination of analytical-computer simulation is traditionally expected. In cases in which it is manageable, authors are encouraged to provide validations using realistic data, laboratory based validation, or practical experiments.
+
+**INTERNATIONAL PERSPECTIVES:** The paper shall not be focused on challenges specific for a single country. On contrary, an international perspective is needed to be provided.
+
+   **Reply to editor:**  
+   We thank the Associate Editor for the detailed guidance. We have carefully addressed each point raised in the revision, as summarised below.
+
+   **Action taken:**  
+   - **RELEVANCE:** We strengthened the connection to IJEPES by incorporating recent journal publications on power system flexibility, DC demand response, and aggregator coordination into the Introduction and Literature Review.
+   - **REFERENCES AND CITING:** Throughout the manuscript, grouped or lumped reference lists (e.g., [1-5]) that supported multiple distinct ideas have been replaced with claim-specific citations. Each cited work is now accompanied by a brief description of its concrete contribution, so that the reader can identify the role of every reference. This revision affects Sections 1.1, 1.2, 1.3, 2.2, 3.2, and 3.3. Grouped citations were retained only where every reference supports the exact same narrow statement.
+
+
+
+
 ## Reviewer #4 Comments
 
 This paper proposes the **LAD-Flex** strategy, which filters loads that can be postponed using task queuing latency, and implements short-term load reduction and peak shifting at the request of aggregators. However, several aspects require further improvement:

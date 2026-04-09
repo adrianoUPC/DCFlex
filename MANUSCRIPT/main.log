@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  9 APR 2026 17:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.31)  9 APR 2026 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1132,11 +1132,11 @@ Package natbib Warning: Citation `Purkait2024' on page 4 undefined on input lin
 e 251.
 
 
-Package natbib Warning: Citation `AlKez2022' on page 4 undefined on input line 
+Package natbib Warning: Citation `Jones2018' on page 4 undefined on input line 
 251.
 
 
-Package natbib Warning: Citation `Jones2018' on page 4 undefined on input line 
+Package natbib Warning: Citation `AlKez2022' on page 4 undefined on input line 
 251.
 
 
@@ -1177,12 +1177,12 @@ Package natbib Warning: Citation `Takci2025' on page 4 undefined on input line
 
 [4]
 
-Package natbib Warning: Citation `Alapera2019' on page 5 undefined on input lin
-e 262.
-
-
 Package natbib Warning: Citation `tomaszewska2019lithium' on page 5 undefined o
 n input line 262.
+
+
+Package natbib Warning: Citation `Alapera2019' on page 5 undefined on input lin
+e 262.
 
 
 Package natbib Warning: Citation `crozier2025potential' on page 5 undefined on 
@@ -1216,23 +1216,23 @@ line 275.
 Package natbib Warning: Citation `CAO2022119665' on page 5 undefined on input l
 ine 275.
 
+[5]
 
-Package natbib Warning: Citation `Liu2013' on page 5 undefined on input line 27
+Package natbib Warning: Citation `Liu2013' on page 6 undefined on input line 27
 7.
 
 
-Package natbib Warning: Citation `Zhang2023_TSC' on page 5 undefined on input l
+Package natbib Warning: Citation `Zhang2023_TSC' on page 6 undefined on input l
 ine 277.
 
 
-Package natbib Warning: Citation `Zhang2021_DATE' on page 5 undefined on input 
+Package natbib Warning: Citation `Zhang2021_DATE' on page 6 undefined on input 
 line 277.
 
 
-Package natbib Warning: Citation `Zhang2024_TPWRS' on page 5 undefined on input
+Package natbib Warning: Citation `Zhang2024_TPWRS' on page 6 undefined on input
  line 277.
 
-[5]
 
 Package natbib Warning: Citation `Zheng2020' on page 6 undefined on input line 
 279.
@@ -1319,6 +1319,26 @@ e 285.
 
 [6] [7]
 
+LaTeX Warning: Reference `problem_description' on page 8 undefined on input lin
+e 309.
+
+
+LaTeX Warning: Reference `methodology' on page 8 undefined on input line 309.
+
+
+LaTeX Warning: Reference `case study' on page 8 undefined on input line 309.
+
+
+LaTeX Warning: Reference `results' on page 8 undefined on input line 309.
+
+
+LaTeX Warning: Reference `Limitations_and_future_work' on page 8 undefined on i
+nput line 309.
+
+
+LaTeX Warning: Reference `conclusion' on page 8 undefined on input line 309.
+
+
 Package natbib Warning: Citation `Weng2022' on page 8 undefined on input line 3
 14.
 
@@ -1355,7 +1375,15 @@ Package natbib Warning: Citation `Iria2019' on page 9 undefined on input line 3
 Package natbib Warning: Citation `Lu2020' on page 9 undefined on input line 332
 .
 
-<methodology_diagram.png, id=86, 5861.9pt x 2880.7625pt>
+
+LaTeX Warning: Reference `fig:AGG_ecosystem' on page 9 undefined on input line 
+332.
+
+
+LaTeX Warning: Reference `fig:AGG_ecosystem' on page 9 undefined on input line 
+332.
+
+<methodology_diagram.png, id=71, 5861.9pt x 2880.7625pt>
 File: methodology_diagram.png Graphic file (type png)
 <use methodology_diagram.png>
 Package pdftex.def Info: methodology_diagram.png  used on input line 336.
@@ -1368,24 +1396,73 @@ ne 337.
 Package natbib Warning: Citation `DEttorre2022' on page 9 undefined on input li
 ne 337.
 
-[9 <./methodology_diagram.png>]
-<methodology.drawionew.png, id=101, 11151.6625pt x 4245.8625pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `results' on page 9 undefined on input line 340.
+
+[9]
+
+LaTeX Warning: Reference `fig:methodology_diag' on page 10 undefined on input l
+ine 351.
+
+
+LaTeX Warning: Reference `a_posteriori' on page 10 undefined on input line 351.
+
+
+
+LaTeX Warning: Reference `LAD-Flex_section' on page 10 undefined on input line 
+351.
+
+
+LaTeX Warning: Reference `notification_period_opt_section_methodology' on page 
+10 undefined on input line 351.
+
+<methodology.drawionew.png, id=78, 11151.6625pt x 4245.8625pt>
 File: methodology.drawionew.png Graphic file (type png)
 <use methodology.drawionew.png>
 Package pdftex.def Info: methodology.drawionew.png  used on input line 355.
 (pdftex.def)             Requested size: 412.56496pt x 157.04262pt.
- [10 <./methodology.drawionew.png>] [11]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./methodology_diagram.png>] [11 <./methodology.drawionew.png>]
+
+LaTeX Warning: Reference `eq:power_DC1' on page 12 undefined on input line 394.
+
+
 [12]
-<latencydiagram.png, id=132, 5349.9875pt x 3332.45pt>
+
+LaTeX Warning: Reference `eq:power_DC1' on page 13 undefined on input line 429.
+
+
+
+LaTeX Warning: Reference `eq:power_DC2' on page 13 undefined on input line 429.
+
+
+
+LaTeX Warning: Reference `fig:latency' on page 13 undefined on input line 447.
+
+
+LaTeX Warning: Reference `case study' on page 13 undefined on input line 447.
+
+<latencydiagram.png, id=106, 5349.9875pt x 3332.45pt>
 File: latencydiagram.png Graphic file (type png)
 <use latencydiagram.png>
 Package pdftex.def Info: latencydiagram.png  used on input line 459.
 (pdftex.def)             Requested size: 398.33858pt x 248.0924pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [13] [14 <./latencydiagram.png>]
+
+LaTeX Warning: Reference `case study' on page 15 undefined on input line 500.
+
+
+LaTeX Warning: Reference `a_posteriori' on page 15 undefined on input line 504.
+
+
 
 Package natbib Warning: Citation `Hu2021' on page 15 undefined on input line 50
 6.
@@ -1410,59 +1487,99 @@ Package natbib Warning: Citation `Weng2022' on page 15 undefined on input line
 Package natbib Warning: Citation `Weng2022' on page 15 undefined on input line 
 509.
 
+[15]
 
-Package natbib Warning: Citation `Hu2021' on page 15 undefined on input line 52
+Package natbib Warning: Citation `Hu2021' on page 16 undefined on input line 52
 5.
 
 
-Package natbib Warning: Citation `Yeung2022' on page 15 undefined on input line
+Package natbib Warning: Citation `Yeung2022' on page 16 undefined on input line
  525.
 
-[15]
-<task_flex_conditions.png, id=165, 6012.4625pt x 1937.2375pt>
+[16]
+
+LaTeX Warning: Reference `fig:flex_conditions' on page 17 undefined on input li
+ne 568.
+
+<task_flex_conditions.png, id=145, 6012.4625pt x 1937.2375pt>
 File: task_flex_conditions.png Graphic file (type png)
 <use task_flex_conditions.png>
 Package pdftex.def Info: task_flex_conditions.png  used on input line 572.
 (pdftex.def)             Requested size: 398.33858pt x 128.3192pt.
- [16]
+
+LaTeX Warning: Reference `case:end' on page 17 undefined on input line 573.
+
+
+LaTeX Warning: Reference `case:end_overhang' on page 17 undefined on input line
+ 573.
+
+
+LaTeX Warning: Reference `case:end' on page 17 undefined on input line 573.
+
+
+LaTeX Warning: Reference `case:end_overhang' on page 17 undefined on input line
+ 573.
+
 
 Package natbib Warning: Citation `Villar2018' on page 17 undefined on input lin
+e 586.
+
+
+Package natbib Warning: Citation `Conejo2010' on page 17 undefined on input lin
 e 586.
 
 
 Package natbib Warning: Citation `MohsenianRad2010' on page 17 undefined on inp
 ut line 586.
 
-
-Package natbib Warning: Citation `Conejo2010' on page 17 undefined on input lin
-e 586.
-
 [17 <./task_flex_conditions.png>]
 
 Package natbib Warning: Citation `LLM' on page 18 undefined on input line 613.
 
 
-Package natbib Warning: Citation `Weng2022' on page 18 undefined on input line 
-618.
+LaTeX Warning: Reference `a_posteriori' on page 18 undefined on input line 613.
 
 
-Package natbib Warning: Citation `Weng2022' on page 18 undefined on input line 
-618.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Package natbib Warning: Citation `Weng2022' on page 18 undefined on input line 
-640.
+LaTeX Warning: Reference `tab:specs' on page 18 undefined on input line 614.
 
 [18]
-<A.png, id=203, 1011.78pt x 578.16pt>
+
+Package natbib Warning: Citation `Weng2022' on page 19 undefined on input line 
+618.
+
+
+Package natbib Warning: Citation `Weng2022' on page 19 undefined on input line 
+618.
+
+
+LaTeX Warning: Reference `a_posteriori' on page 19 undefined on input line 638.
+
+
+
+LaTeX Warning: Reference `fig:A_1a' on page 19 undefined on input line 640.
+
+
+Package natbib Warning: Citation `Weng2022' on page 19 undefined on input line 
+640.
+
+
+LaTeX Warning: Reference `fig:B_1b' on page 19 undefined on input line 642.
+
+
+LaTeX Warning: Reference `fig:B_1b' on page 19 undefined on input line 650.
+
+
+LaTeX Warning: Reference `tab:task_summary_duration' on page 19 undefined on in
+put line 652.
+
+[19]
+<A.png, id=172, 1011.78pt x 578.16pt>
 File: A.png Graphic file (type png)
 <use A.png>
 Package pdftex.def Info: A.png  used on input line 661.
 (pdftex.def)             Requested size: 422.77664pt x 241.59045pt.
-<B.png, id=204, 1011.78pt x 578.16pt>
+<B.png, id=173, 1011.78pt x 578.16pt>
 File: B.png Graphic file (type png)
 <use B.png>
 Package pdftex.def Info: B.png  used on input line 670.
@@ -1472,60 +1589,111 @@ Package pdftex.def Info: B.png  used on input line 670.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `tab:scenario_parameters' on page 20 undefined on inpu
+t line 698.
 
-[19] [20 <./A.png> <./B.png>]
+[20] [21 <./A.png> <./B.png>]
 
-Package natbib Warning: Citation `ENTSOE_MARI_IG_v1_7' on page 21 undefined on 
+Package natbib Warning: Citation `ENTSOE_MARI_IG_v1_7' on page 22 undefined on 
 input line 726.
 
-[21]
 
 Package natbib Warning: Citation `ENTSOE_Market_Report_2024' on page 22 undefin
 ed on input line 734.
 
-<flexibility_value_function_color.png, id=227, 1084.05pt x 722.7pt>
+[22]
+
+LaTeX Warning: Reference `notification_period_opt_section_methodology' on page 
+23 undefined on input line 743.
+
+<flexibility_value_function_color.png, id=195, 1084.05pt x 722.7pt>
 File: flexibility_value_function_color.png Graphic file (type png)
 <use flexibility_value_function_color.png>
 Package pdftex.def Info: flexibility_value_function_color.png  used on input li
 ne 748.
 (pdftex.def)             Requested size: 398.33858pt x 265.55322pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `smooth_decay' on page 23 undefined on input line 753.
 
 
-Package natbib Warning: Citation `entsoe_balancing' on page 22 undefined on inp
-ut line 753.
-
-[22]
 
 Package natbib Warning: Citation `entsoe_balancing' on page 23 undefined on inp
-ut line 757.
+ut line 753.
+
+
+LaTeX Warning: Reference `fig:flex_value_vs_time' on page 23 undefined on input
+ line 755.
 
 [23 <./flexibility_value_function_color.png>]
-<a_posteriori_interval1.png, id=244, 714.7503pt x 353.6412pt>
+
+Package natbib Warning: Citation `entsoe_balancing' on page 24 undefined on inp
+ut line 757.
+
+
+LaTeX Warning: Reference `a_posteriori' on page 24 undefined on input line 767.
+
+
+<a_posteriori_interval1.png, id=203, 714.7503pt x 353.6412pt>
 File: a_posteriori_interval1.png Graphic file (type png)
 <use a_posteriori_interval1.png>
 Package pdftex.def Info: a_posteriori_interval1.png  used on input line 774.
 (pdftex.def)             Requested size: 422.77664pt x 209.1861pt.
-<a_posteriori_interval2.png, id=245, 714.7503pt x 353.6412pt>
+<a_posteriori_interval2.png, id=204, 714.7503pt x 353.6412pt>
 File: a_posteriori_interval2.png Graphic file (type png)
 <use a_posteriori_interval2.png>
 Package pdftex.def Info: a_posteriori_interval2.png  used on input line 783.
 (pdftex.def)             Requested size: 422.77664pt x 209.1861pt.
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+LaTeX Warning: Reference `fig:interval_comparison' on page 24 undefined on inpu
+t line 819.
+
+
+LaTeX Warning: Reference `tab:latency_distribution' on page 24 undefined on inp
+ut line 819.
+
 [24] [25 <./a_posteriori_interval1.png> <./a_posteriori_interval2.png>]
+
+LaTeX Warning: Reference `case study' on page 26 undefined on input line 840.
+
+
+LaTeX Warning: Reference `Case_study_scenarios' on page 26 undefined on input l
+ine 842.
+
+
+LaTeX Warning: Reference `sec:robustness' on page 26 undefined on input line 84
+2.
+
+
+LaTeX Warning: Reference `Case_study_scenarios' on page 26 undefined on input l
+ine 855.
+
+
+LaTeX Warning: Reference `tab:parameters_baseline' on page 26 undefined on inpu
+t line 855.
+
 [26]
-<LARGE_DEFAULT_BASELINE_ZETA_0.png, id=276, 1011.78pt x 433.62pt>
+
+LaTeX Warning: Reference `fig:LAD_flex_points_baseline' on page 27 undefined on
+ input line 870.
+
+<LARGE_DEFAULT_BASELINE_ZETA_0.png, id=225, 1011.78pt x 433.62pt>
 File: LARGE_DEFAULT_BASELINE_ZETA_0.png Graphic file (type png)
 <use LARGE_DEFAULT_BASELINE_ZETA_0.png>
 Package pdftex.def Info: LARGE_DEFAULT_BASELINE_ZETA_0.png  used on input line 
 874.
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
-<power_consumption_3x3_LARGE_DEFAULT_BASELINE.png, id=278, 1445.4pt x 1011.78pt
+
+LaTeX Warning: Reference `fig:LAD_flex_points_grid_baseline' on page 27 undefin
+ed on input line 879.
+
+[27 <./LARGE_DEFAULT_BASELINE_ZETA_0.png>]
+<power_consumption_3x3_LARGE_DEFAULT_BASELINE.png, id=234, 1445.4pt x 1011.78pt
 >
 File: power_consumption_3x3_LARGE_DEFAULT_BASELINE.png Graphic file (type png)
 <use power_consumption_3x3_LARGE_DEFAULT_BASELINE.png>
@@ -1534,123 +1702,195 @@ Package pdftex.def Info: power_consumption_3x3_LARGE_DEFAULT_BASELINE.png  used
 (pdftex.def)             Requested size: 398.33858pt x 278.83473pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `fig:LAD_flex_summary_baseline' on page 28 undefined o
+n input line 890.
 
-[27 <./LARGE_DEFAULT_BASELINE_ZETA_0.png>]
-<LAD_flex_P1_explanation_DEFAULT_BASELINE.png, id=288, 1011.78pt x 433.62pt>
+<LAD_flex_P1_explanation_DEFAULT_BASELINE.png, id=235, 1011.78pt x 433.62pt>
 File: LAD_flex_P1_explanation_DEFAULT_BASELINE.png Graphic file (type png)
 <use LAD_flex_P1_explanation_DEFAULT_BASELINE.png>
 Package pdftex.def Info: LAD_flex_P1_explanation_DEFAULT_BASELINE.png  used on 
 input line 894.
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
- [28 <./power_consumption_3x3_LARGE_DEFAULT_BASELINE.png> <./LAD_flex_P1_explan
-ation_DEFAULT_BASELINE.png>] [29]
-<LARGE_DEFAULT_DAM_ZETA_0.png, id=305, 1011.78pt x 433.62pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `tab:energy_flexibility_baseline' on page 28 undefined
+ on input line 899.
+
+[28 <./power_consumption_3x3_LARGE_DEFAULT_BASELINE.png>]
+
+LaTeX Warning: Reference `tab:parameters_intraday' on page 29 undefined on inpu
+t line 931.
+
+[29 <./LAD_flex_P1_explanation_DEFAULT_BASELINE.png>]
+
+LaTeX Warning: Reference `fig:LAD_flex_points_intraday' on page 30 undefined on
+ input line 946.
+
+<LARGE_DEFAULT_DAM_ZETA_0.png, id=250, 1011.78pt x 433.62pt>
 File: LARGE_DEFAULT_DAM_ZETA_0.png Graphic file (type png)
 <use LARGE_DEFAULT_DAM_ZETA_0.png>
 Package pdftex.def Info: LARGE_DEFAULT_DAM_ZETA_0.png  used on input line 950.
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
-<power_consumption_3x3_LARGE_DEFAULT_DAM.png, id=307, 1445.4pt x 1011.78pt>
+
+LaTeX Warning: Reference `fig:LAD_flex_points_grid_intraday' on page 30 undefin
+ed on input line 955.
+
+<power_consumption_3x3_LARGE_DEFAULT_DAM.png, id=251, 1445.4pt x 1011.78pt>
 File: power_consumption_3x3_LARGE_DEFAULT_DAM.png Graphic file (type png)
 <use power_consumption_3x3_LARGE_DEFAULT_DAM.png>
 Package pdftex.def Info: power_consumption_3x3_LARGE_DEFAULT_DAM.png  used on i
 nput line 959.
 (pdftex.def)             Requested size: 398.33858pt x 278.83473pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<LAD_flex_P1_explanation_DEFAULT_DAM.png, id=309, 1011.78pt x 433.62pt>
+
+LaTeX Warning: Reference `fig:LAD_flex_summary_intraday' on page 30 undefined o
+n input line 964.
+
+[30 <./LARGE_DEFAULT_DAM_ZETA_0.png>]
+<LAD_flex_P1_explanation_DEFAULT_DAM.png, id=259, 1011.78pt x 433.62pt>
 File: LAD_flex_P1_explanation_DEFAULT_DAM.png Graphic file (type png)
 <use LAD_flex_P1_explanation_DEFAULT_DAM.png>
 Package pdftex.def Info: LAD_flex_P1_explanation_DEFAULT_DAM.png  used on input
  line 968.
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[30 <./LARGE_DEFAULT_DAM_ZETA_0.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[31 <./power_consumption_3x3_LARGE_DEFAULT_DAM.png> <./LAD_flex_P1_explanation_
-DEFAULT_DAM.png>]
-<LARGE_DEFAULT_mFRR_ZETA_0.png, id=329, 1011.78pt x 433.62pt>
+
+LaTeX Warning: Reference `tab:energy_flexibility_intraday' on page 31 undefined
+ on input line 973.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `tab:parameters_mfrr' on page 31 undefined on input li
+ne 1005.
+
+[31 <./power_consumption_3x3_LARGE_DEFAULT_DAM.png>] [32 <./LAD_flex_P1_explana
+tion_DEFAULT_DAM.png>]
+
+LaTeX Warning: Reference `fig:LAD_flex_points_mfrr' on page 33 undefined on inp
+ut line 1020.
+
+<LARGE_DEFAULT_mFRR_ZETA_0.png, id=276, 1011.78pt x 433.62pt>
 File: LARGE_DEFAULT_mFRR_ZETA_0.png Graphic file (type png)
 <use LARGE_DEFAULT_mFRR_ZETA_0.png>
 Package pdftex.def Info: LARGE_DEFAULT_mFRR_ZETA_0.png  used on input line 1024
 .
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
 
+LaTeX Warning: Reference `fig:LAD_flex_points_grid_mfrr' on page 33 undefined o
+n input line 1029.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[32]
-<power_consumption_3x3_LARGE_DEFAULT_mFRR.png, id=339, 1445.4pt x 1011.78pt>
+<power_consumption_3x3_LARGE_DEFAULT_mFRR.png, id=277, 1445.4pt x 1011.78pt>
 File: power_consumption_3x3_LARGE_DEFAULT_mFRR.png Graphic file (type png)
 <use power_consumption_3x3_LARGE_DEFAULT_mFRR.png>
 Package pdftex.def Info: power_consumption_3x3_LARGE_DEFAULT_mFRR.png  used on 
 input line 1035.
 (pdftex.def)             Requested size: 398.33858pt x 278.83473pt.
- [33 <./LARGE_DEFAULT_mFRR_ZETA_0.png> <./power_consumption_3x3_LARGE_DEFAULT_m
-FRR.png>]
-<LAD_flex_P1_explanation_DEFAULT_mFRR.png, id=347, 1011.78pt x 433.62pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:LAD_flex_summary_mfrr' on page 33 undefined on in
+put line 1040.
+
+<LAD_flex_P1_explanation_DEFAULT_mFRR.png, id=278, 1011.78pt x 433.62pt>
 File: LAD_flex_P1_explanation_DEFAULT_mFRR.png Graphic file (type png)
 <use LAD_flex_P1_explanation_DEFAULT_mFRR.png>
 Package pdftex.def Info: LAD_flex_P1_explanation_DEFAULT_mFRR.png  used on inpu
 t line 1044.
 (pdftex.def)             Requested size: 398.33858pt x 170.71892pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34 <./LAD_flex_P1_explanation_DEFAULT_mFRR.png>]
-<time_series_overlay_sample_week.png, id=359, 1287.3696pt x 390.258pt>
+
+LaTeX Warning: Reference `tab:energy_flexibility_mfrr' on page 33 undefined on 
+input line 1049.
+
+[33 <./LARGE_DEFAULT_mFRR_ZETA_0.png>] [34 <./power_consumption_3x3_LARGE_DEFAU
+LT_mFRR.png> <./LAD_flex_P1_explanation_DEFAULT_mFRR.png>]
+
+LaTeX Warning: Reference `sec:scenario_comparison' on page 35 undefined on inpu
+t line 1076.
+
+
+LaTeX Warning: Reference `fig:time_series_comparison' on page 35 undefined on i
+nput line 1090.
+
+<time_series_overlay_sample_week.png, id=293, 1287.3696pt x 390.258pt>
 File: time_series_overlay_sample_week.png Graphic file (type png)
 <use time_series_overlay_sample_week.png>
 Package pdftex.def Info: time_series_overlay_sample_week.png  used on input lin
 e 1096.
 (pdftex.def)             Requested size: 469.75502pt x 142.40427pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+LaTeX Warning: Reference `fig:boxplot_comparison' on page 35 undefined on input
+ line 1101.
+
 [35]
-<combined_comparison_publication_ready.png, id=367, 1255.5708pt x 429.5247pt>
+<combined_comparison_publication_ready.png, id=300, 1255.5708pt x 429.5247pt>
 File: combined_comparison_publication_ready.png Graphic file (type png)
 <use combined_comparison_publication_ready.png>
 Package pdftex.def Info: combined_comparison_publication_ready.png  used on inp
 ut line 1109.
 (pdftex.def)             Requested size: 469.75502pt x 160.69778pt.
- [36 <./time_series_overlay_sample_week.png> <./combined_comparison_publication
-_ready.png>]
-<notable_points_comparison.png, id=376, 1145.2386pt x 494.0859pt>
+
+
+LaTeX Warning: Reference `fig:notable_points_comparison' on page 36 undefined o
+n input line 1114.
+
+[36 <./time_series_overlay_sample_week.png> <./combined_comparison_publication_
+ready.png>]
+<notable_points_comparison.png, id=309, 1145.2386pt x 494.0859pt>
 File: notable_points_comparison.png Graphic file (type png)
 <use notable_points_comparison.png>
 Package pdftex.def Info: notable_points_comparison.png  used on input line 1122
 .
 (pdftex.def)             Requested size: 469.75502pt x 202.66699pt.
-<hourly_yield_comparison.png, id=378, 711.3777pt x 494.5677pt>
+
+
+LaTeX Warning: Reference `fig:hourly_yield' on page 37 undefined on input line 
+1136.
+
+[37 <./notable_points_comparison.png>]
+<hourly_yield_comparison.png, id=318, 711.3777pt x 494.5677pt>
 File: hourly_yield_comparison.png Graphic file (type png)
 <use hourly_yield_comparison.png>
 Package pdftex.def Info: hourly_yield_comparison.png  used on input line 1144.
 (pdftex.def)             Requested size: 375.80544pt x 261.26688pt.
+ [38 <./hourly_yield_comparison.png>]
 
+LaTeX Warning: Reference `fig:rebound_ratio' on page 39 undefined on input line
+ 1164.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[37 <./notable_points_comparison.png>] [38 <./hourly_yield_comparison.png>]
-<rebound_energy_summary.png, id=393, 1289.2968pt x 421.8159pt>
+<rebound_energy_summary.png, id=325, 1289.2968pt x 421.8159pt>
 File: rebound_energy_summary.png Graphic file (type png)
 <use rebound_energy_summary.png>
 Package pdftex.def Info: rebound_energy_summary.png  used on input line 1168.
 (pdftex.def)             Requested size: 469.75502pt x 153.68797pt.
 
+LaTeX Warning: Reference `tab:scenario_summary' on page 39 undefined on input l
+ine 1173.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [39 <./rebound_energy_summary.png>]
-<sensitivity_grid_fixed_shading_distinct_latencies.png, id=405, 1445.4pt x 1011
+
+LaTeX Warning: Reference `fig:LAD_flex_sens_all' on page 40 undefined on input 
+line 1236.
+
+<sensitivity_grid_fixed_shading_distinct_latencies.png, id=333, 1445.4pt x 1011
 .78pt>
 File: sensitivity_grid_fixed_shading_distinct_latencies.png Graphic file (type 
 png)
@@ -1658,8 +1898,23 @@ png)
 Package pdftex.def Info: sensitivity_grid_fixed_shading_distinct_latencies.png 
  used on input line 1240.
 (pdftex.def)             Requested size: 398.33858pt x 278.83473pt.
- [40 <./sensitivity_grid_fixed_shading_distinct_latencies.png>]
-<sensitivity_KDE_latency_filtered_improved.png, id=414, 1084.05pt x 722.7pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `tab:deferrable_energy_latency' on page 40 undefined o
+n input line 1245.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[40]
+
+LaTeX Warning: Reference `fig:LAD_flex_KDE' on page 41 undefined on input line 
+1269.
+
+[41 <./sensitivity_grid_fixed_shading_distinct_latencies.png>]
+<sensitivity_KDE_latency_filtered_improved.png, id=347, 1084.05pt x 722.7pt>
 File: sensitivity_KDE_latency_filtered_improved.png Graphic file (type png)
 <use sensitivity_KDE_latency_filtered_improved.png>
 Package pdftex.def Info: sensitivity_KDE_latency_filtered_improved.png  used on
@@ -1667,15 +1922,31 @@ Package pdftex.def Info: sensitivity_KDE_latency_filtered_improved.png  used on
 (pdftex.def)             Requested size: 398.33858pt x 265.55322pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `LAD_flex_results' on page 42 undefined on input line 
+1285.
 
-[41]
+
+LaTeX Warning: Reference `prediction_uncertainty_methods' on page 42 undefined 
+on input line 1285.
+
+
+LaTeX Warning: Reference `prediction_uncertainty_methods' on page 42 undefined 
+on input line 1287.
+
+
+LaTeX Warning: Reference `tab:prediction_error_scenarios' on page 42 undefined 
+on input line 1292.
+
 
 Package natbib Warning: Citation `Weng2022' on page 42 undefined on input line 
 1310.
 
 [42 <./sensitivity_KDE_latency_filtered_improved.png>]
-<error_and_scatter_combined_zeta_010_030_050_loglog.png, id=434, 1057.7919pt x 
+
+LaTeX Warning: Reference `fig:prediction_error_distribution' on page 43 undefin
+ed on input line 1312.
+
+<error_and_scatter_combined_zeta_010_030_050_loglog.png, id=357, 1057.7919pt x 
 421.8159pt>
 File: error_and_scatter_combined_zeta_010_030_050_loglog.png Graphic file (type
  png)
@@ -1683,7 +1954,11 @@ File: error_and_scatter_combined_zeta_010_030_050_loglog.png Graphic file (type
 Package pdftex.def Info: error_and_scatter_combined_zeta_010_030_050_loglog.png
   used on input line 1316.
 (pdftex.def)             Requested size: 469.75502pt x 187.32451pt.
-<deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png, id=436, 1445.4pt x 10
+
+LaTeX Warning: Reference `fig:3x3_gamma_effect' on page 43 undefined on input l
+ine 1321.
+
+<deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png, id=358, 1445.4pt x 10
 11.78pt>
 File: deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png Graphic file (typ
 e png)
@@ -1691,7 +1966,11 @@ e png)
 Package pdftex.def Info: deferred_power_timeseries_3x3_zeta_DEFAULT_BASELINE.pn
 g  used on input line 1325.
 (pdftex.def)             Requested size: 469.75502pt x 328.8246pt.
-<confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png, id=438, 1277.9745pt x 4
+
+LaTeX Warning: Reference `fig:confusion_matrices' on page 43 undefined on input
+ line 1330.
+
+<confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png, id=359, 1277.9745pt x 4
 33.3791pt>
 File: confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png Graphic file (type 
 png)
@@ -1699,10 +1978,22 @@ png)
 Package pdftex.def Info: confusion_matrix_zeta_comparison_DEFAULT_BASELINE.png 
  used on input line 1334.
 (pdftex.def)             Requested size: 469.75502pt x 159.29631pt.
- [43 <./error_and_scatter_combined_zeta_010_030_050_loglog.png>] [44 <./deferre
-d_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png> <./confusion_matrix_zeta_comp
-arison_DEFAULT_BASELINE.png>]
-<flexibility_sensitivity_all_points_impr_clean.png, id=456, 1445.4pt x 867.24pt
+[43 <./error_and_scatter_combined_zeta_010_030_050_loglog.png>] [44 <./deferred
+_power_timeseries_3x3_zeta_DEFAULT_BASELINE.png> <./confusion_matrix_zeta_compa
+rison_DEFAULT_BASELINE.png>]
+
+LaTeX Warning: Reference `notification_period_opt_section_methodology' on page 
+45 undefined on input line 1407.
+
+
+LaTeX Warning: Reference `fig:flex_value_vs_time' on page 45 undefined on input
+ line 1407.
+
+
+LaTeX Warning: Reference `fig:opt_results_sensitive' on page 45 undefined on in
+put line 1409.
+
+<flexibility_sensitivity_all_points_impr_clean.png, id=375, 1445.4pt x 867.24pt
 >
 File: flexibility_sensitivity_all_points_impr_clean.png Graphic file (type png)
 
@@ -1719,6 +2010,10 @@ Overfull \hbox (13.94182pt too wide) in paragraph at lines 1415--1416
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
+LaTeX Warning: Reference `tab:opt_delta_and_revenue_transposed' on page 45 unde
+fined on input line 1420.
+
+[45]
 Overfull \hbox (9.39716pt too wide) in paragraph at lines 1457--1457
 []|\OT1/cmr/m/n/8 (min)| 
  []
@@ -1919,10 +2214,19 @@ Overfull \hbox (32.01457pt too wide) in paragraph at lines 1431--1458
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Reference `LAD_flex_results' on page 46 undefined on input line 
+1462.
 
-[45] [46 <./flexibility_sensitivity_all_points_impr_clean.png>] [47] [48]
-[49] (main.bbl)
+
+LaTeX Warning: Reference `tab:comparison_optimal_fixed' on page 46 undefined on
+ input line 1462.
+
+[46 <./flexibility_sensitivity_all_points_impr_clean.png>] [47]
+
+LaTeX Warning: Reference `sec:scenario_comparison' on page 48 undefined on inpu
+t line 1533.
+
+[48] [49] [50] (main.bbl)
 
 Package natbib Warning: There were undefined citations.
 
@@ -1930,24 +2234,27 @@ Package natbib Warning: There were undefined citations.
 Package caption Warning: Unused \captionsetup[longtable] on input line 63.
 See the caption package documentation for explanation.
 
-[50] (main.aux)
+[51] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 27775 strings out of 467867
- 520189 string characters out of 5417850
- 930412 words of memory out of 5000000
- 55998 multiletter control sequences out of 15000+600000
- 638692 words of font info for 85 fonts, out of 8000000 for 9000
+ 27773 strings out of 467867
+ 520157 string characters out of 5417850
+ 918353 words of memory out of 5000000
+ 55996 multiletter control sequences out of 15000+600000
+ 638524 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,17n,104p,2125b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,17n,104p,2160b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcr
 m1000.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
 600\tcrm0800.pk> <C:\Users\citcea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen
@@ -1975,12 +2282,10 @@ msfonts/cm/cmsy7.pfb><C:/Users/citcea/AppData/Local/Programs/MiKTeX/fonts/type1
 nts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/citcea/AppData/Local/Programs
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/citcea/AppData/Loca
 l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti7.pfb><C:/Users/citcea/App
-Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/
-citcea/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-
-Output written on main.pdf (50 pages, 17555942 bytes).
+Data/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (51 pages, 17528200 bytes).
 PDF statistics:
- 751 PDF objects out of 1000 (max. 8388607)
- 168 named destinations out of 1000 (max. 500000)
+ 669 PDF objects out of 1000 (max. 8388607)
+ 169 named destinations out of 1000 (max. 500000)
  446 words of extra memory for PDF output out of 10000 (max. 10000000)
 
